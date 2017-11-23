@@ -1,0 +1,321 @@
+body {
+	background: #fff;
+}
+@font-face {
+    font-family: "NunitoSans";
+    src: url('../font/NunitoSans-Regular.ttf');
+    font-style: normal;
+    font-weight: normal;
+}
+@font-face {
+    font-family: "NunitoSans";
+    src: url('../font/NunitoSans-LightItalic.ttf');
+    font-style: italic;
+    font-weight: 300;
+}
+@font-face {
+    font-family: "NunitoSans";
+    src: url('../font/NunitoSans-Bold.ttf');
+    font-style: normal;
+    font-weight: 700;
+}
+.menu-btn {
+    display: none;
+}
+.search-btn, .search-ip {
+	border-radius: 0; 
+}
+.search-ip {
+	border: 1px solid #348dcc;
+	background: #348dcc;
+	font-family: "NunitoSans";
+	font-weight: 300;
+	font-style: italic;
+}
+.search-ip:focus {
+
+}
+.search-frm {
+    color: #fff;
+    padding-bottom: 10px;
+    margin-top: 5px;
+}
+.search-ip::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #fff;
+}
+.search-ip::-moz-placeholder { /* Firefox 19+ */
+  color: #fff;
+}
+.search-ip:-ms-input-placeholder { /* IE 10+ */
+  color: #fff;
+}
+.search-ip:-moz-placeholder { /* Firefox 18- */
+  color: #fff;
+}
+.top {
+	padding-bottom: 0;
+}
+.logo {
+	width: 60%;
+}
+.quan {
+    position: absolute;
+    top: -4px;
+    left: 58%;
+    background: red;
+    padding: 3px 6px;
+    border-radius: 50%;
+}
+.order12 {
+	border-top: 1px solid #ccc;
+	margin-top: 20px;
+}
+.carousel_top .owl-dots {
+	bottom: -9px;
+}
+.carousel-index .owl-nav.disabled {
+	position: static;
+}
+.new-book {
+	border-top: 10px solid #ececec;
+}
+.new-book .tit {
+	font-family: "NunitoSans";
+	font-size: 36px;
+	font-weight: 700;
+}
+.index-list-wrap, .nbook-wrap {
+	width: 100%;
+	overflow-x: auto;
+}
+.index-list-wrap ul, .nbook-list {
+    display: flex;
+    width: max-content;
+}
+.index-list-wrap ul li {
+	padding: 35px 20px;
+}
+.index-list-wrap ul li, .nbook-list li {
+	display: inline-block;
+}
+.index-list-wrap ul li a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "NunitoSans";
+    font-weight: 700;
+    font-size: 24px;
+}
+.index-list-wrap ul li:nth-child(3n-2) a {
+	color: #348dcc;
+}
+.index-list-wrap ul li:nth-child(3n-1) a {
+	color: #7cb544;
+}
+.index-list-wrap ul li:nth-child(3n) a {
+	color: #e83434;
+}
+.carousel_detail {
+	border: 0;
+}
+.nbook-wrap {
+	border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    font-family: "NunitoSans";
+}
+.nbook-list {
+    display: flex;
+    width: max-content;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.nbook-list li a {
+    padding-left: 22px;
+    padding-right: 22px;
+    border-left: 1px solid #444;
+    color: #444;
+}
+.nbook-list li:first-child a {
+	border-left: 0;
+}
+.pro-name a {
+	font-size: 13px;
+}
+.pro-price {
+	font-size: 15px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+.carousel-index .carousel_detail-item {
+	border: 1px solid #ccc;
+	margin-bottom: 15px;
+	padding: 15px 0 0 0;
+}
+.carousel-index .carousel_detail-item a img {
+	height: 210px;
+	object-fit: cover;
+	object-position: center;
+}
+.carousel-index .btn-buy {
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: static;
+    top: 50%;
+    left: 50%;
+    transform: translate(0);
+    opacity: 1;
+    border-radius: 0;
+    background: #ccc;
+    color: #444;
+    margin-top: 15px;
+}
+.carousel-index .carousel_detail-item > img {
+	width: auto;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+}
+#mm-1 >  .mm-navbar > .mm-title {
+	display: none;
+}
+.owl-theme.carousel-index .owl-dots .owl-dot, .owl-theme.carousel-re-pro .owl-dots .owl-dot {
+    border: 1px solid #ccc;
+}
+.owl-theme.carousel-index .owl-dots .owl-dot.active span, .owl-theme.carousel-re-pro .owl-dots .owl-dot.active span {
+    background: #ccc;
+}
+.owl-theme.carousel-index .owl-dots .owl-dot, .owl-theme.carousel-re-pro .owl-dots .owl-dot {
+    border-radius: 100%;
+    padding: 2px 0px;
+    margin: 2px;
+}
+.owl-theme.carousel-index .owl-dots .owl-dot span, .owl-theme.carousel-re-pro .owl-dots .owl-dot span {
+    margin: 2px 4px;
+}
+.owl-theme.carousel-index .owl-nav.disabled+.owl-dots {
+	margin-bottom: 25px;
+	margin-top: 0;
+}
+.brand {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #ececec;
+}
+.khach {
+	background: url(../images/khachbg.jpg) no-repeat center center;
+	background-size: cover;
+	padding-top: 70px;
+	padding-bottom: 30px;
+	border-top: 0;
+}
+.khach-con {
+	position: static;
+	transform: translate(0);
+}
+.carousel_khach blockquote {
+	margin-left: 0;
+	margin-right: 0;
+}
+.carousel_khach blockquote:before {
+	content: url(../images/quote.png);
+	display: block;
+}
+.khach-img {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.khach-img img {
+	max-width: 25%;
+}
+.owl-theme.carousel_khach .owl-nav.disabled+.owl-dots {
+	bottom: -20px;
+	width: 100%;
+}
+.owl-theme.carousel_khach .owl-dots .owl-dot {
+	width: 30%;
+	height: 16px;
+	border-radius: 0;
+	margin-right: 2px;
+	background: #fff;
+}
+.owl-theme.carousel_khach .owl-dots .owl-dot span {
+	display: none;
+}
+.owl-theme.carousel_khach .owl-dots .owl-dot.active {
+	background: rgba(255,255,255,.5);
+}
+.ft-ori img {
+	max-width: 75%;
+}
+.ft-ori-p {
+	font-size: 16px;
+	margin-top: 15px;
+}
+.ft-ori a {
+	color: #444;
+}
+.ft-ori > p {
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+.ft-card {
+	border-top: 15px solid #ececec;
+	border-bottom: 15px solid #ececec;
+}
+.ft-last {
+	background: #fff;
+}
+.ft-last h2 {
+	font-weight: 400;
+}
+.pdetail-intro-tit {
+	color: #444;
+}
+.seemore {
+	padding-top: 25px;
+	border-top: 1px solid #ccc;
+}
+.info-tab-btn {
+	border: 0;
+	color: #348dcc;
+	background: transparent;
+}
+.pdetail-content-wrap {
+	height: 50px;
+	overflow: hidden;
+}
+.th {
+	height: auto;
+}
+
+/* .mm-panels {
+	background: url(../mimages/logo.png) no-repeat bottom 15px center;
+} */
+@media (max-width: 767px) {
+    .popup {
+        display: none;
+    }
+    .menu-btn {
+        display: inline-block;
+    }
+    .menu {
+    	display: none;
+    }
+    .khach-wrap blockquote {
+	    height: auto;
+	}
+	#gal1 {
+		margin-top: 115px;
+		}
+	.list-pro {
+		padding-bottom: 10px;
+	}
+}
+@media (max-width: 375px) {
+	.curent-book .carousel_detail-item, .pdetail-re .carousel_detail-item, .carousel-re-pro .carousel_detail-item {
+		border-width: 1px 1px 1px 1px;
+	}
+}
