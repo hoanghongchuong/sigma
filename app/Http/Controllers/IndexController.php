@@ -69,7 +69,7 @@ class IndexController extends Controller {
     	$setting = DB::table('setting')->select()->where('id',1)->get()->first();
     	$menu_top = DB::table('menu')->select()->where('com','menu-top')->where('status',1)->orderBy('stt','asc')->get();
     	$dichvu = DB::table('news')->select()->where('status',1)->where('com','dich-vu')->orderBy('stt','asc')->get();
-    	$cateProducts = DB::table('product_categories')->where('status',1)->get();
+    	$cateProducts = DB::table('product_categories')->where('status',1)->where('parent_id',0)->get();
     	$about = DB::table('about')->select()->first();
     	Cache::forever('setting', $setting);
         Cache::forever('menu_top', $menu_top);
@@ -146,7 +146,7 @@ class IndexController extends Controller {
 	public function getProductList($id)
 	{
 		//Tìm article thông qua mã id tương ứng
-		$cate_pro = DB::table('product_categories')->where('status',1)->orderby('id','asc')->get();
+		$cate_pro = DB::table('product_categories')->where('status',1)->orderby('id','desc')->get();
 		$com='san-pham';
 		$product_cate = DB::table('product_categories')->select()->where('status',1)->where('alias',$id)->get()->first();
 		if(!empty($product_cate)){
@@ -161,7 +161,6 @@ class IndexController extends Controller {
 				"cate_id" => $product_cate->id,
 				"spbc"	=> 1
 			])->orderBy('id', 'desc')->take(3)->get();
-			// dd($saleProduct);
 			$setting = Cache::get('setting');
 			if(!empty($product_cate->title)){
 				$title = $product_cate->title;
@@ -196,7 +195,7 @@ class IndexController extends Controller {
 			$album_hinh = DB::table('images')->select()->where('product_id',$product_detail->id)->orderby('id','asc')->get();
 			
 			$cateProduct = DB::table('product_categories')->select('name','alias')->where('id',$product_detail->cate_id)->first();
-			$productSameCate = DB::table('products')->select()->where('status',1)->where('alias','<>',$id)->where('cate_id',$product_detail->cate_id)->orderby('stt','desc')->take(4)->get();
+			$productSameCate = DB::table('products')->select()->where('status',1)->where('alias','<>',$id)->where('cate_id',$product_detail->cate_id)->orderby('stt','desc')->take(12)->get();
 			$setting = Cache::get('setting');
 			$tintucs = DB::table('news')->orderBy('id','desc')->take(3)->get();
 			// Cấu hình SEO
@@ -587,7 +586,7 @@ class IndexController extends Controller {
 
 	public function addCart(Request $req)
 	{
-		$data = $req->only('product_id');
+		$data = $req->only('product_id','product_numb');
 		$product = DB::table('products')->select()->where('status',1)->where('id',$data['product_id'])->first();
 		if (!$product) {
 			die('product not found');
@@ -595,9 +594,9 @@ class IndexController extends Controller {
 		Cart::add(array(
 				'id'=>$product->id,
 				'name'=>$product->name,
-				'qty'=>1,
+				'qty'=>$data['product_numb'],
 				'price'=>$product->price,
-				'options'=>array('photo'=>$product->photo,'code'=>$product->code)
+				'options'=>array('photo'=>$product->photo,'code'=>$product->code,'alias'=>$product->alias)
 			));
 		return redirect(route('getCart'));
 	}
@@ -687,7 +686,7 @@ class IndexController extends Controller {
     	$bill->address = $req->address;
     	// $bill->payment = (int)($req->payment_method);
     	$bill->province = $req->province;
-    	// $bill->district = $req->district;
+    	$bill->district = $req->district;
     	$total = $this->getTotalPrice();
     	$bill->total = $total;
     	// $order['price'] = $this->getTotalPrice();
@@ -737,15 +736,16 @@ class IndexController extends Controller {
 
     public function thanhtoan(){
     	$bank = DB::table('bank_account')->get();
+    	$province = DB::table('province')->get();
     	$product_cart= Cart::content();
     	$total = $this->getTotalPrice();
-		return view('templates.thanhtoan_tpl',compact('bank','product_cart','total'));
+		return view('templates.thanhtoan_tpl',compact('bank','product_cart','total','province'));
 	}
     public function loadDistrictByProvince($id){
-    	$district = District::where('province_id',$id)->get();
+    	$district = District::where('cate_id',$id)->get();
     	// dd($district);
     	foreach($district as $item){
-    		echo "<option value='".$item->id."'>".$item->district_name."</option>";
+    		echo "<option value='".$item->id."'>".$item->name."</option>";
     	}
     }
     public function getProductByThuongHieu($alias){

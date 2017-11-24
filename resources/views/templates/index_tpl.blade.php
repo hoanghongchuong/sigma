@@ -16,7 +16,13 @@ $banner = DB::table('banner_content')->where('position',1)->get();
             <div class="text-center text-uppercase item">
                 <div class="text-center carousel_detail-item">
                     <a href="{{url('san-pham/'.$hotProduct->alias.'.html')}}" title=""><img src="{{asset('upload/product/'.$hotProduct->photo)}}" alt="{{$hotProduct->name}}" title="{{$hotProduct->name}}" class="img-responsive img "></a>
+                     <form id="add-item-form" action="{{ route('addProductToCart') }}" method="post" class="variants clearfix"> 
+                        {!! csrf_field() !!}
+                        <input type="hidden" name="product_id" value="{{ $hotProduct->id }}"> 
+                        <input id="quantity" type="number" name="product_numb" min="1" value="1" class="tc item-quantity" style="display: none" />  
                     <button type="submit" class="btn btn-buy">MUA NGAY</button>
+                    </form>
+
                     <div class="text-center carousel_content">
                         <h3 class="text-center pro-name"><a href="{{url('san-pham/'.$hotProduct->alias.'.html')}}" title="{{$hotProduct->name}}">{{$hotProduct->name}}</a></h3>
                         <p class="text-center pro-price">{{number_format($hotProduct->price)}} <span>VNĐ</span></p>
@@ -56,7 +62,12 @@ $banner = DB::table('banner_content')->where('position',1)->get();
                         <!-- <div class="text-center text-uppercase item"> -->
                             <div class="text-center text-center carousel_detail-item">
                                 <a href="{{url('san-pham/'.$newProduct->alias.'.html')}}" title="{{$newProduct->name}}"><img src="{{asset('upload/product/'.$newProduct->photo)}}" alt="{{$newProduct->name}}" title="{{$newProduct->name}}" class="img-responsive img "></a>
-                                <button class="btn btn-buy">MUA NGAY</button>
+                                <form id="add-item-form" action="{{ route('addProductToCart') }}" method="post" class="variants clearfix"> 
+                                    {!! csrf_field() !!}
+                                    <input type="hidden" name="product_id" value="{{ $hotProduct->id }}"> 
+                                    <input id="quantity" type="number" name="product_numb" min="1" value="1" class="tc item-quantity" style="display: none" />  
+                                <button type="submit" class="btn btn-buy">MUA NGAY</button>
+                                </form>
                                 <div class="text-center carousel_content">
                                     <h3 class="text-center pro-name"><a href="{{url('san-pham/'.$newProduct->alias.'.html')}}" title="{{$newProduct->name}}">{{$newProduct->name}}</a></h3>
                                     <p class="text-center pro-price">{{number_format($newProduct->price)}} <span>VNĐ</span></p>
@@ -91,7 +102,12 @@ $banner = DB::table('banner_content')->where('position',1)->get();
                     <!-- <div class="text-center text-uppercase item"> -->
                         <div class="text-center text-center carousel_detail-item">
                             <a href="{{url('san-pham/'.$hotProduct->alias.'.html')}}" title=""><img src="{{asset('upload/product/'.$hotProduct->photo)}}" alt="" title="" class="img-responsive img "></a>
-                            <button class="btn btn-buy">MUA NGAY</button>
+                             <form id="add-item-form" action="{{ route('addProductToCart') }}" method="post" class="variants clearfix"> 
+                                {!! csrf_field() !!}
+                                <input type="hidden" name="product_id" value="{{ $hotProduct->id }}"> 
+                                <input id="quantity" type="number" name="product_numb" min="1" value="1" class="tc item-quantity" style="display: none" />  
+                            <button type="submit" class="btn btn-buy">MUA NGAY</button>
+                            </form>
                             <div class="text-center carousel_content">
                                 <h3 class="text-center pro-name"><a href="{{url('san-pham/'.$hotProduct->alias.'.html')}}" title="">{{$hotProduct->name}}</a></h3>
                                 <p class="text-center pro-price">{{number_format($hotProduct->price)}} <span>VNĐ</span></p>

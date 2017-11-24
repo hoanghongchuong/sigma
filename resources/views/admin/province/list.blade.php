@@ -37,7 +37,7 @@
               <tr>
                 
                 <td>{{ $key+1 }}</td>
-                <td>{{$item->province_name}}</td>            
+                <td>{{$item->name}}</td>            
                 <td class="text-center with_dieuhuong">
                   <i class="fa fa-pencil fa-fw"></i><a href="{{asset('backend/province/edit/'.$item->id)}}">Edit</a>
                 </td>

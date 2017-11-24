@@ -208,8 +208,8 @@
             <li><a href="backend/about/edit?type=footer"><i class="fa fa-gear" aria-hidden="true"></i> Quản lý footer</a></li>
           </ul>
         </li> -->
-        <!-- <li><a href="backend/province"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý tỉnh/ thành phố</span></a></li> -->
-         <!-- <li><a href="backend/district"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý quận/ huyện</span></a></li> -->
+        <li><a href="backend/province"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý tỉnh/ thành phố</span></a></li>
+         <li><a href="backend/district"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý quận/ huyện</span></a></li>
       </ul>
     </section>
 </aside>

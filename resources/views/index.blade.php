@@ -36,7 +36,9 @@
     <link href="{{asset('public/css/font-awesome.min.css')}}" rel='stylesheet' type='text/css'>
     <link href="{{asset('public/css/owl.carousel.min.css')}}" rel='stylesheet' type='text/css'>
     <link href="{{asset('public/css/owl.theme.default.min.css')}}" rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{asset('public/css/ion.rangeSlider.css')}}">
     <link href="{{asset('public/css/jquery.mmenu.css')}}" type="text/css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css" />
     <link rel="stylesheet" href="{{asset('public/css/jquery.mmenu.widescreen.css')}}" rel="stylesheet" media="(min-width: 769px)">
     <link href="{{asset('public/css/style.css')}}" rel='stylesheet' type='text/css'>
     <!--link js-->
@@ -95,8 +97,13 @@
     <script src="{{asset('public/js/popper.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/js/owl.carousel.js')}}"></script>
+
     <script src="{{asset('public/js/jquery.mmenu.js')}}" type="text/javascript"></script>
     <script type="text/javascript" src="{{asset('public/js/jquery.js')}}"></script>
+    <script src="{{asset('public/js/ion.rangeSlider.js')}}"></script>
+    <script src="{{asset('public/js/jquery.elevatezoom.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
+    <script type="text/javascript" src="{{asset('public/js/custom.js')}}"></script>
 
     <script>
         $('.carousel_top, .carousel_khach').owlCarousel({

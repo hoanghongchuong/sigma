@@ -20,7 +20,7 @@ class ProvinceController extends Controller
     }
     public function postCreate(Request $request){
     	$province = new Province;
-    	$province->province_name = $request->txtName;
+    	$province->name = $request->txtName;
     	$province->save();
     	return redirect(route('admin.province.index'))->with('mess','Thêm thành công');
     }
@@ -32,7 +32,7 @@ class ProvinceController extends Controller
     }
     public function postEdit(Request $request, $id){
     	$province = Province::where('id',$id)->first();
-    	$province->province_name = $request->txtName;
+    	$province->name = $request->txtName;
     	$province->save();
     	return redirect(route('admin.province.index'));
     }

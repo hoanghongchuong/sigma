@@ -29,7 +29,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="">Tên</label>
-                <input type="text" name="txtName" class="form-control" value="{{$district->district_name}}">
+                <input type="text" name="txtName" class="form-control" value="{{$district->name}}">
               </div>
             </div>
             <div class="col-md-6">
@@ -38,10 +38,10 @@
                   <select name="province" id="" class="form-control">
                     @foreach($data as $pro)
                     
-                    <option @if($pro->id == $district->province_id)
+                    <option @if($pro->id == $district->cate_id)
                       {{"selected"}}
                       @endif 
-                    value="{{$pro->id}}">{{$pro->province_name}}
+                    value="{{$pro->id}}">{{$pro->name}}
                     </option>
                     @endforeach
                   </select>

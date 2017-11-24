@@ -38,10 +38,10 @@
               <tr>
                 
                 <td>{{ $key+1 }}</td>
-                <td>{{$item->district_name}}</td>  
+                <td>{{$item->name}}</td>  
                 <td>
-                  <?php $province = DB::table('province')->where('id',$item->province_id)->first(); ?>
-                  {{$province->province_name}}
+                  <?php $province = DB::table('province')->where('id',$item->cate_id)->first(); ?>
+                  {{$province->name}}
                   
                 </td>          
                 <td class="text-center with_dieuhuong">

@@ -36,18 +36,19 @@
                     <ul class="flex-column flex-md-row menu-list">
                         <li><a href="#" title="">Danh mục sách</a>
                             <ul class="sub-menu">
-                                <li class="text-uppercase"><a href="list-pro.html" title="">Sách giáo khoa</a>
+                                @foreach($cateProducts as $cate)
+                                <li class="text-uppercase"><a href="list-pro.html" title="{{$cate->name}}">{{$cate->name}}</a>
+                                    <?php $cateChild = DB::table('product_categories')->where('status',1)->where('parent_id',$cate->id)->get(); ?>
+
                                     <ul class="text-capitalize sub-menu-list">
-                                        <li><a href="list-child.html" title="">Sách - Truyện thiếu nhi</a></li>
-                                        <li><a href="list-child.html" title="">Sách Toán Song Ngữ</a></li>
-                                        <li><a href="list-child.html" title="">Sách toán phổ thông</a></li>
-                                        <li><a href="list-child.html" title="">Sách toán tham khảo</a></li>
-                                        <li><a href="list-child.html" title="">Tạp chí toán học</a></li>
-                                        <li><a href="list-child.html" title="">Sách phổ thông</a></li>
-                                        <li><a href="list-child.html" title="">sách khởi nghiệp</a></li>
+                                    @foreach($cateChild as $cate2)
+                                        <li><a href="{{url('san-pham/'.$cate2->alias)}}" title="">{{$cate2->name}}</a></li>
+                                    @endforeach    
+
                                     </ul>
                                 </li>
-                                <li class="text-uppercase"><a href="list-pro.html" title="">Sách giáo khoa</a>
+                                @endforeach
+                                <!-- <li class="text-uppercase"><a href="list-pro.html" title="">Sách giáo khoa</a>
                                     <ul class="text-capitalize sub-menu-list">
                                         <li><a href="list-child.html" title="">Sách - Truyện thiếu nhi</a></li>
                                         <li><a href="list-child.html" title="">Sách Toán Song Ngữ</a></li>
@@ -72,7 +73,7 @@
                                         <li>Email: <a href="mailto:info@gco.vn" title="" class="text-lowercase">info@gco.vn</a></li>
                                         <li>Website: <a href="www.gco.vn" title="" class="text-lowercase">www.gco.vn</a></li>
                                     </ul>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                         <li><a href="{{url('')}}" title="">Trang chủ</a></li>

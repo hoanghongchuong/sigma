@@ -3,67 +3,252 @@
 <?php
     $setting = Cache::get('setting');
 ?>
-
-<div class="content-cart">
+<div class="breadcrumb-wrap">
 	<div class="container">
-		<div class="row" style="margin-top: 20px;">
-			<div class="col-sm-12 col-md-12">
-				<ul class="breadcrumb">
-					<li class="breadcrumb-item">
-						<a href="{{url('gio-hang')}}">Giỏ hàng</a>
-					</li>
-		            
-				    <li class="breadcrumb-item breadcrumb-item-current"> Thông tin giao hàng </li>
-				    <li class="breadcrumb-item "> Phương thức thanh toán </li>
-				</ul>
-			</div>
-
-			<div class="col-md-6 col-xs-12">
-				<form class="form-group cart-info-frm" method="post" action="{{route('postOrder')}}">
-            		<input type="hidden" name="_token" value="{{csrf_token()}}">
-					<h3>Thông tin giao hàng</h3>
-					<div class="form-group">
-						<input type="text" required="required" name="full_name" class="form-control" placeholder="Họ và tên">
-					</div>
-					<div class="form-group">
-						<input type="email" required="required" name="email" class="form-control" placeholder="Email">
-					</div>
-					<div class="form-group">
-						<input type="text" required="required" name="phone" class="form-control" placeholder="Số điện thoại">
-					</div>
-					<div class="form-group">
-						<input type="text" required="required" name="address" class="form-control" placeholder="Địa chỉ">
-					</div>
-					
-					<div class="form-group">
-                   	 	<textarea name="note" id="" class="form-control" placeholder="Nội dung đặt hàng"></textarea>
-                    </div>
-                    <div class="pull-right"><button type="submit" class="btn btn-primary">Gửi đơn hàng</button></div>
-				</form>
-			</div>
-			<div class="col-md-6 col-xs-12">
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col"><span class="visually-hidden">Hình ảnh</span></th>
-							<th scope="col"><span class="visually-hidden">Số lượng</span></th>
-							<th scope="col"><span class="visually-hidden">Giá</span></th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($product_cart as $item)
-						<tr>
-							<td><img src="{{asset('upload/product/'.$item->options->photo)}}" style="width: 4.6em; height: 4.6em" ></td>
-							<td>{{$item->qty}}</td>
-							<td>{{number_format($item->price)}}</td>
-						</tr>
-						@endforeach						
-					</tbody>
-				</table>
-				<p class="pull-right" style="font-size: 1.71429em; font-weight: 500; color: #4b4b4b; line-height: 1em;">Tổng tiền: {{number_format($total)}} đ</p>
-			</div>
-			
-		</div>
+		<ul class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{{url('')}}" title="">Trang chủ</a></li>
+			<li class="breadcrumb-item"><a href="{{url('thanh-toan')}}" title="">Thanh toán</a></li>
+		</ul>
 	</div>
 </div>
+<div class="chkout">
+	<div class="container">
+		<h2 class="tit">Thanh toán</h2>
+		<form action="confirm.html">
+			<div class="row">
+				<div class="col-md-8 col-lg-9">
+					<h3 class="chk-tit">
+						<span class="chk-quan">1</span><span class="chk-cap">Thông tin người nhận</span>
+					</h3>
+					<div class="chk-info">
+						<div class="row chkcart-wrap">
+							<div class="col-md-6 col-lg-4">
+								<input type="email" required="required" name="email" placeholder="Địa chỉ email">
+							</div>
+							<div class="col-md-6 col-lg-4">
+								<input type="text" required="required" name="full_name" placeholder="Họ tên người nhận">
+							</div>
+							<div class="col-md-6 col-lg-4">
+								<input type="tel" required="required" name="phone" placeholder="Số điện thoại">
+							</div>
+							<div class="col-md-6 col-lg-4">
+								<select name="province" id="province_id">
+									<option value="">Tỉnh/Thành phố</option>
+									@foreach($province as $pro)
+                                        <option value="{{$pro->id}}">{{$pro->name}}</option>
+                                    @endforeach
+								</select>
+							</div>
+							<div class="col-md-6 col-lg-4">
+								<select name="district" id="district_id">
+									<option value="">Quận/Huyện</option>
+									
+								</select>
+							</div>
+							<div class="col-md-6 col-lg-4">
+								<input type="text" name="address" required="required" placeholder="Địa chỉ">
+							</div>
+						</div>
+					</div>
+					<h3 class="chk-tit">
+						<span class="chk-quan">2</span><span class="chk-cap">Hình thức thanh toán</span>
+					</h3>
+					<div class="chk-ship">
+						<ul class="nav nav-pills chk-ship-list" id="pills-tab" role="tablist">
+							<li class="d-flex align-items-center nav-item">
+								<a class="nav-link active" name="payment_method" id="bank-menu" data-toggle="pill" href="#bank" role="tab" aria-controls="pills-profile" aria-selected="false"> Chuyển khoản ngân hàng</a>
+							</li>
+							<li class="d-flex align-items-center nav-item">
+								<a class="nav-link" name="payment_method" id="online-menu" data-toggle="pill" href="#online" role="tab" aria-controls="pills-contact" aria-selected="false"> Thanh toán online</a>
+							</li>
+							<li class="d-flex align-items-center nav-item">
+								<a class="nav-link" name="payment_method" id="cod-menu" data-toggle="pill" href="#cod" role="tab" aria-controls="pills-contact" aria-selected="false"> Ship COD</a>
+							</li>
+						</ul>
+
+						<div class="tab-content" id="pills-tabContent">
+					  		<div class="tab-pane fade show active bank-content-tab" id="bank" role="tabpanel" aria-labelledby="pills-profile-tab">
+								<p class="chk-info-text">Lưu ý: Bạn cần phải đăng ký dịch vụ Internet Banking hoặc dịch vụ thanh toán trực tuyến tại ngân hàng trước khi tiếp tục.</p>
+								<p class="chk-info-text">Chúng tôi giúp bạn thanh toán qua chuyển khoản ngân hàng với các ngân hàng dưới đây. Chọn ngân hàng để hoàn tất thanh toán</p>
+
+								<div class="chk-info-choice">
+									<div class="row">
+										<div class="col-md-3 col-lg-2 text-center">
+											<a href="#" title=""><img src="images/partner7.jpg" alt="" title=""></a>
+										</div>
+										<div class="col-md-3 col-lg-2 text-center">
+											<a href="#" title=""><img src="images/partner8.jpg" alt="" title=""></a>
+										</div>
+										<div class="col-md-3 col-lg-2 text-center">
+											<a href="#" title=""><img src="images/partner9.jpg" alt="" title=""></a>
+										</div>
+										<div class="col-md-3 col-lg-2 text-center">
+											<a href="#" title=""><img src="images/partner10.jpg" alt="" title=""></a>
+										</div>
+										<div class="col-md-3 col-lg-2 text-center">
+											<a href="#" title=""><img src="images/partner11.jpg" alt="" title=""></a>
+										</div>
+										<div class="col-md-3 col-lg-2 text-center">
+											<a href="#" title=""><img src="images/partner12.jpg" alt="" title=""></a>
+										</div>
+
+										<div class="col-md-3 col-lg-2 text-center">
+											<a href="#" title=""><img src="images/partner13.jpg" alt="" title=""></a>
+										</div>
+										<div class="col-md-3 col-lg-2 text-center">
+											<a href="#" title=""><img src="images/partner14.jpg" alt="" title=""></a>
+										</div>
+										<div class="col-md-3 col-lg-2 text-center">
+											<a href="#" title=""><img src="images/partner15.jpg" alt="" title=""></a>
+										</div>
+										<div class="col-md-3 col-lg-2 text-center">
+											<a href="#" title=""><img src="images/partner16.jpg" alt="" title=""></a>
+										</div>
+										<div class="col-md-3 col-lg-2 text-center">
+											<a href="#" title=""><img src="images/partner17.jpg" alt="" title=""></a>
+										</div>
+										<div class="col-md-3 col-lg-2 text-center">
+											<a href="#" title=""><img src="images/partner18.jpg" alt="" title=""></a>
+										</div>
+									</div>
+								</div>
+					  		</div><!-- end chuyển khoản -->
+
+					  		<div class="tab-pane fade" id="online" role="tabpanel" aria-labelledby="pills-contact-tab">
+								online
+					  		</div><!-- end tt online -->
+
+					  		<div class="tab-pane fade" id="cod" role="tabpanel" aria-labelledby="pills-contact-tab">
+								cod
+					  		</div><!-- end cod -->
+					  	</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-lg-3">
+					<h2 class="chkcart-tit">Giỏ hàng của bạn</h2>
+					<div class="chk-cart-item">
+
+						@foreach($product_cart as $item)
+						<div class="chk-cart-sitem">
+							<div class="row">
+								
+								
+								<div class="col-4">
+									<a href="{{url('san-pham/'.$item->options->alias.'.html')}}" title=""><img src="{{asset('upload/product/'.$item->options->photo)}}" alt="{{$item->name}}" title="{{$item->name}}"></a>
+								</div>
+								<div class="col-8">
+									<h3 class="chk-cart-item-tit"><a href="{{url('san-pham/'.$item->options->alias.'.html')}}" title="{{$item->name}}">{{$item->name}}</a></h3>
+									<ul class="pro-rate">
+										<li><i class="fa fa-star-o"></i></li>
+										<li><i class="fa fa-star-o"></i></li>
+										<li><i class="fa fa-star-o"></i></li>
+										<li><i class="fa fa-star-o"></i></li>
+										<li><i class="fa fa-star-o"></i></li>
+									</ul>
+									<h4 class="chk-cart-item-price"><span>{{number_format($item->price)}}</span> vnđ x <span class="chk-cart-item-qty">{{$item->qty}}</span></h4>
+								</div>
+							</div>
+						</div>
+						@endforeach
+						
+
+						<div class="chk-total">
+							<p class="chk-total-p">Tổng thanh toán: <span>{{number_format($total)}}</span> VNĐ</p>
+							<p class="text-right">
+								<a href="{{url('gio-hang')}}" title="" class="btn btn-chk-see">Xem giỏ hàng</a>
+							</p>
+						</div>
+						
+						<button type="submit" class="text-uppercase w-100 btn btn-chkcart">Thanh toán</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="khach">
+	<img src="images/khachbg.jpg" title="" alt="">
+	<div class="container khach-con">
+		<div class="owl-carousel owl-theme carousel_khach">
+            <div class="item">
+            	<div class="khach-wrap">
+	            	<div class="text-center khach-img">
+	            		<img class="mx-auto khach-item" src="images/khach1.jpg" alt="" title="">
+	            		<i class="fa fa-quote-left khach-decor"></i>
+	            	</div>
+					<ul class="text-center khach-rate">
+						<li><i class="fa fa-star-o"></i></li>
+						<li><i class="fa fa-star-o"></i></li>
+						<li><i class="fa fa-star-o"></i></li>
+						<li><i class="fa fa-star-o"></i></li>
+						<li><i class="fa fa-star-o"></i></li>
+					</ul>
+					<p class="text-center">Nguyễn Phương Mai</p>
+					<blockquote class="font-weight-bold text-center">Việc like một fanpage hay tham gia một group trên mạng xã hội thường làm cho các bạn lo lắng về độ phiền toái nhất định của nó. Cũng như nhiều group khác khi mới được thành lập.</blockquote>
+            	</div>
+            </div>
+            <div class="item">
+            	<div class="khach-wrap">
+	            	<div class="text-center khach-img">
+	            		<img class="mx-auto khach-item" src="images/khach1.jpg" alt="" title="">
+	            		<i class="fa fa-quote-left khach-decor"></i>
+	            	</div>
+					<ul class="text-center khach-rate">
+						<li><i class="fa fa-star-o"></i></li>
+						<li><i class="fa fa-star-o"></i></li>
+						<li><i class="fa fa-star-o"></i></li>
+						<li><i class="fa fa-star-o"></i></li>
+						<li><i class="fa fa-star-o"></i></li>
+					</ul>
+					<p class="text-center">Nguyễn Phương Mai</p>
+					<blockquote class="font-weight-bold text-center">Việc like một fanpage hay tham gia một group trên mạng xã hội thường làm cho các bạn lo lắng về độ phiền toái nhất định của nó. Cũng như nhiều group khác khi mới được thành lập. Việc like một fanpage hay tham gia một group trên mạng xã hội thường làm cho các bạn lo lắng về độ phiền toái nhất định của nó. Cũng như nhiều group khác khi mới được thành lập. Việc like một fanpage hay tham gia một group trên mạng xã hội thường làm cho các bạn lo lắng về độ phiền toái nhất định của nó. Cũng như nhiều group khác khi mới được thành lập.</blockquote>
+            	</div>
+            </div>
+            <div class="item">
+            	<div class="khach-wrap">
+	            	<div class="text-center khach-img">
+	            		<img class="mx-auto khach-item" src="images/khach1.jpg" alt="" title="">
+	            		<i class="fa fa-quote-left khach-decor"></i>
+	            	</div>
+					<ul class="text-center khach-rate">
+						<li><i class="fa fa-star-o"></i></li>
+						<li><i class="fa fa-star-o"></i></li>
+						<li><i class="fa fa-star-o"></i></li>
+						<li><i class="fa fa-star-o"></i></li>
+						<li><i class="fa fa-star-o"></i></li>
+					</ul>
+					<p class="text-center">Nguyễn Phương Mai</p>
+					<blockquote class="font-weight-bold text-center">Việc like một fanpage hay tham gia một group trên mạng xã hội thường làm cho các bạn lo lắng về độ phiền toái nhất định của nó. Cũng như nhiều group khác khi mới được thành lập.</blockquote>
+            	</div>
+            </div>
+        </div>
+	</div>
+</div>
+
+<div class="intro">
+	<div class="container">
+		<h1 class="text-uppercase btit">Nhà sách trực tuyến Sigmabooks</h1>
+		<p>Nhà sách online Edufly hội tụ đầy đủ và cập nhật nhanh nhất các tựa sách đủ thể loại với mức giảm 5 – 15%. Qua nhiều năm, không chỉ là địa chỉ tin cậy để bạn mua sách trực tuyến, Edufly còn có quà tặng, văn phòng phẩm, vật dụng gia đình,…với chất lượng đảm bảo, chủng loại đa dạng, chế độ bảo hành đầy đủ và giá cả hợp lý từ hàng trăm thương hiệu uy tín trong và ngoài nước. Đặc biệt, bạn có thể chọn những mẫu sổ tay handmade hay nhiều món quà tặng sinh nhật độc đáo chỉ có tại Edufly.</p>
+
+		<p>Mua sách online tại Edufly, bạn được tận hưởng chính sách hỗ trợ miễn phí đổi trả hàng, giao hàng nhanh – tận nơi – miễn phí*, thanh toán linh hoạt - an toàn, đặc biệt giảm thêm trên giá bán khi sử dụng BBxu giúp bạn mua sách online giá 0đ!</p>
+
+		<p>Chỉ với 3 cú click chuột, chưa bao giờ trải nghiệm mua sách online lại dễ chịu và nhẹ nhàng như vậy. Còn chần chờ gì nữa, đặt mua ngay những tựa sách hay cùng hàng ngàn sản phẩm chất lượng khác tại Edufly!</p>
+	</div>
+</div>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function(){
+           
+            $('#province_id').change(function(){
+                var pro_id = $(this).val();
+             
+                $.get("ajax/province/"+pro_id, function(data){
+                    // alert(data);
+                    $('#district_id').html(data);
+                });
+            });
+        });
+    </script>
 @endsection

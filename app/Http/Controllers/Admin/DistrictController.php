@@ -20,8 +20,8 @@ class DistrictController extends Controller
 
     public function postCreate(Request $req){
         $district = new District;
-        $district->district_name = $req->txtName;
-        $district->province_id = $req->province;
+        $district->name = $req->txtName;
+        $district->cate_id = $req->province;
         $district->save();
         return redirect(route('admin.district.index'));
     }
@@ -33,8 +33,8 @@ class DistrictController extends Controller
     }
     public function postEdit(Request $req, $id){
         $district = District::where('id',$id)->first();
-        $district->district_name = $req->txtName;
-        $district->province_id = $req->province;
+        $district->name = $req->txtName;
+        $district->cate_id = $req->province;
         $district->save();
         return redirect(route('admin.district.index'));
     }
