@@ -10,8 +10,9 @@
                 <a href="{{url('')}}" title=""><img src="{{asset('upload/hinhanh/'.$setting->photo)}}" alt="Logo" title=""></a>
             </div>
             <div class="col-xl-8 col-lg-7 col-md-7 order12">
-                <form action="" method="post" class="form-group h-100 d-flex align-items-center search-frm">
-                    <input type="text" required="required" class="w-100 search-ip" placeholder="Đánh thức tài năng Toán học, Những cuộc phiêu lưu của những người thích đếm,...">
+                <form action="{{route('search')}}" method="get" class="form-group h-100 d-flex align-items-center search-frm">
+                    {{csrf_field()}}
+                    <input type="text" required="required" class="w-100 search-ip" name="txtSearch" placeholder="Đánh thức tài năng Toán học, Những cuộc phiêu lưu của những người thích đếm,...">
                     <button type="submit" class="btn text-uppercase search-btn">Tìm kiếm</button>
                 </form>
             </div>

@@ -72,7 +72,7 @@
                 <h3 class="sb-title">Danh mục </h3>
             </div>
             
-            <ul class="nav navs sidebar menu" id='cssmenu'>   
+            <!-- <ul class="nav navs sidebar menu" id='cssmenu'>   
                 @foreach($cate_pro as $key=>$cate)
                     <?php $cateChilds = DB::table('product_categories')->where('parent_id',$cate->id)->get(); ?>
                 <li class='item has-sub active first'>
@@ -96,7 +96,7 @@
                     </ul>
                 </li>
                 @endforeach
-            </ul>
+            </ul> -->
             </div>
 
             <!-- Banner quảng cáo -->
@@ -152,23 +152,10 @@
                                             <img  class ="second-image" src="{{asset('upload/hasp/'.@$image->photo)}}"  alt="{{$product->name}}" />
                                         </a>
                                         <div class="actionss">
-                                            <!-- <div class="btn-cart-products">
-                                                <a href="javascript:void(0);" onclick="">
-                                                    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                            <div class="view-details">
-                                                <a href="{{url('san-pham/'.$product->alias.'.html')}}" class="view-detail" > 
-                                                    <span><i class="fa fa-clone"> </i></span>
-                                                </a>
-                                            </div> -->
-                                            <!-- <div class="btn-quickview-products">
-                                                <a href="javascript:void(0);" class="quickview" data-handle="detail.html"><i class="fa fa-eye"></i></a>
-                                            </div> -->
+                                           
                                         </div>
                                     </div>
                                     <div class="product-detail clearfix">
-                                        <!-- sử dụng pull-left -->
                                         <h3 class="pro-name"><a href="{{url('san-pham/'.$product->alias.'.html')}}" title="{{$product->name}}">{{$product->name}} </a></h3>
                                         <div class="pro-prices">    
                                             <p class="pro-price">{{number_format($product->price)}} ₫</p>

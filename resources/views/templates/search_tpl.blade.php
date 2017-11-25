@@ -1,57 +1,95 @@
 @extends('index')
 @section('content')
-<div class="wrap-breadcrumb">
-    <div class="clearfix container">
-        <div class="row main-header">                           
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pd5  ">
-                <ol class="breadcrumb breadcrumb-arrows">
-                    <li><a href="{{url('')}}" target="_self">Trang chủ</a></li>
-                    <li><a href="#" target="_self">Tìm kiếm</a></li>
-                    <!-- <li class="active"><span>Tất cả sản phẩm</span></li> -->
-                </ol>
-            </div>
-        </div>
-    </div>                          
-</div>
-<section id="content" class="clearfix container">  
-    <div class="row">
-      @foreach($products as $product)
-        <div class="col-md-4  col-sm-6 col-xs-12 pro-loop">
-            <div class="product-block product-resize">
-                <div class="product-img image-resize view view-third">
-                    <a href="{{url('san-pham/'.$product->alias.'.html')}}" title="Xe trượt HDL">
-                        <img class="first-image  has-img" alt=" {{$product->name}} " src="{{asset('upload/product/'.$product->photo)}}"  /> <?php @$image = DB::table('images')->where('product_id', $product->id)->orderBy('id','asc')->first();
-                          
-                         ?>     
-                        <img  class ="second-image" src="{{asset('upload/hasp/'.@$image->photo)}}"  alt="{{$product->name}}" />
-                    </a>
-                    <div class="actionss">
-                        <!-- <div class="btn-cart-products">
-                            <a href="javascript:void(0);" onclick="add_item_show_modalCart(1009814358)">
-                                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                        <div class="view-details">
-                            <a href="{{url('san-pham/'.$product->alias.'.html')}}" class="view-detail" > 
-                                <span><i class="fa fa-clone"> </i></span>
-                            </a>
-                        </div>
-                        <div class="btn-quickview-products">
-                            <a href="javascript:void(0);" class="quickview" data-handle="detail.html"><i class="fa fa-eye"></i></a>
-                        </div> -->
-                    </div>
-                </div>
-                <div class="product-detail clearfix">
-                    <!-- sử dụng pull-left -->
-                    <h3 class="pro-name"><a href="{{url('san-pham/'.$product->alias.'.html')}}" title="{{$product->name}}">{{$product->name}} </a></h3>
-                    <div class="pro-prices">    
-                        <p class="pro-price">{{number_format($product->price)}} ₫</p>
-                        <p class="pro-price-del text-left"></p> 
-                    </div>
-                </div>
-            </div>  
-        </div> 
-        @endforeach   
+<?php
+    $setting = Cache::get('setting');
+    $about = Cache::get('about');
+?>
+<div class="breadcrumb-wrap">
+    <div class="container">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{url('')}}" title="">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="#" title="">Tìm kiếm</a></li>
+        </ul>
     </div>
-</section>
+</div>
+
+<div class="list-pro">
+    <div class="container">
+        <p class="news-social">
+            <img src="images/social.jpg" alt="" title="">
+        </p>
+        <div class="row">
+            <aside class="col-md-12 col-lg-3">
+                @include('templates.filter')
+            </aside>
+            <div class="col-md-12 col-lg-9">
+                <h1 class="ndetail-tit"><a href="news-detail.html" title="">Kết quả tìm kiếm cho: "{{$search}}"</a></h1>
+                    
+                <div class="propage">
+                    @if(count($products) > 0)
+                    <div class="row flex-wrap no-gutters curent-book-row">
+                        @foreach($products as $product)
+                        <div class="col-md-6 col-lg-3">
+                            <!-- <div class="text-center text-uppercase item"> -->
+                                <div class="carousel_detail-item">
+                                    <a href="{{url('san-pham/'.$product->alias.'.html')}}" title=""><img src="{{asset('upload/product/'.$product->photo)}}" alt="{{$product->name}}" title="{{$product->name}}" class="img-responsive img "></a>
+                                    <button class="btn btn-buy">MUA NGAY</button>
+                                    <div class="text-center carousel_content">
+                                        <h3 class="text-center pro-name"><a href="{{url('san-pham/'.$product->alias.'.html')}}" title="">{{$product->name}}</a></h3>
+                                        <p class="text-center pro-price">{{number_format($product->price)}} <span>VNĐ</span></p>
+                                        <ul class="pro-rate">
+                                            <li><i class="fa fa-star-o"></i></li>
+                                            <li><i class="fa fa-star-o"></i></li>
+                                            <li><i class="fa fa-star-o"></i></li>
+                                            <li><i class="fa fa-star-o"></i></li>
+                                            <li><i class="fa fa-star-o"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                        @endforeach
+                    </div>
+                    @else <h2 style="font-size: 24px; font-weight: bold">Không có kết quả</h2>
+                    @endif
+                </div>
+            </div><!-- end col-10 -->
+        </div>
+    </div>
+</div>
+
+<div class="khach">
+    <img src="{{asset('public/images/khachbg.jpg')}}" title="" alt="">
+    <div class="container khach-con">
+        <div class="owl-carousel owl-theme carousel_khach">
+            <?php $feedback = DB::table('feedback')->get(); ?>
+            @foreach($feedback as $f)
+            <div class="item">
+                <div class="khach-wrap">
+                    <div class="text-center khach-img">
+                        <img class="mx-auto khach-item" src="{{asset('upload/hinhanh/'.$f->photo)}}" alt="" title="">
+                        <i class="fa fa-quote-left khach-decor"></i>
+                    </div>
+                    <ul class="text-center khach-rate">
+                        <li><i class="fa fa-star-o"></i></li>
+                        <li><i class="fa fa-star-o"></i></li>
+                        <li><i class="fa fa-star-o"></i></li>
+                        <li><i class="fa fa-star-o"></i></li>
+                        <li><i class="fa fa-star-o"></i></li>
+                    </ul>
+                    <p class="text-center">{{$f->name}}</p>
+                    <blockquote class="font-weight-bold text-center">{!! $f->content !!}</blockquote>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+
+<div class="intro">
+    <div class="container">
+        <h1 class="text-uppercase btit">Nhà sách trực tuyến Sigmabooks</h1>
+        <p{!! $about->mota !!}</p>
+    </div>
+</div>
 @endsection

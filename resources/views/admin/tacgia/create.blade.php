@@ -44,7 +44,7 @@
 									</div> -->
 									<div class="clearfix"></div>
 							    	<div class="form-group @if ($errors->first('txtName')!='') has-error @endif">
-								      	<label for="ten">Tên thể loại</label>
+								      	<label for="ten">Tên tác giả</label>
 								      	<input type="text" name="txtName" id="txtName" value="" required="required" class="form-control" />
 								      	@if ($errors->first('txtName')!='')
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtName'); !!}</label>

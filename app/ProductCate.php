@@ -12,7 +12,7 @@ class ProductCate extends Model {
 	public function getProductsAttribute()
     {
     	$categoryIdArray = $this->getChildCategories([$this->id]);
-        return \App\Products::whereIn('cate_id', $categoryIdArray)->paginate(8);
+        return \App\Products::whereIn('cate_id', $categoryIdArray)->paginate(16);
     }
 
 

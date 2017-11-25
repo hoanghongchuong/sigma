@@ -146,11 +146,38 @@ class IndexController extends Controller {
 	public function getProductList($id)
 	{
 		//Tìm article thông qua mã id tương ứng
-		$cate_pro = DB::table('product_categories')->where('status',1)->orderby('id','desc')->get();
+		//$cate_pro = DB::table('product_categories')->where('status',1)->orderby('id','desc')->get();
 		$com='san-pham';
-		$product_cate = DB::table('product_categories')->select()->where('status',1)->where('alias',$id)->get()->first();
+		$product_cate = ProductCate::select('*')->where('status',1)->where('alias',$id)->first();
+		// $categoryDetail = ProductCate::select('name','alias','id','parent_id')->where('alias', $alias)->first();
 		if(!empty($product_cate)){
-			$product = DB::table('products')->select()->where('status',1)->where('cate_id',$product_cate->id)->orderBy('stt','desc')->paginate(9);
+
+			if($product_cate->parent_id > 0){
+				$cate_pro = DB::table('product_categories')->where('status',1)->where('parent_id',$product_cate->id)->orderby('stt','asc')->get();
+				if(count($cate_pro)>0){
+					$cate_pro = DB::table('product_categories')->where('status',1)->where('parent_id',$product_cate->id)->orderby('stt','asc')->get();
+				}else{
+					$cate_pro = DB::table('product_categories')->where('status',1)->where('parent_id',$product_cate->parent_id)->orderby('stt','asc')->get();
+				}
+			}
+
+			// $ids=array();
+			// $ids=$product_cate->id;
+			// $cate_pro_byids = DB::table('product_categories')->where('status',1)->where('parent_id',$product_cate->id)->orderby('stt','asc')->get();
+			// if(count($cate_pro_byids)>0){
+			// 	foreach($cate_pro_byids as $item){
+			// 		$ids=$item->id;
+			// 		$cate_pro_byids2 = DB::table('product_categories')->where('status',1)->where('parent_id',$item->id)->orderby('stt','asc')->get();
+			// 		if(count($cate_pro_byids2)>0){
+			// 			foreach($cate_pro_byids2 as $item2){
+			// 				$ids=$item2->id;
+			// 			}
+			// 		}
+
+			// 	}
+			// }
+			$products = $product_cate->products;
+			// $product = DB::table('products')->select()->where('status',1)->whereIn('cate_id',$product_cate->id)->orderBy('stt','desc')->paginate(9);
 			$banner_danhmuc = DB::table('lienket')->select()->where('status',1)->where('com','chuyen-muc')->where('link','san-pham')->get()->first();
 			$doitac = DB::table('lienket')->select()->where('status',1)->where('com','doi-tac')->orderby('stt','asc')->get();
 			$tintucs = DB::table('news')->orderBy('id','desc')->take(3)->get();
@@ -171,7 +198,7 @@ class IndexController extends Controller {
 			$description = $product_cate->description;
 			$img_share = asset('upload/product/'.$product_cate->photo);
 
-			return view('templates.productlist_tpl', compact('product','product_cate','banner_danhmuc','doitac','keyword','description','title','img_share','cate_pro','tintucs','cateChilds','com','hotProducts','saleProduct'));
+			return view('templates.productlist_tpl', compact('products','product_cate','banner_danhmuc','doitac','keyword','description','title','img_share','cate_pro','tintucs','cateChilds','com','hotProducts','saleProduct'));
 		}else{
 			return redirect()->route('getErrorNotFount');
 		}
@@ -254,7 +281,7 @@ class IndexController extends Controller {
 		// End cấu hình SEO
 		
 		$products = DB::table('products')->select()->where('name', 'LIKE', '%' . $search . '%')->orderBy('id','DESC')->get();
-		// dd($product);
+		// dd($products);
 		return view('templates.search_tpl', compact('products','banner_danhmuc','keyword','description','title','img_share','search','cate_pro'));
 	}
 
@@ -561,10 +588,6 @@ class IndexController extends Controller {
 		$data->save();
 		return redirect()->back()->with('mess','Cảm ơn bạn đã gửi yêu cầu. Chúng tôi sẽ liên hệ lại với bạn sớm nhất !');
 	}
-
-	
-	
-
 	public function getCart()
 	{
 		$product_cart= Cart::content();

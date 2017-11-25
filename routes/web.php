@@ -29,6 +29,7 @@ Route::post('newsletter',['as'=>'postNewsletter', 'uses'=>'IndexController@postN
 Route::get('san-pham',['as'=>'getProduct', 'uses'=>'IndexController@getProduct']);
 Route::get('san-pham/{alias}.html','IndexController@getProductDetail')->name('detailProduct');
 Route::get('san-pham/{id}',['as'=>'getProductList', 'uses'=>'IndexController@getProductList']);
+// Route::get('san-pham/{id}',['as'=>'getProductList', 'uses'=>'IndexController@getProductByCate']);
 Route::get('danh-muc/{alias}', 'IndexController@getProductByCate')->name('detailCategory');
 
 Route::get('thanh-toan',['as'=>'thanhtoan', 'uses' => 'IndexController@thanhtoan']);
