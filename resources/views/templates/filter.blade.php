@@ -1,8 +1,8 @@
-<form action="" method="get" accept-charset="utf-8">
+<form action="{{route('filter')}}" method="get" accept-charset="utf-8">
     {{ csrf_field() }}    
     
     <div class="pro-filter">           
-        <select name="" id="" class="w-100 pro-filter-type">
+        <select name="theloai" id="" class="w-100 pro-filter-type">
             <option value="">-- Thể loại --</option>
             <?php $theloai = DB::table('theloai')->orderBy('id','desc')->get(); ?>
             @foreach($theloai as $tl)
@@ -10,7 +10,7 @@
             @endforeach
         </select>
 
-        <select name="" id="" class="w-100 pro-filter-author">
+        <select name="tacgia" id="" class="w-100 pro-filter-author">
             <option value="">-- Tác giả --</option>
             <?php $tacgia = DB::table('tacgia')->orderBy('id','desc')->get(); ?>
             @foreach($tacgia as $tg)
@@ -18,7 +18,7 @@
             @endforeach
         </select>
 
-        <select name="" id="" class="w-100 pro-filter-publish">
+        <select name="nxb" id="" class="w-100 pro-filter-publish">
             <option value="">-- Nhà xuất bản --</option>
             <?php $nxb = DB::table('nxb')->orderBy('id','desc')->get(); ?>
             @foreach($nxb as $n)

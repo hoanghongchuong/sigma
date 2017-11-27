@@ -19,8 +19,9 @@
             <aside class="col-md-12 col-lg-3 mt-4">
                 <div class="aside-wrap">
                     <ul class="pro-menu"><!-- list-child.html -->
-                        <li class="active"><a href="list-pro.html" title="">Toán tài năng</a></li>
-                        <li><a href="list-pro.html" title="">Đánh thức: trẻ thơ</a></li>
+                        
+                        <!-- <li class="active"><a href="list-pro.html" title="">Toán tài năng</a></li> -->
+                        <!-- <li><a href="list-pro.html" title="">Đánh thức: trẻ thơ</a></li>
                         <li><a href="list-pro.html" title="">Sách giáo khoa</a>
                             <ul class="sub-menu">
                                 <li><a href="list-child.html" title="">Toán</a></li>
@@ -32,7 +33,7 @@
                         <li><a href="list-pro.html" title="">Toán Tiểu học 2</a></li>
                         <li><a href="list-pro.html" title="">Toán Tiểu học 3</a></li>
                         <li><a href="list-pro.html" title="">Toán Tiểu học 4</a></li>
-                        <li><a href="list-pro.html" title="">Toán Tiểu học 5</a></li>
+                        <li><a href="list-pro.html" title="">Toán Tiểu học 5</a></li> -->
                     </ul>
                     @include('templates.filter')
                     <a href="#" title="" class="d-lg-block d-none"><img src="{{asset('public/images/banner1.jpg')}}" alt="" title=""></a>
@@ -71,13 +72,16 @@
                                 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52843d4e1ff0313a"></script>
                         </p>
                         <!-- <h2 class="p-status">Tình trạng: <span>Còn hàng</span></h2> -->
-                        <ul class="pro-rate">
+                        <!-- <ul class="pro-rate">
                             <li><i class="fa fa-star-o"></i></li>
                             <li><i class="fa fa-star-o"></i></li>
                             <li><i class="fa fa-star-o"></i></li>
                             <li><i class="fa fa-star-o"></i></li>
                             <li><i class="fa fa-star-o"></i></li>
-                        </ul>
+                        </ul> -->
+                        <div class="rate_row"></div>
+                        <div class="mess-rate"></div>
+                        <input type="hidden" name="productId" value="{{ $product_detail->id }}"> 
                         <h3 class="p-price">Giá: <span>{{number_format($product_detail->price)}}</span> VNĐ</h3>
                         <h3 class="p-o-price"><del>Giá bìa: <span>{{number_format($product_detail->price_old)}}</span> đ</del></h3>
                         <p>{!! $product_detail->mota !!}</p>

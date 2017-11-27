@@ -16,9 +16,9 @@
 <div class="list-pro">
     <div class="container">
         <!-- <h1 class="ndetail-tit"><a href="news-detail.html" title="{{$product_cate->name}}">{{$product_cate->name}}</a></h1> -->
-        <p class="news-social">
+        <!-- <p class="news-social">
             <img src="images/social.jpg" alt="" title="">
-        </p>
+        </p> -->
         <div class="row">
             <aside class="col-md-12 col-lg-3">
                 <div class="aside-wrap">
@@ -36,12 +36,10 @@
             <div class="col-md-12 col-lg-9">
                 <h1 class="ndetail-tit"><a href="news-detail.html" title="{{$product_cate->name}}">{{$product_cate->name}}</a></h1>
                 <div class="newspage-content">
-                    <p>Mua sách online tại Bansachtructuyen.com, bạn được tận hưởng chính sách hỗ trợ miễn phí đổi trả hàng, giao hàng nhanh – tận nơi – miễn phí*, thanh toán linh hoạt - an toàn.</p>
-
-                    <p>Chỉ với 3 cú click chuột, chưa bao giờ trải nghiệm mua sách online lại dễ chịu và nhẹ nhàng như vậy. Còn chần chờ gì nữa, đặt mua ngay những tựa sách hay cùng hàng ngàn sản phẩm chất lượng khác tại Bansachtructuyen.com!</p>
+                    <p>{!! $product_cate->mota !!}</p>
                 </div>
                 <div class="banner pro-banner">
-                    <a href="#" title=""><img src="images/banner.jpg" alt="" title=""></a>
+                    <a href="#" title=""><img src="{{asset('public/images/banner.jpg')}}" alt="" title=""></a>
                 </div>
                 
                 <div class="propage">
@@ -51,7 +49,12 @@
                             <!-- <div class="text-center text-uppercase item"> -->
                                 <div class="carousel_detail-item">
                                     <a href="{{url('san-pham/'.$product->alias.'.html')}}" title=""><img src="{{asset('upload/product/'.$product->photo)}}" alt="{{$product->name}}" title="{{$product->name}}" class="img-responsive img "></a>
-                                    <button class="btn btn-buy">MUA NGAY</button>
+                                   <form id="add-item-form" action="{{ route('addProductToCart') }}" method="post" class="variants clearfix"> 
+                                        {!! csrf_field() !!}
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}"> 
+                                        <input id="quantity" type="number" name="product_numb" min="1" value="1" class="tc item-quantity" style="display: none" />  
+                                    <button type="submit" class="btn btn-buy">MUA NGAY</button>
+                                    </form>
                                     <div class="text-center carousel_content">
                                         <h3 class="text-center pro-name"><a href="{{url('san-pham/'.$product->alias.'.html')}}" title="">{{$product->name}}</a></h3>
                                         <p class="text-center pro-price">{{number_format($product->price)}} <span>VNĐ</span></p>

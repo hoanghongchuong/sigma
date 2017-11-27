@@ -40,6 +40,7 @@
     <link href="{{asset('public/css/jquery.mmenu.css')}}" type="text/css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css" />
     <link rel="stylesheet" href="{{asset('public/css/jquery.mmenu.widescreen.css')}}" rel="stylesheet" media="(min-width: 769px)">
+    <link rel="stylesheet" href="{{asset('public/css/starwars.css')}}" type="text/css" />
     <link href="{{asset('public/css/style.css')}}" rel='stylesheet' type='text/css'>
     <!--link js-->
     <script type="text/javascript" src="{{asset('public/js/jquery.min.js')}}"></script>
@@ -51,6 +52,7 @@
         window.token = '{{ csrf_token() }}';
         window.urlAddCart = '{{ route("addProductToCartAjax") }}';
    </script>
+   <script src="{{asset('public/js/jquery/jquery-2.1.3.min.js')}}"></script>
 </head>
 <body class="">
     <div class="popup">
@@ -91,9 +93,8 @@
             </div>
         </div>
     </div>
-    
     <!-- setup jquery -->
-    <script src="{{asset('public/js/jquery.min.js')}}"></script>
+    <!-- <script src="{{asset('public/js/jquery.min.js')}}"></script> -->
     <script src="{{asset('public/js/popper.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/js/owl.carousel.js')}}"></script>
@@ -104,6 +105,8 @@
     <script src="{{asset('public/js/jquery.elevatezoom.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
     <script type="text/javascript" src="{{asset('public/js/custom.js')}}"></script>
+    <!-- <script type="text/javascript" src="{{asset('public/js/starwarsjs.js ')}}"></script> -->
+    <script src="{{asset('public/js/starwarsjs.js')}}"></script>
 
     <script>
         $('.carousel_top, .carousel_khach').owlCarousel({

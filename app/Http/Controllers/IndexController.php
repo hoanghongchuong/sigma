@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Products;
+use App\Rate;
 use App\ProductCate;
 use App\NewsLetter;
 use App\Recruitment;
@@ -804,6 +805,39 @@ class IndexController extends Controller {
 
     	return view('templates.cateproduct_tpl', compact('categoryDetail','cate_pro','products'));
     }
+    public function filter(Request $request){
+    	$price = explode(';',$request->range);
+    	$result = DB::table('products')
+    	->join('theloai','products.theloai_id','=','theloai.id')
+    	->join('tacgia','products.tacgia_id','=','tacgia.id')
+    	->join('nxb','products.nxb_id','=','nxb.id')
+    	->select('products.id as pID', 'products.name as productName','products.alias as productAlias','products.photo as productPhoto','products.price as productPrice');
+    	if($request->theloai){
+    		$result = $result->where('products.theloai_id', $request->theloai);
+    	}
+    	if($request->tacgia){
+    		$result = $result->where('products.tacgia_id', $request->tacgia);
+    	}
+    	if($request->nxb){
+    		$result = $result->where('products.nxb_id', $request->nxb);
+    	}
+    	if($request->range){
+    		$result = $result->whereBetween('products.price', array($price[0], $price[1]));
+    	}
 
+		$result = $result->orderBy('products.id','desc')->paginate(20);
+		
+		return view('templates.filter_tpl', compact('result'));    	
+    }
     
+    public function rating(Request $request){
+    	$ip = $_SERVER['HTTP_CLIENT_IP'];
+    	$data = new Rate;
+    	$data->product_id = $request->productID;
+    	$data->rate = $request->rate;
+    	$data->ip_address = $ip;
+    	dd($data);
+    	$data->save();
+    }
+
 }
