@@ -831,13 +831,14 @@ class IndexController extends Controller {
     }
     
     public function rating(Request $request){
-    	$ip = $_SERVER['HTTP_CLIENT_IP'];
+    	// $ip = $_SERVER['HTTP_CLIENT_IP'];
     	$data = new Rate;
     	$data->product_id = $request->productID;
     	$data->rate = $request->rate;
-    	$data->ip_address = $ip;
-    	dd($data);
+    	// $data->ip_address = $ip;
+    	// dd($data);
     	$data->save();
+    	return 1;
     }
 
 }

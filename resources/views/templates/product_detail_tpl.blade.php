@@ -80,8 +80,8 @@
                             <li><i class="fa fa-star-o"></i></li>
                         </ul> -->
                         <div class="rate_row"></div>
-                        <div class="mess-rate"></div>
-                        <input type="hidden" name="productId" value="{{ $product_detail->id }}"> 
+                        <div class="mess-rate" style="margin-top: 5px; color: #1ba056"></div>
+                        <input type="hidden" name="productId" class="productId" value="{{ $product_detail->id }}"> 
                         <h3 class="p-price">Giá: <span>{{number_format($product_detail->price)}}</span> VNĐ</h3>
                         <h3 class="p-o-price"><del>Giá bìa: <span>{{number_format($product_detail->price_old)}}</span> đ</del></h3>
                         <p>{!! $product_detail->mota !!}</p>
@@ -137,10 +137,10 @@
                             <a href="{{url('san-pham/'.$item->alias.'.html')}}" title=""><img src="{{asset('upload/product/'.$item->photo)}}" alt="{{$item->name}}" title="{{$item->name}}" class="img-responsive img "></a>
                             <form id="add-item-form" action="{{ route('addProductToCart') }}" method="post" class="variants clearfix"> 
                                 {!! csrf_field() !!}
-                                <input type="hidden" name="product_id" value="{{ $item->id }}"> 
-                                <input id="quantity" type="number" name="product_numb" min="1" value="1" class="tc item-quantity" style="display: none" />  
-                            <button type="submit" class="btn btn-buy">MUA NGAY</button>
-                        </form>
+                                    <input type="hidden" name="product_id" value="{{ $item->id }}"> 
+                                    <input id="quantity" type="number" name="product_numb" min="1" value="1" class="tc item-quantity" style="display: none" />  
+                                <button type="submit" class="btn btn-buy">MUA NGAY</button>
+                            </form>
                             <div class="text-center carousel_content">
                                 <h3 class="text-center pro-name"><a href="{{url('san-pham/'.$item->alias.'.html')}}" title="">{{$item->name}}</a></h3>
                                 <p class="text-center pro-price">{{number_format($item->price)}} <span>VNĐ</span></p>

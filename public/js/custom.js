@@ -45,28 +45,48 @@ $("#range").ionRangeSlider({
 $( document ).ready(function() {
     $('.rate_row').starwarsjs({
         stars : 5,
-        count : 1
-    });
-
-    $('rate_row').click(function(){
-        var productID = $('.productId').val();
-        console.log(productID);
-        var rate = $('.get_rate').val();
-        $.ajax({
-          url: 'a',
-          type: 'GET',
-          data : {
-            productID: productID,
-            rate: rate,
-            // ip_address: ip_address
-          },
-          success: function(data){
-            if(data){
-                $('.mess-rate').html(data);
+        count : 1,
+        on_select : function(rate){
+          var productID = $('.productId').val();
+          $.ajax({
+            url : window.getRate,
+            type: 'POST',
+            data: {
+              productID : productID,
+              rate : rate,
+              _token : window.token
+            },
+            success: function(res){
+              if(res == 1){
+                $('.mess-rate').html("Cảm ơn bạn đã đánh giá");
+              }
             }
-          }
-
-        });
+          }); 
+          
+        }
     });
+
+   
+
+    // $('rate_row').click(function(){
+    //     var productID = $('.productId').val();
+    //     console.log(productID);
+    //     var rate = $('.get_rate').val();
+    //     $.ajax({
+    //       url: 'a',
+    //       type: 'GET',
+    //       data : {
+    //         productID: productID,
+    //         rate: rate,
+    //         // ip_address: ip_address
+    //       },
+    //       success: function(data){
+    //         if(data){
+    //             $('.mess-rate').html("Cảm ơn bạn đã đánh giá sản phẩm!!");
+    //         }
+    //       }
+
+    //     });
+    // });
 
 });

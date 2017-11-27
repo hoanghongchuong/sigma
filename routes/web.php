@@ -24,7 +24,7 @@ Route::get('tuyen-dung',['as'=>'getNews', 'uses'=>'IndexController@getTuyenDung'
 Route::get('tuyen-dung/{id}.html',['as'=>'getNewsDetail', 'uses'=>'IndexController@getNewsTuyenDungDetail']);
 Route::get('filter','IndexController@filter')->name('filter');
 
-Route::get('rating','IndexController@rating')->name('rating');
+Route::post('rating','IndexController@rating')->name('rating');
 
 Route::get('tim-kiem',['as'=>'search', 'uses'=>'IndexController@search']);
 Route::post('newsletter',['as'=>'postNewsletter', 'uses'=>'IndexController@postNewsletter']);
