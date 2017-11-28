@@ -17,7 +17,6 @@
 </section>
 <!-- Main content -->
 <section class="content">
-  
     <div class="box">
     	@include('admin.messages_error')
         <div class="box-body">

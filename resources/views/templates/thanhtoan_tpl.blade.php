@@ -56,27 +56,20 @@
 						<span class="chk-quan">2</span><span class="chk-cap">Hình thức thanh toán</span>
 					</h3>
 					<div class="chk-ship">
+						<input type="text"  name="payment_method" value="0" id="payment_method">
 						<ul class="nav nav-pills chk-ship-list" id="pills-tab" role="tablist">
-							<!-- <li class="d-flex align-items-center nav-item">
-								<input type="radio" class="nav-link active" data-id="0" name="payment_method" id="bank-menu" data-toggle="pill" href="#bank" role="tab" aria-controls="pills-profile" aria-selected="false"> Chuyển khoản ngân hàng</input>
+							<li class="d-flex align-items-center nav-item">
+								<a  class="nav-link active" data-id="0" name="" id="bank-menu" data-toggle="pill" href="#bank" role="tab" aria-controls="pills-profile" aria-selected="false"> Chuyển khoản ngân hàng</a>	
 							</li>
 							<li class="d-flex align-items-center nav-item">
-								<input type="radio" class="nav-link" data-id="1" name="payment_method" id="online-menu" data-toggle="pill" href="#online" role="tab" aria-controls="pills-contact" aria-selected="false"> Thanh toán online</input>
+								<a  class="nav-link" data-id="1" name="" id="online-menu" data-toggle="pill" href="#online" role="tab" aria-controls="pills-contact" aria-selected="false"> Thanh toán online</a>
 							</li>
 							<li class="d-flex align-items-center nav-item">
-								<input type="radio" class="nav-link" data-id="2" name="payment_method" id="cod-menu" data-toggle="pill" href="#cod" role="tab" aria-controls="pills-contact" aria-selected="false"> Ship COD</input>
-							</li> -->
+								<a  class="nav-link" data-id="2" name="" id="cod-menu" data-toggle="pill" href="#cod" role="tab" aria-controls="pills-contact" aria-selected="false"> Ship COD</a>
+							</li>	
 							
-							<li class="nav-item" >
-								<input type="radio" value="0" checked="checked" name="payment_method" >Chuyển khoản ngân hàng
-							</li>
-							<li class="nav-item">
-								<input type="radio" value="1" name="payment_method">Thanh toán online
-							</li>
-							<li class="nav-item">
-								<input type="radio" value="2" name="payment_method">Ship COD
-							</li>
 						</ul>
+						
 
 						<div class="tab-content" id="pills-tabContent">
 					  		<div class="tab-pane fade show active bank-content-tab" id="bank" role="tabpanel" aria-labelledby="pills-profile-tab">

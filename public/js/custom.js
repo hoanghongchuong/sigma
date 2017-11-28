@@ -66,27 +66,9 @@ $( document ).ready(function() {
         }
     });
 
-   
-
-    // $('rate_row').click(function(){
-    //     var productID = $('.productId').val();
-    //     console.log(productID);
-    //     var rate = $('.get_rate').val();
-    //     $.ajax({
-    //       url: 'a',
-    //       type: 'GET',
-    //       data : {
-    //         productID: productID,
-    //         rate: rate,
-    //         // ip_address: ip_address
-    //       },
-    //       success: function(data){
-    //         if(data){
-    //             $('.mess-rate').html("Cảm ơn bạn đã đánh giá sản phẩm!!");
-    //         }
-    //       }
-
-    //     });
-    // });
+  $(".nav-link").on('click',function(e){
+    $("#payment_method").attr('value', $(this).data('id'));
+    return -1;
+  })
 
 });
