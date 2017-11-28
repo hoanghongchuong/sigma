@@ -38,7 +38,7 @@
                         <li><a href="#" title="">Danh mục sách</a>
                             <ul class="sub-menu">
                                 @foreach($cateProducts as $cate)
-                                <li class="text-uppercase"><a href="list-pro.html" title="{{$cate->name}}">{{$cate->name}}</a>
+                                <li class="text-uppercase"><a href="#" title="{{$cate->name}}">{{$cate->name}}</a>
                                     <?php $cateChild = DB::table('product_categories')->where('status',1)->where('parent_id',$cate->id)->get(); ?>
 
                                     <ul class="text-capitalize sub-menu-list">

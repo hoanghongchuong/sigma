@@ -104,7 +104,7 @@
         </li> -->
        
         <li><a href="backend/about/edit?type=gioi-thieu"><i class="fa fa-circle-o"></i> <span>Giới thiệu</span></a></li>
-        <!-- <li><a href="backend/video"><i class="fa fa-circle-o"></i> <span>Video</span></a></li> -->
+        <li><a href="backend/tag"><i class="fa fa-circle-o"></i> <span>Quản lý tag</span></a></li>
         <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-edit"></i> <span>Quản lý tin tức</span>
@@ -168,8 +168,19 @@
             <li><a href="backend/lienket?type=chi-nhanh"><i class="fa fa-circle-o"></i> Quản lý chi nhánh</a></li>
           </ul>
         </li> -->
-        <li><a href="backend/slider?type=gioi-thieu"><i class="fa fa-circle-o"></i> <span>Quản lý slider</span></a></li>
-        <li><a href="backend/lienket?type=chuyen-muc"><i class="fa fa-circle-o"></i> Banner quảng cáo</a></li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>Hình ảnh - quảng cáo</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="backend/slider?type=gioi-thieu"><i class="fa fa-circle-o"></i> <span>Quản lý slider</span></a></li>
+            <li><a href="backend/lienket?type=chuyen-muc"><i class="fa fa-circle-o"></i> Banner quảng cáo</a></li>
+          </ul>
+        </li>
+        <!-- <li><a href="backend/position"><i class="fa fa-gear" aria-hidden="true"></i> <span>Vị trí quảng cáo</span></a></li>
+        <li><a href="backend/banner"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý banner</span></a></li> -->
         <li><a href="backend/chinhanh"><i class="fa fa-envelope"></i><span>Quản lý chi nhánh</span></a></li>
         <!-- <li class="treeview">
           <a href="#">
@@ -195,9 +206,20 @@
         </li> -->
         <!-- <li><a href="backend/bankaccount"><i class="fa fa-envelope"></i><span>Quản lý tài khoản ngân hàng</span></a></li> -->
         <!-- <li><a href="{{ asset('backend/menu?type=menu-top') }}"><i class="fa fa-circle-o"></i> <span>Quản lý menu</span></a></li> -->
-        <!-- <li><a href="backend/position"><i class="fa fa-gear" aria-hidden="true"></i> <span>Vị trí quảng cáo</span></a></li>
-        <li><a href="backend/banner"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý banner</span></a></li> -->
-        <li><a href="{{ asset('backend/setting') }}"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý thiết lập</span></a></li>
+        
+        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>Quản lý thiết lập</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ asset('backend/setting') }}"><i class="fa fa-gear" aria-hidden="true"></i> <span>Thiết lập</span></a></li>
+            <li><a href="backend/province"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý tỉnh/ thành phố</span></a></li>
+            <li><a href="backend/district"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý quận/ huyện</span></a></li>
+          </ul>
+        </li>
         <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-gear" aria-hidden="true"></i> <span>Thiết lập hệ thống</span>
@@ -208,8 +230,7 @@
             <li><a href="backend/about/edit?type=footer"><i class="fa fa-gear" aria-hidden="true"></i> Quản lý footer</a></li>
           </ul>
         </li> -->
-        <li><a href="backend/province"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý tỉnh/ thành phố</span></a></li>
-         <li><a href="backend/district"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý quận/ huyện</span></a></li>
+        
       </ul>
     </section>
 </aside>

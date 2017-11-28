@@ -397,6 +397,13 @@ Route::group(['middleware' =>'authen', 'prefix' => 'backend'], function(){
 		Route::post('edit/{id}',['as'=>'admin.nhaxuatban.postEdit', 'uses'=>'Admin\NXBController@postEdit']);
 		Route::get('delete/{id}',['as'=>'admin.nhaxuatban.delete', 'uses' => 'Admin\NXBController@delete']);
 	});
+	Route::group(['prefix'=>'tag'], function(){
+		Route::get('/',['as'=>'admin.tag.index','uses'=>'Admin\TagController@index']);
+		Route::any('add',['as'=>'admin.tag.create','uses'=>'Admin\TagController@create']);
+		Route::any('edit/{id}',['as'=>'admin.tag.edit', 'uses'=>'Admin\TagController@create']);
+		Route::get('delete/{id}',['as'=>'admin.tag.delete', 'uses' => 'Admin\TagController@delete']);
+	});
+
 	Route::post('uploadImg', ['as'=>'admin.uploadImg' ,'uses'=>'Admin/UploadController@uploadImg']);
 	Route::post('dropzone/store', ['as'=>'dropzone.store','uses'=>'Admin/ProductController@dropzoneStore']);
 

@@ -1748,3 +1748,7 @@ div#load {
 .delete-cart i{
     color: #000;
 }
+
+.d-flex {
+    margin-left: 15px;
+}

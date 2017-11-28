@@ -18,22 +18,8 @@
         <div class="row">
             <aside class="col-md-12 col-lg-3 mt-4">
                 <div class="aside-wrap">
-                    <ul class="pro-menu"><!-- list-child.html -->
-                        
-                        <!-- <li class="active"><a href="list-pro.html" title="">Toán tài năng</a></li> -->
-                        <!-- <li><a href="list-pro.html" title="">Đánh thức: trẻ thơ</a></li>
-                        <li><a href="list-pro.html" title="">Sách giáo khoa</a>
-                            <ul class="sub-menu">
-                                <li><a href="list-child.html" title="">Toán</a></li>
-                                <li><a href="list-child.html" title="">Văn</a></li>
-                                <li><a href="list-child.html" title="">Anh</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="list-pro.html" title="">Toán Tiểu học 1</a></li>
-                        <li><a href="list-pro.html" title="">Toán Tiểu học 2</a></li>
-                        <li><a href="list-pro.html" title="">Toán Tiểu học 3</a></li>
-                        <li><a href="list-pro.html" title="">Toán Tiểu học 4</a></li>
-                        <li><a href="list-pro.html" title="">Toán Tiểu học 5</a></li> -->
+                    <ul class="pro-menu">
+                       
                     </ul>
                     @include('templates.filter')
                     <a href="#" title="" class="d-lg-block d-none"><img src="{{asset('public/images/banner1.jpg')}}" alt="" title=""></a>
@@ -71,23 +57,19 @@
                                 <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
                                 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52843d4e1ff0313a"></script>
                         </p>
-                        <!-- <h2 class="p-status">Tình trạng: <span>Còn hàng</span></h2> -->
-                        <!-- <ul class="pro-rate">
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                        </ul> -->
+                        <h2 class="p-status">Tình trạng: <span>Còn hàng</span></h2>
+                        
                         <div class="rate_row"></div>
                         <div class="mess-rate" style="margin-top: 5px; color: #1ba056"></div>
                         <input type="hidden" name="productId" class="productId" value="{{ $product_detail->id }}"> 
                         <h3 class="p-price">Giá: <span>{{number_format($product_detail->price)}}</span> VNĐ</h3>
                         <h3 class="p-o-price"><del>Giá bìa: <span>{{number_format($product_detail->price_old)}}</span> đ</del></h3>
                         <p>{!! $product_detail->mota !!}</p>
-                        <form action="" class="p-qty-frm">
+                        <form action="{{ route('addProductToCart') }}" method="post" class="p-qty-frm">
+                            {{ csrf_field() }}
                             <div class="form-inline text-uppercase">
-                                <input type="number" required="required" value="1">
+                                <input type="hidden" name="product_id" value="{{ $product_detail->id }}"> 
+                                <input type="number" name="product_numb" min="1" required="required" value="1">
                                 <button type="submit" class="btn text-uppercase btn-pbuy">Mua ngay</button>
                                 <a href="reader.html" title="" class="btn btn-read">Đọc thử</a>
                             </div>
@@ -105,15 +87,14 @@
                     <h2 class="prate-point-tit">Đánh giá từ khách hàng</h2>
                     <div class="rate-wrap">
                         <ul class="pro-rate">
+                            @for($i = 1; $i <= 5; $i++)
                             <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
+                            @endfor
                         </ul>
-                        <span>5 lượt đánh giá - 5/4 lượt đánh giá tốt</span>
+                        <span>{{$numbRates}} lượt đánh giá - {{$rateGood}}/{{$numbRates}} lượt đánh giá tốt</span>
                     </div>
                 </div>
+
                 <h2 class="prate-point-tit">
                     <span class="mr-4">Tag: </span>
                     <ul class="p-tags">
@@ -125,8 +106,9 @@
                         <li><a href="#" title="">Em yêu toán học</a></li>
                     </ul>
                 </h2>
-                 <div class="fb-comments" data-href="{{url('san-pham/'.$product_detail->alias.'.html')}}" data-width="100%" data-numposts="5"></div>
 
+
+                <div class="fb-comments" data-href="{{url('san-pham/'.$product_detail->alias.'.html')}}" data-width="100%" data-numposts="5"></div>
                 <!-- product re -->
                 <h2 class="ndetail-tit"><a href="news-detail.html" title="">Sách liên quan</a></h2>
 
@@ -138,7 +120,7 @@
                             <form id="add-item-form" action="{{ route('addProductToCart') }}" method="post" class="variants clearfix"> 
                                 {!! csrf_field() !!}
                                     <input type="hidden" name="product_id" value="{{ $item->id }}"> 
-                                    <input id="quantity" type="number" name="product_numb" min="1" value="1" class="tc item-quantity" style="display: none" />  
+                                    <input id="quantity" type="number" name="product_numb" min="1" value="" class="tc item-quantity" style="display: none" />
                                 <button type="submit" class="btn btn-buy">MUA NGAY</button>
                             </form>
                             <div class="text-center carousel_content">

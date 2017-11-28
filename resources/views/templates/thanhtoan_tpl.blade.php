@@ -2,6 +2,7 @@
 @section('content')
 <?php
     $setting = Cache::get('setting');
+    $about = Cache::get('about');
 ?>
 <div class="breadcrumb-wrap">
 	<div class="container">
@@ -14,7 +15,8 @@
 <div class="chkout">
 	<div class="container">
 		<h2 class="tit">Thanh toán</h2>
-		<form action="confirm.html">
+		<form action="{{route('postOrder')}}" method="post">
+			{{csrf_field()}}
 			<div class="row">
 				<div class="col-md-8 col-lg-9">
 					<h3 class="chk-tit">
@@ -55,14 +57,24 @@
 					</h3>
 					<div class="chk-ship">
 						<ul class="nav nav-pills chk-ship-list" id="pills-tab" role="tablist">
-							<li class="d-flex align-items-center nav-item">
-								<a class="nav-link active" name="payment_method" id="bank-menu" data-toggle="pill" href="#bank" role="tab" aria-controls="pills-profile" aria-selected="false"> Chuyển khoản ngân hàng</a>
+							<!-- <li class="d-flex align-items-center nav-item">
+								<input type="radio" class="nav-link active" data-id="0" name="payment_method" id="bank-menu" data-toggle="pill" href="#bank" role="tab" aria-controls="pills-profile" aria-selected="false"> Chuyển khoản ngân hàng</input>
 							</li>
 							<li class="d-flex align-items-center nav-item">
-								<a class="nav-link" name="payment_method" id="online-menu" data-toggle="pill" href="#online" role="tab" aria-controls="pills-contact" aria-selected="false"> Thanh toán online</a>
+								<input type="radio" class="nav-link" data-id="1" name="payment_method" id="online-menu" data-toggle="pill" href="#online" role="tab" aria-controls="pills-contact" aria-selected="false"> Thanh toán online</input>
 							</li>
 							<li class="d-flex align-items-center nav-item">
-								<a class="nav-link" name="payment_method" id="cod-menu" data-toggle="pill" href="#cod" role="tab" aria-controls="pills-contact" aria-selected="false"> Ship COD</a>
+								<input type="radio" class="nav-link" data-id="2" name="payment_method" id="cod-menu" data-toggle="pill" href="#cod" role="tab" aria-controls="pills-contact" aria-selected="false"> Ship COD</input>
+							</li> -->
+							
+							<li class="nav-item" >
+								<input type="radio" value="0" checked="checked" name="payment_method" >Chuyển khoản ngân hàng
+							</li>
+							<li class="nav-item">
+								<input type="radio" value="1" name="payment_method">Thanh toán online
+							</li>
+							<li class="nav-item">
+								<input type="radio" value="2" name="payment_method">Ship COD
 							</li>
 						</ul>
 
@@ -70,45 +82,44 @@
 					  		<div class="tab-pane fade show active bank-content-tab" id="bank" role="tabpanel" aria-labelledby="pills-profile-tab">
 								<p class="chk-info-text">Lưu ý: Bạn cần phải đăng ký dịch vụ Internet Banking hoặc dịch vụ thanh toán trực tuyến tại ngân hàng trước khi tiếp tục.</p>
 								<p class="chk-info-text">Chúng tôi giúp bạn thanh toán qua chuyển khoản ngân hàng với các ngân hàng dưới đây. Chọn ngân hàng để hoàn tất thanh toán</p>
-
 								<div class="chk-info-choice">
 									<div class="row">
 										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="images/partner7.jpg" alt="" title=""></a>
+											<a href="#" title=""><img src="{{asset('public/images/partner7.jpg')}}" alt="" title=""></a>
 										</div>
 										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="images/partner8.jpg" alt="" title=""></a>
+											<a href="#" title=""><img src="{{asset('public/images/partner8.jpg')}}" alt="" title=""></a>
 										</div>
 										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="images/partner9.jpg" alt="" title=""></a>
+											<a href="#" title=""><img src="{{asset('public/images/partner9.jpg')}}" alt="" title=""></a>
 										</div>
 										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="images/partner10.jpg" alt="" title=""></a>
+											<a href="#" title=""><img src="{{asset('public/images/partner10.jpg')}}" alt="" title=""></a>
 										</div>
 										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="images/partner11.jpg" alt="" title=""></a>
+											<a href="#" title=""><img src="{{asset('public/images/partner11.jpg')}}" alt="" title=""></a>
 										</div>
 										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="images/partner12.jpg" alt="" title=""></a>
+											<a href="#" title=""><img src="{{asset('public/images/partner12.jpg')}}" alt="" title=""></a>
 										</div>
 
 										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="images/partner13.jpg" alt="" title=""></a>
+											<a href="#" title=""><img src="{{asset('public/images/partner13.jpg')}}" alt="" title=""></a>
 										</div>
 										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="images/partner14.jpg" alt="" title=""></a>
+											<a href="#" title=""><img src="{{asset('public/images/partner14.jpg')}}" alt="" title=""></a>
 										</div>
 										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="images/partner15.jpg" alt="" title=""></a>
+											<a href="#" title=""><img src="{{asset('public/images/partner15.jpg')}}" alt="" title=""></a>
 										</div>
 										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="images/partner16.jpg" alt="" title=""></a>
+											<a href="#" title=""><img src="{{asset('public/images/partner16.jpg')}}" alt="" title=""></a>
 										</div>
 										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="images/partner17.jpg" alt="" title=""></a>
+											<a href="#" title=""><img src="{{asset('public/images/partner17.jpg')}}" alt="" title=""></a>
 										</div>
 										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="images/partner18.jpg" alt="" title=""></a>
+											<a href="#" title=""><img src="{{asset('public/images/partner18.jpg')}}" alt="" title=""></a>
 										</div>
 									</div>
 								</div>
@@ -168,73 +179,38 @@
 </div>
 
 <div class="khach">
-	<img src="images/khachbg.jpg" title="" alt="">
-	<div class="container khach-con">
-		<div class="owl-carousel owl-theme carousel_khach">
+    <img src="{{asset('public/images/khachbg.jpg')}}" title="" alt="">
+    <div class="container khach-con">
+        <div class="owl-carousel owl-theme carousel_khach">
+            <?php $feedback = DB::table('feedback')->get(); ?>
+            @foreach($feedback as $f)
             <div class="item">
-            	<div class="khach-wrap">
-	            	<div class="text-center khach-img">
-	            		<img class="mx-auto khach-item" src="images/khach1.jpg" alt="" title="">
-	            		<i class="fa fa-quote-left khach-decor"></i>
-	            	</div>
-					<ul class="text-center khach-rate">
-						<li><i class="fa fa-star-o"></i></li>
-						<li><i class="fa fa-star-o"></i></li>
-						<li><i class="fa fa-star-o"></i></li>
-						<li><i class="fa fa-star-o"></i></li>
-						<li><i class="fa fa-star-o"></i></li>
-					</ul>
-					<p class="text-center">Nguyễn Phương Mai</p>
-					<blockquote class="font-weight-bold text-center">Việc like một fanpage hay tham gia một group trên mạng xã hội thường làm cho các bạn lo lắng về độ phiền toái nhất định của nó. Cũng như nhiều group khác khi mới được thành lập.</blockquote>
-            	</div>
+                <div class="khach-wrap">
+                    <div class="text-center khach-img">
+                        <img class="mx-auto khach-item" src="{{asset('upload/hinhanh/'.$f->photo)}}" alt="" title="">
+                        <i class="fa fa-quote-left khach-decor"></i>
+                    </div>
+                    <ul class="text-center khach-rate">
+                        <li><i class="fa fa-star-o"></i></li>
+                        <li><i class="fa fa-star-o"></i></li>
+                        <li><i class="fa fa-star-o"></i></li>
+                        <li><i class="fa fa-star-o"></i></li>
+                        <li><i class="fa fa-star-o"></i></li>
+                    </ul>
+                    <p class="text-center">{{$f->name}}</p>
+                    <blockquote class="font-weight-bold text-center">{!! $f->content !!}</blockquote>
+                </div>
             </div>
-            <div class="item">
-            	<div class="khach-wrap">
-	            	<div class="text-center khach-img">
-	            		<img class="mx-auto khach-item" src="images/khach1.jpg" alt="" title="">
-	            		<i class="fa fa-quote-left khach-decor"></i>
-	            	</div>
-					<ul class="text-center khach-rate">
-						<li><i class="fa fa-star-o"></i></li>
-						<li><i class="fa fa-star-o"></i></li>
-						<li><i class="fa fa-star-o"></i></li>
-						<li><i class="fa fa-star-o"></i></li>
-						<li><i class="fa fa-star-o"></i></li>
-					</ul>
-					<p class="text-center">Nguyễn Phương Mai</p>
-					<blockquote class="font-weight-bold text-center">Việc like một fanpage hay tham gia một group trên mạng xã hội thường làm cho các bạn lo lắng về độ phiền toái nhất định của nó. Cũng như nhiều group khác khi mới được thành lập. Việc like một fanpage hay tham gia một group trên mạng xã hội thường làm cho các bạn lo lắng về độ phiền toái nhất định của nó. Cũng như nhiều group khác khi mới được thành lập. Việc like một fanpage hay tham gia một group trên mạng xã hội thường làm cho các bạn lo lắng về độ phiền toái nhất định của nó. Cũng như nhiều group khác khi mới được thành lập.</blockquote>
-            	</div>
-            </div>
-            <div class="item">
-            	<div class="khach-wrap">
-	            	<div class="text-center khach-img">
-	            		<img class="mx-auto khach-item" src="images/khach1.jpg" alt="" title="">
-	            		<i class="fa fa-quote-left khach-decor"></i>
-	            	</div>
-					<ul class="text-center khach-rate">
-						<li><i class="fa fa-star-o"></i></li>
-						<li><i class="fa fa-star-o"></i></li>
-						<li><i class="fa fa-star-o"></i></li>
-						<li><i class="fa fa-star-o"></i></li>
-						<li><i class="fa fa-star-o"></i></li>
-					</ul>
-					<p class="text-center">Nguyễn Phương Mai</p>
-					<blockquote class="font-weight-bold text-center">Việc like một fanpage hay tham gia một group trên mạng xã hội thường làm cho các bạn lo lắng về độ phiền toái nhất định của nó. Cũng như nhiều group khác khi mới được thành lập.</blockquote>
-            	</div>
-            </div>
+            @endforeach
         </div>
-	</div>
+    </div>
 </div>
 
 <div class="intro">
-	<div class="container">
-		<h1 class="text-uppercase btit">Nhà sách trực tuyến Sigmabooks</h1>
-		<p>Nhà sách online Edufly hội tụ đầy đủ và cập nhật nhanh nhất các tựa sách đủ thể loại với mức giảm 5 – 15%. Qua nhiều năm, không chỉ là địa chỉ tin cậy để bạn mua sách trực tuyến, Edufly còn có quà tặng, văn phòng phẩm, vật dụng gia đình,…với chất lượng đảm bảo, chủng loại đa dạng, chế độ bảo hành đầy đủ và giá cả hợp lý từ hàng trăm thương hiệu uy tín trong và ngoài nước. Đặc biệt, bạn có thể chọn những mẫu sổ tay handmade hay nhiều món quà tặng sinh nhật độc đáo chỉ có tại Edufly.</p>
-
-		<p>Mua sách online tại Edufly, bạn được tận hưởng chính sách hỗ trợ miễn phí đổi trả hàng, giao hàng nhanh – tận nơi – miễn phí*, thanh toán linh hoạt - an toàn, đặc biệt giảm thêm trên giá bán khi sử dụng BBxu giúp bạn mua sách online giá 0đ!</p>
-
-		<p>Chỉ với 3 cú click chuột, chưa bao giờ trải nghiệm mua sách online lại dễ chịu và nhẹ nhàng như vậy. Còn chần chờ gì nữa, đặt mua ngay những tựa sách hay cùng hàng ngàn sản phẩm chất lượng khác tại Edufly!</p>
-	</div>
+    <div class="container">
+        <h1 class="text-uppercase btit">Nhà sách trực tuyến Sigmabooks</h1>
+        <p{!! $about->mota !!}</p>
+    </div>
 </div>
 @endsection
 @section('script')

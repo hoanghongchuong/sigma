@@ -235,9 +235,14 @@ class IndexController extends Controller {
 			$keyword = $product_detail->keyword;
 			$description = $product_detail->description;
 			$img_share = asset('upload/product/'.$product_detail->photo);
-
 			// End cấu hình SEO
-			return view('templates.product_detail_tpl', compact('product_detail','banner_danhmuc','keyword','description','title','img_share','product_khac','album_hinh','cateProduct','productSameCate','tintucs','cate_pro'));
+			// get rating
+			$numbRate = DB::table('rating')->join('products', 'rating.product_id', '=', 'products.id')->select('rating.*','rating.rate as sumrate')->where('rating.product_id', $product_detail->id)->get();
+			$numbRates = count($numbRate);
+			$avgRates = DB::table('rating')->join('products', 'rating.product_id', '=', 'products.id')->where('rating.product_id', $product_detail->id)->avg('rate');
+			$avg = round($avgRates);
+			$rateGood = DB::table('rating')->join('products', 'rating.product_id', '=', 'products.id')->where('rating.product_id', $product_detail->id)->where('rating.rate', '>=', 3)->count('rate');
+			return view('templates.product_detail_tpl', compact('product_detail','banner_danhmuc','keyword','description','title','img_share','product_khac','album_hinh','cateProduct','productSameCate','tintucs','cate_pro','numbRates','avg','rateGood'));
 		}else{
 			return redirect()->route('getErrorNotFount');
 		}
@@ -708,7 +713,7 @@ class IndexController extends Controller {
     	$bill->phone = $req->phone;
     	$bill->note = $req->note;
     	$bill->address = $req->address;
-    	// $bill->payment = (int)($req->payment_method);
+    	$bill->payment = (int)($req->payment_method);
     	$bill->province = $req->province;
     	$bill->district = $req->district;
     	$total = $this->getTotalPrice();
@@ -723,6 +728,7 @@ class IndexController extends Controller {
 	    // 	$tongtien = $this->checkCard($req);
 	    // 	$bill->total = ((Int)str_replace(',', '', $tongtien)); 	
     	// }
+    	dd($bill);
     	$detail = [];
     	foreach ($cart as $key) {
     		$detail[] = [
@@ -829,16 +835,32 @@ class IndexController extends Controller {
 		
 		return view('templates.filter_tpl', compact('result'));    	
     }
+
+    // get ip address
+	public	function getRealIPAddress(){  
+		    if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+		        //check ip from share internet
+		        $ip = $_SERVER['HTTP_CLIENT_IP'];
+		    }else if(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+		        //to check ip is pass from proxy
+		        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		    }else{
+		        $ip = $_SERVER['REMOTE_ADDR'];
+		    }
+		    return $ip;
+		}
     
     public function rating(Request $request){
-    	// $ip = $_SERVER['HTTP_CLIENT_IP'];
+    	// $ip = $_SERVER['REMOTE_ADDR'];
+    	$ip = $this->getRealIPAddress();
     	$data = new Rate;
     	$data->product_id = $request->productID;
     	$data->rate = $request->rate;
-    	// $data->ip_address = $ip;
+    	$data->ip_address = $ip;
     	// dd($data);
     	$data->save();
     	return 1;
     }
+
 
 }
