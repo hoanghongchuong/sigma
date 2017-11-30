@@ -754,7 +754,6 @@ class IndexController extends Controller {
     	$result = DB::table('products')
     			->join('product_categories','products.cate_id','=','product_categories.id')
     			->select('products.id', 'products.name as productName','products.alias as productAlias','products.photo as productPhoto','products.price as productPrice');
-
     	if ($request->cate) {
     		$result = $result->where('products.cate_id', $request->cate);
     	}
@@ -777,6 +776,12 @@ class IndexController extends Controller {
     }
     public function filter(Request $request){
     	$price = explode(';',$request->range);
+    	$theloai = intval($request->theloai);
+    	$tacgia = intval($request->tacgia);
+    	$nxb = intval($request->nxb);
+    	// dd($theloai);
+    	$tagia = $request->tacgia;
+    	$nxb = $request->nxb;
     	$result = DB::table('products')
     	->join('theloai','products.theloai_id','=','theloai.id')
     	->join('tacgia','products.tacgia_id','=','tacgia.id')
@@ -794,10 +799,9 @@ class IndexController extends Controller {
     	if($request->range){
     		$result = $result->whereBetween('products.price', array($price[0], $price[1]));
     	}
-
 		$result = $result->orderBy('products.id','desc')->paginate(20);
 		
-		return view('templates.filter_tpl', compact('result'));    	
+		return view('templates.filter_tpl', compact('result','theloai','tacgia','nxb'));    	
     }
     // get ip address
 	public	function getRealIPAddress(){  

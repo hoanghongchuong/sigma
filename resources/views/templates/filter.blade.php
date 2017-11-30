@@ -4,25 +4,25 @@
     <div class="pro-filter">           
         <select name="theloai" id="" class="w-100 pro-filter-type">
             <option value="">-- Thể loại --</option>
-            <?php $theloai = DB::table('theloai')->orderBy('id','desc')->get(); ?>
-            @foreach($theloai as $tl)
-            <option value="{{$tl->id}}">{{$tl->name}}</option>
+            <?php $theloais = DB::table('theloai')->orderBy('id','desc')->get(); ?>
+            @foreach($theloais as $tl)
+            <option value="{{$tl->id}}" @if($tl->id == @$theloai) {{"selected"}} @endif >{{$tl->name}}</option>
             @endforeach
         </select>
 
         <select name="tacgia" id="" class="w-100 pro-filter-author">
             <option value="">-- Tác giả --</option>
-            <?php $tacgia = DB::table('tacgia')->orderBy('id','desc')->get(); ?>
-            @foreach($tacgia as $tg)
-            <option value="{{$tg->id}}">{{$tg->name}}</option>
+            <?php $tacgias = DB::table('tacgia')->orderBy('id','desc')->get(); ?>
+            @foreach($tacgias as $tg)
+            <option value="{{$tg->id}}" @if($tg->id == @$tacgia) {{"selected"}} @endif >{{$tg->name}}</option>
             @endforeach
         </select>
 
         <select name="nxb" id="" class="w-100 pro-filter-publish">
             <option value="">-- Nhà xuất bản --</option>
-            <?php $nxb = DB::table('nxb')->orderBy('id','desc')->get(); ?>
-            @foreach($nxb as $n)
-            <option value="{{$n->id}}">{{$n->name}}</option>
+            <?php $nxbs = DB::table('nxb')->orderBy('id','desc')->get(); ?>
+            @foreach($nxbs as $n)
+            <option value="{{$n->id}}" @if($n->id == @$nxb) {{"selected"}} @endif >{{$n->name}}</option>
             @endforeach
         </select>
 
