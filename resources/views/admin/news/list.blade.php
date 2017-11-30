@@ -28,7 +28,7 @@
     <small>@yield('action')</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="admin"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="backend"><i class="fa fa-dashboard"></i> Home</a></li>
     <li><a href="javascript:">@yield('controller')</a></li>
     <li class="active">@yield('action')</li>
   </ol>

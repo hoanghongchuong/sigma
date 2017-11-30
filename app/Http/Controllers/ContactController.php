@@ -48,7 +48,6 @@ class ContactController extends Controller {
 			alert('Cảm ơn bạn đã gửi liên hệ. Chúng tôi sẽ liên hệ lại với bạn sớm nhất !');
 			window.location = '".url('/')."' </script>";
 
-
 		// $setting = Cache::get('setting');
 		// $data = [
 		// 	'hoten' 	=> Request::input('hoten_contact'),   

@@ -56,17 +56,18 @@
 						<span class="chk-quan">2</span><span class="chk-cap">Hình thức thanh toán</span>
 					</h3>
 					<div class="chk-ship">
-						<input type="text"  name="payment_method" value="0" id="payment_method">
+						<input type="text"  hidden="" name="payment_method" value="0" id="payment_method">
 						<ul class="nav nav-pills chk-ship-list" id="pills-tab" role="tablist">
 							<li class="d-flex align-items-center nav-item">
-								<a  class="nav-link active" data-id="0" name="" id="bank-menu" data-toggle="pill" href="#bank" role="tab" aria-controls="pills-profile" aria-selected="false"> Chuyển khoản ngân hàng</a>	
-							</li>
-							<li class="d-flex align-items-center nav-item">
-								<a  class="nav-link" data-id="1" name="" id="online-menu" data-toggle="pill" href="#online" role="tab" aria-controls="pills-contact" aria-selected="false"> Thanh toán online</a>
-							</li>
-							<li class="d-flex align-items-center nav-item">
-								<a  class="nav-link" data-id="2" name="" id="cod-menu" data-toggle="pill" href="#cod" role="tab" aria-controls="pills-contact" aria-selected="false"> Ship COD</a>
+								<a  class="nav-link active" data-id="0" name="" id="cod-menu" data-toggle="pill" href="#cod" role="tab" aria-controls="pills-contact" aria-selected="false"> Ship COD</a>
 							</li>	
+							<li class="d-flex align-items-center nav-item">
+								<a  class="nav-link " data-id="1" name="" id="bank-menu" data-toggle="pill" href="#bank" role="tab" aria-controls="pills-profile" aria-selected="false"> Chuyển khoản ngân hàng</a>	
+							</li>
+							<li class="d-flex align-items-center nav-item">
+								<a  class="nav-link" data-id="2" name="" id="online-menu" data-toggle="pill" href="#online" role="tab" aria-controls="pills-contact" aria-selected="false"> Thanh toán online</a>
+							</li>
+							
 							
 						</ul>
 						

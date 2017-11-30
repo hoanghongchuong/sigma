@@ -3,25 +3,6 @@
 @section('controller','Orders List')
 @section('action','List')
 <!-- Content Header (Page header) -->
-<!-- <script type="text/javascript">
-  $(document).ready(function() {
-    $("#chonhet").click(function(){
-      var status=this.checked;
-      $("input[name='chon']").each(function(){this.checked=status;})
-    });
-    
-    $("#xoahet").click(function(){
-      var listid="";
-      $("input[name='chon']").each(function(){
-        if (this.checked) listid = listid+","+this.value;
-        })
-      listid=listid.substr(1);   //alert(listid);
-      if (listid=="") { alert("Bạn chưa chọn mục nào"); return false;}
-      hoi= confirm("Bạn có chắc chắn muốn xóa?");
-      if (hoi==true) document.location = homeUrl()+"/admin/orders/"+listid+"/delete_list";
-    });
-  });
-</script> -->
 <section class="content-header">
   <h1>
     @yield('controller')
@@ -52,7 +33,7 @@
               <tr>
                 <!-- <th style="width: 20px;"><input type="checkbox" name="chonhet" class="minimal" id="chonhet" /></th> -->
                 <th class="text-center with_dieuhuong">Stt</th>
-                
+                <th>Mã hóa đơn</th>
                 <th>Họ tên</th>
                 <th>Tổng tiền</th>
                 <th>Phương thức thanh toán</th>
@@ -65,11 +46,10 @@
             <tbody>
               @foreach($data as $k=>$item)
               <tr>
-
                 <!-- <td><input type="checkbox" name="chon" id="chon" value="{{$item->id}}" class="chon" /></td> -->
                 <td class="text-center with_dieuhuong">{{$k+1}}</td>
+                <td>{{$item->code}}</td>
                 <td>{{$item->full_name}}</td>
-
                 <td>{{ number_format($item->total)}}</td>
                 <td>
                   <?php 
@@ -80,7 +60,6 @@
                 <td>{{ date($item->created_at) }}</td>
                 <td>
                   <?php
-                      
                       switch ($item->status) {
                         case '0':
                           echo "Mới đặt";
@@ -88,13 +67,13 @@
                         case '1':
                           echo "Xác nhận";
                           break;
-                          case '2':
+                        case '2':
                           echo "Đang giao hàng";
                           break;
-                          case '3':
+                        case '3':
                           echo "Hoàn thành";
                           break;
-                          case '4':
+                        case '4':
                           echo "Hủy";
                           break;
                         default:
@@ -102,9 +81,7 @@
                           break;
                       }
                   ?>
-                   
-                 </td>
-                
+                </td>
                 <!-- <td class="text-center with_dieuhuong">
                   @if($item->status>0)
                     <a href="admin/orders/edit?id={{$item->id}}&hienthi={{ time() }}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Bật</a>

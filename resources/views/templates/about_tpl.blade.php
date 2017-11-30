@@ -12,7 +12,6 @@
         </ul>
     </div>
 </div>
-
 <div class="news-section news-detail">
     <div class="container">
         <!-- <h1 class="ndetail-tit"><a href="news-detail.html" title="">Làm thế nào để hoạt động ngoại khoá không làm ảnh hưởng tới việc học?</a></h1> -->
@@ -22,9 +21,7 @@
         <div class="newspage-content">
             {!! $about->content !!}
         </div>
-        
         <div class="fb-comments" data-href="{{url('gioi-thieu')}}" data-width="100%" data-numposts="5"></div>
-        
         <div class="news-re-list ndetail-re-list">
             <h2 class="news-re-list-tit">Tin tức mới</h2>
             <?php $tintuc = DB::table('news')->where('com','tin-tuc')->where('status',1)->take(6)->orderBy('id','desc')->get(); ?>

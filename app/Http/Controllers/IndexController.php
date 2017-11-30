@@ -8,13 +8,14 @@ use App\Rate;
 use App\ProductCate;
 use App\NewsLetter;
 use App\Recruitment;
-use DB,Cache,Mail;
+use Cache,Mail;
+use DB;
 use Cart;
-use App\Campaign;
+//use App\Campaign;
 use App\Bill;
 use App\CampaignCard;
 use App\District;
-use App\ChiNhanh;
+//use App\ChiNhanh;
 class IndexController extends Controller {
 	protected $setting = NULL;
 
@@ -161,22 +162,6 @@ class IndexController extends Controller {
 					$cate_pro = DB::table('product_categories')->where('status',1)->where('parent_id',$product_cate->parent_id)->orderby('stt','asc')->get();
 				}
 			}
-
-			// $ids=array();
-			// $ids=$product_cate->id;
-			// $cate_pro_byids = DB::table('product_categories')->where('status',1)->where('parent_id',$product_cate->id)->orderby('stt','asc')->get();
-			// if(count($cate_pro_byids)>0){
-			// 	foreach($cate_pro_byids as $item){
-			// 		$ids=$item->id;
-			// 		$cate_pro_byids2 = DB::table('product_categories')->where('status',1)->where('parent_id',$item->id)->orderby('stt','asc')->get();
-			// 		if(count($cate_pro_byids2)>0){
-			// 			foreach($cate_pro_byids2 as $item2){
-			// 				$ids=$item2->id;
-			// 			}
-			// 		}
-
-			// 	}
-			// }
 			$products = $product_cate->products;
 			// $product = DB::table('products')->select()->where('status',1)->whereIn('cate_id',$product_cate->id)->orderBy('stt','desc')->paginate(9);
 			$banner_danhmuc = DB::table('lienket')->select()->where('status',1)->where('com','chuyen-muc')->where('link','san-pham')->get()->first();
@@ -187,7 +172,8 @@ class IndexController extends Controller {
 			$saleProduct = DB::table('products')->where([
 				"status" => 1,
 				"cate_id" => $product_cate->id,
-				"spbc"	=> 1
+				"spbc"	=> 1,
+				"com" => "san-pham"
 			])->orderBy('id', 'desc')->take(3)->get();
 			$setting = Cache::get('setting');
 			if(!empty($product_cate->title)){
@@ -204,17 +190,13 @@ class IndexController extends Controller {
 			return redirect()->route('getErrorNotFount');
 		}
 	}
-
-	public function getProductChild($alias){
-		$cate = DB::table('product_categories')->where('alias',$alias)->first();
-		$products = DB::table('products')->select()->where('status',1)->where('cate_id',$cate->id)->orderBy('id','desc')->paginate(20);
-		$tintucs = DB::table('news')->orderBy('id','desc')->take(3)->get();
-		return view('templates.productlist_level2', compact('tintucs','products'));
+	public function combo(){
+		$com = 'combo';
+		$combos = DB::table('products')->where('status',1)->where('com', $com)->paginate(16);
+		return view('templates.combo', compact('combos'));
 	}
-	
 	public function getProductDetail($id)
 	{
-        
         $cate_pro = DB::table('product_categories')->where('status',1)->where('parent_id',0)->orderby('id','asc')->get();
 		$product_detail = DB::table('products')->select()->where('status',1)->where('alias',$id)->get()->first();
 		if(!empty($product_detail)){
@@ -526,9 +508,7 @@ class IndexController extends Controller {
 		}else{
 			return redirect()->route('getErrorNotFount');
 		}
-		
 	}
-
 	public function postGuidonhang(Request $request)
 	{
 		$setting = Cache::get('setting');
@@ -564,7 +544,6 @@ class IndexController extends Controller {
 			$data->status = 1;
 			$data->com = 'newsletter';
 			$data->save();
-
 			echo "<script type='text/javascript'>
 				alert('Bạn đã đăng kí nhận tin tức thành công !');
 				window.location = '".url('/')."' </script>";
@@ -578,7 +557,6 @@ class IndexController extends Controller {
 		$banner_danhmuc = DB::table('lienket')->select()->where('status',1)->where('com','chuyen-muc')->where('link','san-pham')->get()->first();
 		return view('templates.404_tpl',compact('banner_danhmuc'));
 	}
-
 	public function getTuyenDung(){
 		$com='tuyen-dung';
 		$tintuc = DB::table('news')->select()->where('status',1)->where('com','tuyen-dung')->orderby('id','desc')->paginate(6);
@@ -612,7 +590,6 @@ class IndexController extends Controller {
 		// End cấu hình SEO
 		return view('templates.giohang_tpl', compact('doitac','product_cart','district','product_noibat','province','keyword','description','title','img_share','total', 'bank'));
 	}
-
 	public function addCart(Request $req)
 	{
 		$data = $req->only('product_id','product_numb');
@@ -639,7 +616,6 @@ class IndexController extends Controller {
 		}		
 		return redirect(route('getCart'));
 	}
-
 	public function addCartAjax(Request $req)
 	{
 		// $data = $req->only('product_id');
@@ -659,15 +635,12 @@ class IndexController extends Controller {
 		} catch (\Exception $e) {
 			return 0;
 		}
-		
 		// return redirect(route('getCart'));
 	}
-
 	public function deleteCart($id){
         Cart::remove($id);
         return redirect('gio-hang');
     }
-
     public function checkCard(Request $req) {
     	$card = (new CampaignCard)
     		->join('campaigns', 'campaign_cards.campaign_id', '=', 'campaigns.id')
@@ -688,13 +661,11 @@ class IndexController extends Controller {
     		if ($card->campaign_type == 2) {
     			$total = $total * (100 - $card->campaign_value) / 100;
     		}
-
     		// return ($total);
     		return number_format($total);
     	}
     	return response()->json(false);
     }
-
     protected function getTotalPrice() 
     {
     	$cart = Cart::content();
@@ -704,7 +675,6 @@ class IndexController extends Controller {
     	}
     	return $total;
     }
-
     public function postOrder(Request $req){
     	$cart = Cart::content();
     	$bill = new Bill;
@@ -713,6 +683,7 @@ class IndexController extends Controller {
     	$bill->phone = $req->phone;
     	$bill->note = $req->note;
     	$bill->address = $req->address;
+    	$bill->code = str_random(8);
     	$bill->payment = (int)($req->payment_method);
     	$bill->province = $req->province;
     	$bill->district = $req->district;
@@ -728,7 +699,6 @@ class IndexController extends Controller {
 	    // 	$tongtien = $this->checkCard($req);
 	    // 	$bill->total = ((Int)str_replace(',', '', $tongtien)); 	
     	// }
-    	dd($bill);
     	$detail = [];
     	foreach ($cart as $key) {
     		$detail[] = [
@@ -739,7 +709,6 @@ class IndexController extends Controller {
     			'product_code' => $key->options->code
     		];
     	}
-    	    	
     	$bill->detail = json_encode($detail);
     	if($total > 0){
     		$bill->save();
@@ -750,20 +719,16 @@ class IndexController extends Controller {
 				window.location = '".url('/')."' 
 			</script>";
     	}
-    	
     	Cart::destroy();
-
     	echo "<script type='text/javascript'>
 				alert('Cảm ơn bạn đã đặt hàng, chúng tôi sẽ liên hệ với bạn sớm nhất!');
 				window.location = '".url('/')."' 
 			</script>";
     }
-
     public function deleteAllCart(){
     	Cart::destroy();
     	return redirect()->back()->with('mess','Đã xóa giỏ hàng');
     }
-
     public function thanhtoan(){
     	$bank = DB::table('bank_account')->get();
     	$province = DB::table('province')->get();
@@ -803,7 +768,6 @@ class IndexController extends Controller {
     		'data'		 => json_decode(json_encode($result))->data,
     	]);
     }
-
     public function getProductByCate($alias){
     	$cate_pro = DB::table('product_categories')->where('status',1)->where('parent_id',0)->orderby('id','asc')->get();
     	$categoryDetail = ProductCate::select('name','alias','id','parent_id')->where('alias', $alias)->first();
@@ -835,7 +799,6 @@ class IndexController extends Controller {
 		
 		return view('templates.filter_tpl', compact('result'));    	
     }
-
     // get ip address
 	public	function getRealIPAddress(){  
 		    if(!empty($_SERVER['HTTP_CLIENT_IP'])){
@@ -849,9 +812,7 @@ class IndexController extends Controller {
 		    }
 		    return $ip;
 		}
-    
     public function rating(Request $request){
-    	// $ip = $_SERVER['REMOTE_ADDR'];
     	$ip = $this->getRealIPAddress();
     	$data = new Rate;
     	$data->product_id = $request->productID;
@@ -861,6 +822,4 @@ class IndexController extends Controller {
     	$data->save();
     	return 1;
     }
-
-
 }

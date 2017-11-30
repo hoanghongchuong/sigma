@@ -20,12 +20,29 @@ class ProductController extends Controller
     public function getList()
     {
         //$data = Products::select('id','name','photo','price','parent_id','alias')->orderBy('id','DESC')->get()->toArray();
-        $data = Products::orderBy('id','desc')->get();
+        if($_GET['type']=='san-pham') $trang='sản phẩm';
+        else if($_GET['type']=='combo') $trang='combo';
+        
+        if(!empty($_GET['type'])){
+            $com=$_GET['type'];
+        }else{
+            $com='';
+        }
+
+
+        $data = Products::where('com',$com)->orderBy('id','desc')->get();
         return view('admin.product.list', compact('data'));
     }
     public function getAdd()
     {
-        $data = Products::all();
+        if($_GET['type']=='san-pham') $trang='sản phẩm';
+        else if($_GET['type']=='combo') $trang='combo';
+        if(!empty($_GET['type'])){
+            $com=$_GET['type'];
+        }else{
+            $com='';
+        }
+        $data = Products::where('com',$com)->get();
         $parent = ProductCate::all();
         $theloai = TheLoai::all();
         $tacgia = TacGia::all();
@@ -34,6 +51,7 @@ class ProductController extends Controller
     }
     public function postAdd(ProductRequest $request)
     {
+        $com= $request->txtCom;
         $img = $request->file('fImages');
         $path_img='upload/product';
         $img_name='';
@@ -77,7 +95,7 @@ class ProductController extends Controller
         $product->quatang = $request->txtQuatang;
         $product->model = $request->txtModel;
         $product->code = $request->txtCode;
-
+        $product->com = $com;
         $product->title = $request->txtTitle;
         $product->content = $request->txtContent;
         $product->keyword = $request->txtKeyword;
@@ -130,7 +148,7 @@ class ProductController extends Controller
                 }
             }
         }
-        return redirect()->route('admin.product.index')->with('status','Thêm mới thành công !');
+        return redirect('backend/product?type='.$com)->with('status','Thêm mới thành công !');
 
         /*
         echo 'Tên hinh:'.$request->file('fImages')->getClientOriginalName();
@@ -147,6 +165,13 @@ class ProductController extends Controller
      */
     public function getEdit(Request $request)
     {
+        if($_GET['type']=='san-pham') $trang='sản phẩm';
+        else if($_GET['type']=='combo') $trang='combo';
+        if(!empty($_GET['type'])){
+            $com=$_GET['type'];
+        }else{
+            $com='';
+        }
         $id= $request->get('id');
         $theloai = TheLoai::all();
         $tacgia = TacGia::all();
@@ -163,7 +188,7 @@ class ProductController extends Controller
                     $data->status = 1; 
                 }
                 $data->update();
-                return redirect()->route('admin.product.index')->with('status','Cập nhật thành công !');
+                return redirect('backend/product?type='.$com)->with('status','Cập nhật thành công !');
             }
             if($request->get('noibat')>0){
                 if($data->noibat == 1){
@@ -172,7 +197,7 @@ class ProductController extends Controller
                     $data->noibat = 1; 
                 }
                 $data->update();
-                return redirect()->route('admin.product.index')->with('status','Cập nhật thành công !');
+                return redirect('backend/product?type='.$com)->with('status','Cập nhật thành công !');
             }
             if($request->get('spbc')>0){
                 if($data->spbc == 1){
@@ -181,14 +206,14 @@ class ProductController extends Controller
                     $data->spbc = 1; 
                 }
                 $data->update();
-                return redirect()->route('admin.product.index')->with('status','Cập nhật thành công !');
+                return redirect('backend/product?type='.$com)->with('status','Cập nhật thành công !');
             }
             if($request->get('delete_bg')>0){
                 $background='upload/product/'.$request->get('delete_bg');
                 File::delete($background);
                 $data->photo='';
                 $data->update();
-                return redirect('backend/product/edit?id='.$id)->with('status','Xóa ảnh thành công !');
+                return redirect('backend/product/edit?id='.$id.'&type='.$com)->with('status','Xóa ảnh thành công !');
             }
             $parent = ProductCate::orderBy('stt', 'asc')->get()->toArray();
             $product = Products::select('stt')->orderBy('id','asc')->get()->toArray();
@@ -198,7 +223,7 @@ class ProductController extends Controller
         }else{
             $data = Products::all();
             $parent = ProductCate::orderBy('stt', 'asc')->get()->toArray();
-            return redirect()->route('admin.product.index')->with('status','Dữ liệu không có thực');
+            return redirect('backend/product?type='.$com)->with('status','Dữ liệu không có thực');
         }
         
     }
@@ -214,6 +239,11 @@ class ProductController extends Controller
             ["txtName" => "required"],
             ["txtName.required" => "Bạn chưa nhập tên danh mục"]
         );
+        if(!empty($_GET['type'])){
+            $com=$_GET['type'];
+        }else{
+            $com='';
+        }
         $id= $request->get('id');
         if($id){
             $product = Products::findOrFail($id);
@@ -295,25 +325,15 @@ class ProductController extends Controller
             }else{
                 $product->spbc = 0;
             }
-            if($request->phoido=='on'){
-                $product->phoido = 1;
-            }else{
-                $product->phoido = 0;
-            }
-            if($request->xuthe=='on'){
-                $product->xuthe = 1;
-            }else{
-                $product->xuthe = 0;
-            }
             if($request->tinhtrang=='on'){
                 $product->tinhtrang = 1;
             }else{
                 $product->tinhtrang = 0;
             }
-            $product->user_id       = Auth::user()->id;
+            $product->user_id  = Auth::user()->id;
 
             $product->save();
-            return redirect()->route('admin.product.index')->with('status','Cập nhật thành công !');
+            return redirect('backend/product/edit?id='.$id.'&type='.$com)->with('status','Cập nhật thành công !');
             //return redirect('admin/product/edit?id='.$id)->with('status','Cập nhật thành công');
         }else{
             return redirect('admin/product/')->with('status','Dữ liệu không có thực');
@@ -336,7 +356,7 @@ class ProductController extends Controller
         $product = Products::findOrFail($id);
         $product->delete();
         File::delete('upload/product/'.$product->photo);
-        return redirect()->route('admin.product.index');
+        return redirect('backend/product?type='.$com)->route('admin.product.index');
     }
     public function getDeleteList($id){
         $listid = explode(",",$id);
@@ -349,7 +369,7 @@ class ProductController extends Controller
             $product->delete();
             File::delete('upload/product/'.$product->photo);
         }
-        return redirect()->route('admin.product.index');
+        return redirect('backend/product?type='.$com);
     }
     public function getDelImg(Request $request,$id){
         if ($request->ajax()) {      

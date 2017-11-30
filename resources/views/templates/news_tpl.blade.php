@@ -52,13 +52,6 @@
                 </div>
                 @endforeach
                 <div class="paginations">{!! $news->links() !!}</div>
-
-                <!-- <ul class="pagi">
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                </ul> -->
             </div>
 
             <div class="col-sm-12 col-lg-3">
@@ -70,20 +63,16 @@
                         <h3 class="news-re-tit"><a href="{{url('tin-tuc/'.$tintuc[0]->alias.'.html')}}" title="">{{$tintuc[0]->name}}</a></h3>
                         <h4 class="news-time">Upload: <span>{{date('d/m/Y', strtotime($tintuc[0]->created_at))}}</span></h4>
                     </div>
-
                 </div>
-                <!-- <ul class="">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul> -->
                 <div class="news-re-list">
                     @for($i = 1; $i< count($tintuc); $i++)
                     <h3 class=""><a href="news-detail.html" title="">{{$tintuc[$i]->name}}</a></h3>
                     @endfor
                 </div>
-                <a href="#" title=""><img src="{{asset('public/images/news-detail2.jpg')}}" class="mx-auto d-block" alt="" title=""></a>
+                <?php $qc = DB::table('banner_content')->where('position', 2)->get(); ?>
+                @foreach($qc as $q)
+                <a href="{{$q->link}}" title=""><img src="{{asset('upload/banner/'.$q->image)}}" class="mx-auto d-block" alt="" title=""></a>
+                @endforeach
             </div>
         </div>
     </div>

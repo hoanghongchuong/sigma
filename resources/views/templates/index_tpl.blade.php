@@ -43,7 +43,8 @@ $banner = DB::table('banner_content')->where('position',1)->get();
 
 <div class="banner">
     <div class="container-flush">
-        <img src="{{asset('public/images/banner.jpg')}}" class="w-100 mx-auto" title="" alt="">
+        <?php $banner = DB::table('banner_content')->where('position',1)->first(); ?>
+        <img src="{{asset('upload/banner/'.$banner->image)}}" class="w-100 mx-auto" title="" alt="">
     </div>
 </div>
 
@@ -52,7 +53,8 @@ $banner = DB::table('banner_content')->where('position',1)->get();
         <h2 class="text-center tit">Sách Mới</h2>
         <div class="row">
             <div class="col-lg-2 col-md-6 d-lg-block d-none">
-                <a href="#" title=""><img src="{{asset('public/images/banner1.jpg')}}" title="" alt="" title=""></a>
+                <?php $banners = DB::table('banner_content')->where('position',3)->get(); ?>
+                <a href="{{$banners[0]->link}}" title=""><img src="{{asset('upload/banner/'.$banners[0]->image)}}" title="" alt="" title=""></a>
             </div>
 
             <div class="col-md-12 col-lg-8">
@@ -87,7 +89,7 @@ $banner = DB::table('banner_content')->where('position',1)->get();
             </div>
 
             <div class="col-lg-2 col-md-6 d-lg-block d-none">
-                <a href="#" title=""><img src="{{asset('public/images/banner1.jpg')}}" title="" alt="" title=""></a>
+                <a href="{{$banners[1]->link}}" title=""><img src="{{asset('upload/banner/'.$banners[1]->image)}}" title="" alt="" title=""></a>
             </div>
         </div><!-- end row -->  
     </div>

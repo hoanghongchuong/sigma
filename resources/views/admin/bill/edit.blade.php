@@ -32,6 +32,10 @@
 	                  	<div class="tab-pane active" id="tab_1">
 	                  		<div class="row">
 		                  		<div class="col-md-6 col-xs-12">
+		                  			<div class="form-group">
+								      	<label for="ten">Mã hóa đơn</label>
+								      	<input type="text" disabled id="txtCode" value="{!! old('txtName', isset($data) ? $data->code : null) !!}"  class="form-control" />
+									</div>
 							    	<div class="form-group">
 								      	<label for="ten">Họ tên</label>
 								      	<input type="text" disabled id="txtName" value="{!! old('txtName', isset($data) ? $data->full_name : null) !!}"  class="form-control" />
@@ -61,13 +65,13 @@
 											<textarea name="" id="" cols="100" rows="5">{{$data->note}}</textarea>
 										</div>
 									</div>
-									<!-- <div class="form-group">
+									<div class="form-group">
 								      	<label for="txtAddress">Phương thức thanh toán</label>
 								      	<input type="text"  disabled value="<?php 
 								      		if($data->payment ==0)  echo "Thanh toán khi giao hàng";  
 								      		if($data->payment == 1) echo "Chuyển khoản qua ngân hàng"; 
 								      	?>"  class="form-control" />
-									</div> -->
+									</div>
 									<div class="form-group">
 								      	<label for="ten">Tình trạng đơn hàng</label>
 								      	<select name="status" class="form-control">
@@ -115,7 +119,7 @@
 					        </div><!-- /.box-body -->
 					        <div class="form-group">
 					        
-					        	<h4>Tổng thành tiền: <b> {{ number_format($data->total) }} VNĐ</b></h4>
+					        	<h4>Tổng thành tiền: <b style="color: red; font-size: 22px"> {{ number_format($data->total) }} VNĐ</b></h4>
 					        </div>
 	                    	<div class="clearfix"></div>
 	                	</div><!-- /.tab-pane -->
@@ -125,7 +129,7 @@
 			    <div class="box-footer col-md-12 row">
 					<div class="col-md-6">
 				    	<button type="submit" class="btn btn-primary">Cập nhật</button>
-				    	<button type="button" onclick="javascript:window.location='admin/orders'" class="btn btn-danger">Thoát</button>
+				    	<button type="button" onclick="javascript:window.location='backend/orders'" class="btn btn-danger">Thoát</button>
 			    	</div>
 			  	</div>
 		    </form>

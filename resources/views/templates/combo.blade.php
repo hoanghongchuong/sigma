@@ -8,27 +8,18 @@
     <div class="container">
         <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{url('')}}" title="">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="list-pro.html" title="">{{$product_cate->name}}</a></li>
+            <li class="breadcrumb-item"><a href="{{url('combo')}}" title="">Combo</a></li>
         </ul>
     </div>
 </div>
 
 <div class="list-pro">
     <div class="container">
-        <!-- <h1 class="ndetail-tit"><a href="news-detail.html" title="{{$product_cate->name}}">{{$product_cate->name}}</a></h1> -->
-        <!-- <p class="news-social">
-            <img src="images/social.jpg" alt="" title="">
-        </p> -->
+       
         <div class="row">
             <aside class="col-md-12 col-lg-3">
                 <div class="aside-wrap">
-                    <ul class="pro-menu"><!-- list-child.html -->
-                        @if(!empty($cate_pro))
-                        @foreach($cate_pro as $catechild)
-                        <li class="@if($product_cate->id == $catechild->id) active @endif"><a href="{{url('san-pham/'.$catechild->alias)}}" title="{{$catechild->name}}">{{$catechild->name}}</a></li>
-                        @endforeach
-                        @endif
-                    </ul>
+                    
                     @include('templates.filter')
 
                     <?php $qc = DB::table('banner_content')->where('position', 5)->get(); ?>
@@ -38,17 +29,11 @@
                 </div>
             </aside>
             <div class="col-md-12 col-lg-9">
-                <h1 class="ndetail-tit"><a href="news-detail.html" title="{{$product_cate->name}}">{{$product_cate->name}}</a></h1>
-                <div class="newspage-content">
-                    <p>{!! $product_cate->mota !!}</p>
-                </div>
-                <div class="banner pro-banner">
-                    <a href="#" title=""><img src="{{asset('public/images/banner.jpg')}}" alt="" title=""></a>
-                </div>
+                <h1 class="ndetail-tit"><a href="#" title="Combo">Combo</a></h1>
                 
                 <div class="propage">
                     <div class="row flex-wrap no-gutters curent-book-row">
-                        @foreach($products as $product)
+                        @foreach($combos as $product)
                         <div class="col-md-6 col-lg-3">
                             <!-- <div class="text-center text-uppercase item"> -->
                                 <div class="carousel_detail-item">
@@ -75,7 +60,7 @@
                         </div>
                         @endforeach
                     </div><!-- end row -->
-                    <div class="paginations">{!! $products->links() !!}</div>
+                    <div class="paginations">{!! $combos->links() !!}</div>
                 </div><!-- end propage -->
             </div><!-- end col-10 -->
         </div>

@@ -67,21 +67,21 @@
                                         <li><a href="list-child.html" title="">Sách toán tham khảo</a></li>
                                         
                                     </ul>
-                                </li>
+                                </li>-->
                                 <li class="text-uppercase"><a href="#" title="">Hotline đặt sách</a>
                                     <ul class="text-capitalize sub-menu-list">
                                         <li class="top-tel"><a href="tel:0968582838" title="">0968 582 838</a></li>
-                                        <li>Email: <a href="mailto:info@gco.vn" title="" class="text-lowercase">info@gco.vn</a></li>
-                                        <li>Website: <a href="www.gco.vn" title="" class="text-lowercase">www.gco.vn</a></li>
+                                        <!-- <li>Email: <a href="mailto:info@gco.vn" title="" class="text-lowercase">info@gco.vn</a></li>
+                                        <li>Website: <a href="www.gco.vn" title="" class="text-lowercase">www.gco.vn</a></li> -->
                                     </ul>
-                                </li> -->
+                                </li> 
                             </ul>
                         </li>
-                        <li><a href="{{url('')}}" title="">Trang chủ</a></li>
-                        <li><a href="{{url('gioi-thieu')}}" title="">Giới thiệu</a></li>
-                        <li><a href="{{url('tin-tuc')}}" title="">Tin tức</a></li>
-                        <li><a href="combo.html" title="">Combo</a></li>
-                        <li><a href="{{url('lien-he')}}" title="">Liên hệ</a></li>
+                        <li><a href="{{url('')}}" title="Trang chủ">Trang chủ</a></li>
+                        <li><a href="{{url('gioi-thieu')}}" title="Giới thiệu">Giới thiệu</a></li>
+                        <li><a href="{{url('tin-tuc')}}" title="TTin tức">Tin tức</a></li>
+                        <li><a href="{{url('combo')}}" title="Combo">Combo</a></li>
+                        <li><a href="{{url('lien-he')}}" title="Liên hệ">Liên hệ</a></li>
                     </ul>
                 </div>
                 

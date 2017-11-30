@@ -20,7 +20,7 @@
     <div class="box">
     	@include('admin.messages_error')
         <div class="box-body">
-        	<form method="post" name="frmEditProduct" action="backend/product/edit?id={{$id}}" enctype="multipart/form-data">
+        	<form method="post" name="frmEditProduct" action="backend/product/edit?id={{$id}}&type={{ @$_GET['type'] }}" enctype="multipart/form-data">
         		<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
         		
       			<div class="nav-tabs-custom">
@@ -52,6 +52,7 @@
 									</div>
 									
 									<div class="clearfix"></div>
+									@if($_GET['type']=='san-pham')
 									<div class="form-group">
 								      	<label for="ten">Danh mục cha</label>
 								      	<select name="txtProductCate" class="form-control">
@@ -60,6 +61,7 @@
 								      		<?php cate_parent($parent,0,"--",$data->cate_id) ?>
 								      	</select>
 									</div>
+									@endif
 							    	<div class="form-group @if ($errors->first('txtName')!='') has-error @endif">
 								      	<label for="ten">Tên</label>
 								      	<input type="text" name="txtName" id="txtName" value="{{ $data->name }}"  class="form-control" />
@@ -86,6 +88,7 @@
 								      	<label for="ten">Giá bìa</label>
 								      	<input type="text" name="txtPriceOld" onkeyup="FormatNumber(this);"  onKeyPress="return isNumberKey(event)" value="{{ number_format($data->price_old,0,'',',') }}"  class="form-control" />
 									</div>
+									@if($_GET['type']=='san-pham')			
 									<div class="form-group">
 								      	<label for="ten">Thể loại</label>
 								      	<select name="theloai" class="form-control">
@@ -113,6 +116,7 @@
 								      		@endforeach
 								      	</select>
 									</div>
+									@endif
 									<!-- <div class="form-group">
 								      	<label for="alias">Ghi chú</label>
 								      	
@@ -125,10 +129,6 @@
 									<!-- <div class="form-group">
 								      	<label for="ten">Mã SP</label>
 								      	<input type="text" name="txtCode"  value="{{ $data->code }}"  class="form-control" />
-									</div> -->
-									<!-- <div class="form-group">
-								      	<label for="alias">Bảo hành</label>
-								      	<input type="text" name="txtBaohanh" id="txtBaohanh" value="{{ $data->baohanh }}"  class="form-control" />
 									</div> -->
 									<!-- <div class="form-group">
 										<label for="">Thuộc tính</label>
@@ -144,44 +144,11 @@
 										<input id="btnAdd"  class="add-properties" type="button" value="Add" />
 
 									</div> -->
-									<!-- <div class="form-group">
-								      	<label for="ten">Giảm giá</label>
-								      	<input type="text" name="txtSale"  value="{{ $data->sale }}"  class="form-control" />
-									</div> -->
-									<!-- <div class="form-group">
-								      	<label for="ten">Giá cũ</label>
-								      	<input type="text" name="txtPriceOld" onkeyup="FormatNumber(this);"  onKeyPress="return isNumberKey(event)" value="{{ number_format($data->price_old,0,'',',') }}"  class="form-control" />
-									</div> -->
 									<div class="form-group">
 								      	<label for="desc">Mô tả</label>
 								      	<textarea name="txtDesc" rows="5" id="txtContent" class="form-control">{{ $data->mota }}</textarea>
 									</div>
-									<!-- <div class="form-group">
-								      	<label for="alias">Chất liệu</label>
-								      	<input type="text" name="txtThuonghieu" id="txtThuonghieu" value="{{ $data->thuonghieu }}"  class="form-control" />
-									</div>
-									<div class="form-group">
-								      	<label for="alias">Màu sắc</label>
-								      	<input type="text" name="txtBaohanh" id="txtBaohanh" value="{{ $data->baohanh }}"  class="form-control" />
-									</div>
-									<div class="form-group">
-								      	<label for="alias">Size</label>
-								      	<input type="text" name="txtVanchuyen" id="txtVanchuyen" value="{{ $data->vanchuyen }}"  class="form-control" />
-									</div> -->
 									
-									<!-- <div class="form-group">
-								      	<label for="alias">Năm sản xuất</label>
-								      	<input type="text" name="txtNamsanxuat" id="txtNamsanxuat" value="{{ $data->namsanxuat }}"  class="form-control" />
-									</div> -->
-									<!-- <div class="form-group">
-								      	<label for="alias">Khuyến mại</label>
-								      	<input type="text" name="txtQuatang" id="txtQuatang" value="{{ $data->quatang }}"  class="form-control" />
-								      	<textarea name="txtQuatang" rows="5" id="txtContent" class="form-control">{{ $data->quatang }}</textarea>
-									</div> -->
-									<!-- <div class="form-group">
-								      	<label for="alias">Model</label>
-								      	<input type="text" name="txtModel" id="txtModel" value="{{ $data->model }}"  class="form-control" />
-									</div> -->
 								</div>
 							</div>
 							<div class="clearfix"></div>
@@ -273,7 +240,7 @@
 				    </div>
 				    <!-- <div class="form-group">
 					    <label>
-				        	<input type="checkbox" name="tinhtrang" {!! (!isset($data->tinhtrang) || $data->tinhtrang==1)?'checked="checked"':'' !!}> Tình trạng
+				        	<input type="checkbox" name="tinhtrang" {!! (!isset($data->tinhtrang) || $data->tinhtrang==1)?'checked="checked"':'' !!}> Còn hàng
 				    	</label>
 				    </div> -->
 			    	<div class="form-group">
@@ -281,21 +248,12 @@
 				        	<input type="checkbox" name="noibat" {!! (!isset($data->noibat) || $data->noibat==1)?'checked="checked"':'' !!}> Sắp phát hành
 				    	</label>
 				    </div>
-				    <!-- <div class="form-group">
-					    <label>
-				        	<input type="checkbox" name="xuthe" {!! (!isset($data->xuthe) || $data->xuthe==1)?'checked="checked"':'' !!}> Xu thế
-				    	</label>
-				    </div> -->
-				    <!-- <div class="form-group">
-					    <label>
-				        	<input type="checkbox" name="phoido" {!! (!isset($data->phoido) || $data->phoido==1)?'checked="checked"':'' !!}> Phối đồ
-				    	</label>
-				    </div> -->
 				    <div class="form-group">
 					    <label>
 				        	<input type="checkbox" name="spbc" {!! (!isset($data->spbc) || $data->spbc==1)?'checked="checked"':'' !!}> Bán chạy
 				    	</label>
 				    </div>
+
 			    </div>
 			    <div class="clearfix"></div>
 			    <div class="box-footer">

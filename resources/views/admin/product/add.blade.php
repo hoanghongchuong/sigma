@@ -51,7 +51,10 @@
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('fImages'); !!}</label>
 								      	@endif
 									</div>
+
+									<input type="hidden" name="txtCom" value="{{ @$_GET['type'] }}"/>
 									<div class="clearfix"></div>
+									@if($_GET['type']=='san-pham')
 									<div class="form-group">
 								      	<label for="ten">Danh mục cha</label>
 								      	<select name="txtProductCate" class="form-control">
@@ -59,6 +62,7 @@
 								      		<?php cate_parent($parent,0,"--",0) ?>
 								      	</select>
 									</div>
+									@endif	
 							    	<div class="form-group @if ($errors->first('txtName')!='') has-error @endif">
 								      	<label for="ten">Tên</label>
 								      	<input type="text" id="txtName" name="txtName" value=""  class="form-control" />
@@ -73,6 +77,7 @@
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtAlias'); !!}</label>
 								      	@endif
 									</div>
+
 									<div class="form-group">
 								      	<label for="ten">Giá bán</label>
 								      	<input type="text" name="txtPrice"  onkeyup="FormatNumber(this);"  onKeyPress="return isNumberKey(event)" value=""  class="form-control" />
@@ -81,6 +86,7 @@
 								      	<label for="ten">Giá bìa</label>
 								      	<input type="text" name="txtPriceOld"  onkeyup="FormatNumber(this);"  onKeyPress="return isNumberKey(event)" value=""  class="form-control" />
 									</div>
+									@if($_GET['type']=='san-pham')
 									<div class="form-group">
 								      	<label for="ten">Thể loại</label>
 								      	<select name="theloai" class="form-control">
@@ -108,6 +114,7 @@
 								      		@endforeach
 								      	</select>
 									</div>
+									@endif	
 									<!-- <div class="form-group">
 										<label for="">Video</label>
 										<input type="text" name="video" class="form-control" value="" placeholder="">
@@ -241,27 +248,22 @@
 				        	<input type="checkbox" name="status" checked="checked"> Hiển thị
 				    	</label>
 				    </div>
-				    
+				   	<!-- <div class="form-group">
+					    <label>
+				        	<input type="checkbox" checked="checked" name="tinhtrang"> Còn hàng
+				    	</label>
+				    </div> -->
 			    	<div class="form-group">
 					    <label>
 				        	<input type="checkbox" name="noibat"> Sắp phát hành
 				    	</label>
 				    </div>
-				    <!-- <div class="form-group">
-					    <label>
-				        	<input type="checkbox" name="xuthe" > Xu thế
-				    	</label>
-				    </div>
-				    <div class="form-group">
-					    <label>
-				        	<input type="checkbox" name="phoido"> Phối đồ
-				    	</label>
-				    </div> -->
 				    <div class="form-group">
 					    <label>
 				        	<input type="checkbox" name="spbc"> Bán chạy
 				    	</label>
 				    </div>
+
 			    </div>
 			    <div class="clearfix"></div>
 			    <div class="box-footer">

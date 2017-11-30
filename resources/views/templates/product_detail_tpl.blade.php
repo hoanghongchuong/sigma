@@ -22,7 +22,10 @@
                        
                     </ul>
                     @include('templates.filter')
-                    <a href="#" title="" class="d-lg-block d-none"><img src="{{asset('public/images/banner1.jpg')}}" alt="" title=""></a>
+                    <?php $qc = DB::table('banner_content')->where('position', 5)->get(); ?>
+                    @foreach(@$qc as $q)
+                    <a href="{{$q->link}}" title="" class="d-lg-block d-none"><img src="{{asset('upload/banner/'.$q->image)}}" alt="" title=""></a>
+                    @endforeach
                 </div>
             </aside>
             <div class="col-md-12 col-lg-9">
@@ -57,9 +60,9 @@
                                 <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
                                 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52843d4e1ff0313a"></script>
                         </p>
-                        <h2 class="p-status">Tình trạng: <span>Còn hàng</span></h2>
+                        <!-- <h2 class="p-status">Tình trạng: <span>Còn hàng</span></h2> -->
                         
-                        <div class="rate_row"></div>
+                        <div class="rate_row"></div><p>(Đánh giá sản phẩm)</p>
                         <div class="mess-rate" style="margin-top: 5px; color: #1ba056"></div>
                         <input type="hidden" name="productId" class="productId" value="{{ $product_detail->id }}"> 
                         <h3 class="p-price">Giá: <span>{{number_format($product_detail->price)}}</span> VNĐ</h3>

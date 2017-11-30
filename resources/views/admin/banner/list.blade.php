@@ -25,8 +25,9 @@
           <table id="example2" class="table table-bordered table-hover">
             <thead>
               <tr>
-                <th style="width: 20px;"><input type="checkbox" name="chonhet" class="minimal" id="chonhet" /></th>
+                <!-- <th style="width: 20px;"><input type="checkbox" name="chonhet" class="minimal" id="chonhet" /></th> -->
                 <th class="text-center with_dieuhuong">Stt</th>
+                <th class="text-center with_dieuhuong"">ID</th>
                 <th>Hình ảnh</th>
                 <th>Vị trí</th>
                 <th>Link</th>
@@ -38,8 +39,9 @@
             <tbody>
             @foreach($data as $key=>$item) 
               <tr>
-                <td><input type="checkbox" name="chon" id="chon" value="" class="chon" /></td>
+                <!-- <td><input type="checkbox" name="chon" id="chon" value="" class="chon" /></td> -->
                 <td>{{$key+1}}</td>
+                <td>{{$item->position}}</td>
                 <td><img src="{{asset('upload/banner/'.$item->image)}}" class="img_product" alt=""></td>
                 <td>
                   <?php $cate = DB::table('banner_position')->where('id', $item->position)->first(); ?>
