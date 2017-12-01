@@ -84,8 +84,8 @@
                     <form action="" class="form-group login-frm">
                         <input type="text" placeholder="Tài khoản" required="required" class="w-100">
                         <input type="password" placeholder="Mật khẩu" required="required" class="w-100">
-                        <p class="d-flex align-items-center mb-3 login-choice-wrap"><span class="login-choice"></span> Mua hàng không cần đăng nhập</p>
-                        <button type="submit" class="w-100 text-uppercase font-weight-bold btn login-btn">Tiếp tục</button>
+                        {{--<p class="d-flex align-items-center mb-3 login-choice-wrap"><span class="login-choice"></span> Mua hàng không cần đăng nhập</p>--}}
+                        <button type="submit" class="w-100 text-uppercase font-weight-bold btn login-btn">Đăng nhập</button>
                         <p class="text-center mt-4 mb-1">
                             <a href="{{url('')}}" title=""><img src="{{asset('upload/hinhanh/'.$setting->photo)}}" alt="" title=""></a>
                         </p>

@@ -13,8 +13,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ url('public/admin_assets/plugins/datatables/dataTables.bootstrap.css') }}">
+    <!-- tag css -->
+    <link href="{{url('public/admin_assets/tag/css/jquery.tagit.css')}}" rel="stylesheet" type="text/css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('public/admin_assets/dist/css/styles.css') }}">
     <link rel="stylesheet" href="{{ url('public/admin_assets/dist/css/AdminLTE.min.css') }}">
@@ -30,7 +33,9 @@
     <!-- jQuery 2.1.4 -->
     <script src="{{ url('public/admin_assets/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script> -->
+    <!-- js tag -->
+    <script src="{{ url('public/admin_assets/tag/js/tag-it.min.js')}}" type="text/javascript" charset="utf-8"></script>
     <!-- CK Editor -->
     <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
     <script src="{{ asset('public/admin_assets/plugins/ckeditor/ckeditor.js') }}"></script>

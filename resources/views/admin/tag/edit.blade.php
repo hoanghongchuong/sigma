@@ -1,7 +1,7 @@
 @extends('admin.master')
 @section('content')
 @section('controller','Tag')
-@section('action','Add')
+@section('action','Edit')
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -45,7 +45,7 @@
 									<div class="form-group @if ($errors->first('txtAlias')!='') has-error @endif">
 								      	<label for="alias">Đường dẫn tĩnh</label>
 								      	<input type="text" name="slug" id="txtAlias" value=""  class="form-control" />
-								      	@if ($errors->first('slug')!='')
+								      	@if ($errors->first('txtAlias')!='')
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtAlias'); !!}</label>
 								      	@endif
 									</div>

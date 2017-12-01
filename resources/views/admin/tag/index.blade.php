@@ -64,7 +64,6 @@
             <input type="button" onclick="javascript:window.location='backend/tag/add'" value="Thêm" class="btn btn-primary" />
             <!-- <button type="button" id="xoahet" class="btn btn-success">Xóa</button> -->
             <input type="button" value="Thoát" onclick="javascript:window.location='backend'" class="btn btn-danger" />
-
           </div>
         </div>
       </div><!-- /.box -->

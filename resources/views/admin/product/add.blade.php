@@ -130,6 +130,47 @@
 								      	<textarea name="txtQuatang" rows="5" id="txtContent" class="form-control"></textarea>
 									</div>
 								</div> -->
+								<script type="text/javascript">
+								    $(document).ready(function() {
+								        $("#myTags").tagit({
+								        	autocomplete: {
+								        		delay: 1, 
+								        		minLength: 2,
+								        		source: function(request, response) {
+								        			$.ajax({
+								        				url: '{{ route("admin.tag.search") }}',
+								        				type: 'get',
+								        				data: {
+								        					term: request.term
+								        				},
+								        				success: function(data) {
+								        					response(data);
+								        				}
+								        			})
+								        		},
+								        		select: function(event, ui) {
+									        		var taged = JSON.parse($('#tags').val());
+									        		taged.push(ui.item);
+									        		$('#tags').val(JSON.stringify(taged));
+									        		return true;
+									        	}
+								        	},
+								        	beforeTagAdded: function(event, ui) {
+								        		console.log(ui);
+								        	},
+								        	afterTagAdded: function(event, ui) {
+								        		// var taged = JSON.parse($('#tags').val());
+								        		// taged.push(ui.item);
+								        		// $('#tags').val(JSON.stringify(taged));
+								        		// return true;
+								        	}
+								        });
+								    });
+								</script>
+
+								<ul id="myTags"></ul>
+								<input  id="tags" name="tag" value="[]">
+
 								<div class="col-md-6 col-xs-12">
 
 								

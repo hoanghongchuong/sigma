@@ -403,6 +403,7 @@ Route::group(['middleware' =>'authen', 'prefix' => 'backend'], function(){
 		Route::any('add',['as'=>'admin.tag.create','uses'=>'Admin\TagController@create']);
 		Route::any('edit/{id}',['as'=>'admin.tag.edit', 'uses'=>'Admin\TagController@create']);
 		Route::get('delete/{id}',['as'=>'admin.tag.delete', 'uses' => 'Admin\TagController@delete']);
+		Route::get('search',['as'=>'admin.tag.search', 'uses' => 'Admin\TagController@search']);
 	});
 
 	Route::post('uploadImg', ['as'=>'admin.uploadImg' ,'uses'=>'Admin/UploadController@uploadImg']);

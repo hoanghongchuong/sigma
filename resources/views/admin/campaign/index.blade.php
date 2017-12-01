@@ -55,7 +55,6 @@
                         if($item->campaign_type == 1){
                           echo "Trừ tiền";
                         }
-                        
                         if($item->campaign_type == 2){
                           echo "Trừ %";
                         }
