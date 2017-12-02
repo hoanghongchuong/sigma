@@ -81,19 +81,51 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" class="form-group login-frm">
-                        <input type="text" placeholder="Tài khoản" required="required" class="w-100">
-                        <input type="password" placeholder="Mật khẩu" required="required" class="w-100">
-                        {{--<p class="d-flex align-items-center mb-3 login-choice-wrap"><span class="login-choice"></span> Mua hàng không cần đăng nhập</p>--}}
-                        <button type="submit" class="w-100 text-uppercase font-weight-bold btn login-btn">Đăng nhập</button>
+                    <form action="{{route('postLogin')}}" method="post" id="tutorial" class="form-group login-frm">
+                        {{ csrf_field() }}
+                        <input type="email" placeholder="Tài khoản" id="email" name="email" required="required" class="w-100">
+                        
+                        <input type="password" placeholder="Mật khẩu" id="password" name="password" required="required" class="w-100">
+
+                        <!-- <p class="d-flex align-items-center mb-3 login-choice-wrap"><span class="login-choice"></span> Mua hàng không cần đăng nhập</p> -->
+                        <div class="success" style="display:none;"></div>
+                        <button type="button" id="btn-login" class="w-100 text-uppercase font-weight-bold btn login-btn">Đăng nhập</button>
                         <p class="text-center mt-4 mb-1">
-                            <a href="{{url('')}}" title=""><img src="{{asset('upload/hinhanh/'.$setting->photo)}}" alt="" title=""></a>
+                            <a href="index.html" title=""><img src="{{asset('upload/hinhanh/'.$setting->photo)}}" alt="" title=""></a>
                         </p>
                     </form>
                 </div><!-- end modal body -->
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $('#btn-login').click(function(){
+          var password = $('#password').val();
+          var email = $('#email').val();
+          // alert(password);
+          $.ajax({
+              type: "POST",
+              url: baseUrl()+"/login", 
+              data: {
+                email : email,
+                password : password,
+                _token : window.token
+              },
+              success: function(res){  
+                if(res == 0){
+                    
+                    $('div.success').fadeIn();
+                    $('div.success').html('<p class="mess-login">Username hoặc password không đúng !</p>');                  
+                }else{
+                    location.reload();  
+                }
+                   
+            }
+                
+          });
+       });
+    </script>
+
     <!-- setup jquery -->
     <!-- <script src="{{asset('public/js/jquery.min.js')}}"></script> -->
     <script src="{{asset('public/js/popper.min.js')}}"></script>

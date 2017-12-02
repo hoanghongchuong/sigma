@@ -66,9 +66,12 @@ $( document ).ready(function() {
         }
     });
 
+    
+
   $(".nav-link").on('click',function(e){
     $("#payment_method").attr('value', $(this).data('id'));
     return -1;
   })
 
 });
+

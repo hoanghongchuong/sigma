@@ -87,8 +87,13 @@
                 
             </div>
             <div class="d-flex align-items-center menu-wrap-r">
+                @if(Auth::check())
+                    <a href="#" >{{Auth::user()->name}}</a>
+                    <a href="{{route('logout')}}" title="Đăng xuất">Đăng xuất</a>
+                @else
                 <a href="#login" data-toggle="modal" data-target="#login" title="">Đăng nhập</a>
                 <a href="#" data-toggle="modal" data-target="#regis" title="">Đăng ký</a>
+                @endif
             </div>
         </div>
     </div>      

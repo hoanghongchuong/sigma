@@ -50,7 +50,7 @@ class CampaignController extends Controller
 					}
 					DB::table('campaigns')->where('id', $id)->update($data);
 					DB::commit();
-				} catch (Exception $e) {
+				}catch (Exception $e) {
 					DB::rollBack();
 				}
 			} else {

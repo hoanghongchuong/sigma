@@ -21,13 +21,15 @@ class LoginController extends Controller
 	    		'password.required' => 'Bạn chưa nhập password'
 	    	]
 	    );
-	    if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password]))
+	    if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password, 'level'=>2]))
 	    {
-	    	return redirect()->route('index');
+	    	return 1;
+	    	// return redirect()->route('index');
 	    }
 	    else
 	    {
-	    	return redirect()->back()->with('mess','Email hoặc mật khẩu không chính xác');
+	    	// return redirect()->back()->with('mess','Email hoặc mật khẩu không chính xác');
+	    	return 0;
 	    }
     }
     public function logout(){

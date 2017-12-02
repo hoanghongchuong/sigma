@@ -46,9 +46,9 @@ Route::get('sap-xep','IndexController@SapXep')->name('sapxep');
 // dang ky, dang nhap
 Route::get('signup','SignupController@signup');
 Route::post('signup', 'SignupController@postSignup')->name('postSignup');
-Route::get('login','LoginController@getLogin')->name('getLogin');
+// Route::get('login','LoginController@getLogin')->name('getLogin');
 Route::post('login','LoginController@postLogin')->name('postLogin');
-Route::get('logout','LoginController@logout');
+Route::get('logout','LoginController@logout')->name('logout');
 // gio hang
 Route::get('gio-hang',['as'=>'getCart', 'uses'=>'IndexController@getCart']);
 Route::post('cart/add', ['as' => 'addProductToCart', 'uses' => 'IndexController@addCart']);
