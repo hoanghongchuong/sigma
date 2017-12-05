@@ -43,11 +43,16 @@ class ProductController extends Controller
             $com='';
         }
         $data = Products::where('com',$com)->get();
+
+
         $parent = ProductCate::all();
         $theloai = TheLoai::all();
         $tacgia = TacGia::all();
         $nxb = NXB::all();
-        return view('admin.product.add', compact('data','parent','theloai','tacgia','nxb'));
+
+        $availableTags = implode(',', \App\Tag::select('name')->get()->pluck('name')->toArray());
+
+        return view('admin.product.add', compact('data','parent','theloai','tacgia','nxb', 'availableTags'));
     }
     public function postAdd(ProductRequest $request)
     {
@@ -82,6 +87,9 @@ class ProductController extends Controller
         }else{
             $product->alias = changeTitle($request->txtName);
         }
+
+
+        $product->tags = $request->tag;
         $product->mota = $request->txtDesc;
         $product->photo = $img_name;
         $product->theloai_id = $request->theloai;
@@ -134,8 +142,26 @@ class ProductController extends Controller
         //     $number = $_POST['number'];
         //     $product->number_id = implode(',', $number);
         // }
-         
-        $product->save();
+        try {
+            \DB::beginTransaction();
+            $product->save();
+            $tags = collect(json_decode($request->tag))->map(function($item) use ($product) {
+                $item = [
+                    'tag_id' => $item->id,
+                    'product_id' => $product->id
+                ];
+                return $item;
+            })->toArray();
+
+            \DB::table('tag_links')->insert($tags);
+
+            \DB::commit();
+        } catch (\Exception $e) {
+            \DB::rollBack();
+        }
+
+        
+
         $product_id = $product->id;
         if ($request->hasFile('detailImg')) {
             foreach ($request->file('detailImg') as $file) {
@@ -179,7 +205,10 @@ class ProductController extends Controller
         //Tìm article thông qua mã id tương ứng
         //$data = Products::findOrFail($id);
         $data = Products::find($id);
-       
+        $availableTags = implode(',', \App\Tag::select('name')->get()->pluck('name')->toArray());
+        if ($data->tags) {
+            $tagsInput = implode(',', collect(json_decode($data->tags))->pluck('name')->toArray());
+        }
         if(!empty($data)){
             if($request->get('hienthi')>0){
                 if($data->status == 1){
@@ -219,7 +248,7 @@ class ProductController extends Controller
             $product = Products::select('stt')->orderBy('id','asc')->get()->toArray();
             $product_img = Products::find($id)->pimg;
             // Gọi view edit.blade.php hiển thị bải viết
-            return view('admin.product.edit',compact('data','product','id','parent','product_img','tacgia','theloai','nxb'));
+            return view('admin.product.edit',compact('data','product','id','parent','product_img','tacgia','theloai','nxb','availableTags', 'tagsInput'));
         }else{
             $data = Products::all();
             $parent = ProductCate::orderBy('stt', 'asc')->get()->toArray();
@@ -290,6 +319,7 @@ class ProductController extends Controller
             }else{
                 $product->price_old =0;
             }
+            $product->tags = $request->tag;
             $product->theloai_id = $request->theloai;
             $product->tacgia_id = $request->tacgia;
             $product->nxb_id = $request->nxb;
@@ -332,7 +362,24 @@ class ProductController extends Controller
             }
             $product->user_id  = Auth::user()->id;
 
-            $product->save();
+            try {
+                \DB::beginTransaction();
+                $product->save();
+                $tags = collect(json_decode($request->tag))->map(function($item) use ($product) {
+                    $item = [
+                        'tag_id' => $item->id,
+                        'product_id' => $product->id
+                    ];
+                    return $item;
+                })->toArray();
+
+                \DB::table('tag_links')->insert($tags);
+                
+                \DB::commit();
+            } catch (\Exception $e) {
+                \DB::rollBack();
+            }
+            // $product->save();
             return redirect('backend/product/edit?id='.$id.'&type='.$com)->with('status','Cập nhật thành công !');
             //return redirect('admin/product/edit?id='.$id)->with('status','Cập nhật thành công');
         }else{
@@ -349,6 +396,11 @@ class ProductController extends Controller
      */
     public function getDelete($id)
     {
+        if(!empty($_GET['type'])){
+            $com=$_GET['type'];
+        }else{
+            $com='';
+        }
         $product_img = Products::find($id)->pimg->toArray();
         foreach ($product_img as $value) {
            File::delete('upload/hasp/'.$value['photo']);

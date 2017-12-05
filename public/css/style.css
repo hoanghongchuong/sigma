@@ -88,7 +88,7 @@ a:hover, a:focus {
     text-decoration: none;
 }
 /* font setup */
-@font-face {
+/*@font-face {
     font-family: "OpenSans";
     src: url('../font/OpenSans-Bold.ttf');
     font-style: normal;
@@ -135,7 +135,7 @@ a:hover, a:focus {
     src: url('../font/UTM Impact.ttf');
     font-style: normal;
     font-weight: normal;
-}
+}*/
 button, .btn, .search-btn {
     overflow: hidden;
 }
@@ -145,7 +145,12 @@ button, .btn, .search-btn {
 .popup-content, .search-ip, .menu, .news-tit, .news-content p, .intro p, .ft, .news-time, 
 .news-cap, .news-retit, .news-re-tit, .news-re-list, .news-re, .newspage-content, 
 .pro-menu li a, .pro-filter-tit, .pdetail-intro, .pdetail-it, .prate-point-tit, .rate-wrap {
-    font-size: 14px;
+    font-size: 16px;
+    color: #222;
+    
+}
+.newspage-content{
+    line-height: 2;
 }
 .p-price {
     font-size: 48px;
@@ -300,7 +305,7 @@ body, .filter-price .irs-slider, .popup-close, .top, .menu, .sub-menu, .owl-them
     }
 /* } */
 body {
-    font-family: "OpenSans";
+    font-family: "Arial";
     font-size: 16px;/* 16 */
     color: #444;
 }
@@ -1189,7 +1194,7 @@ input[type=number].qty::-webkit-outer-spin-button
     margin-top: 34px;
 }
 .bank-content-tab:before {
-    content: "";
+    /*content: "";*/
     display: block;
     width: 30px;
     height: 30px;

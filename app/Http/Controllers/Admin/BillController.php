@@ -8,7 +8,7 @@ use App\Bill;
 class BillController extends Controller
 {
     public function getList(){
-    	$data = Bill::all();
+    	$data = Bill::orderBy('id', 'desc')->get();
     	return view('admin.bill.list', compact('data'));
     }    
     public function getEdit($id){
@@ -30,5 +30,11 @@ class BillController extends Controller
     	$order = Bill::find($id);
     	$order->delete();
     	return redirect()->back();
+    }
+    public function seachOrder(Request $request){
+        $search = (int)($request->searchorder);
+
+        $data = Bill::where('status', $search)->get();
+        return view('admin.search_order', compact('data','search'));
     }
 }

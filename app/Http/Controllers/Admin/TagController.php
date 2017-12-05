@@ -39,6 +39,7 @@ class TagController extends Controller
             $tag = $this->Tag->findOrFail($id);
         }
     	if ($request->isMethod('GET')) {
+            
     		return view('admin.tag.create', compact('tag', 'id'));
     	}
     	$data = $request->only($this->Tag->getFieldList());

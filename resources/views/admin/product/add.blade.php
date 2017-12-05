@@ -132,61 +132,76 @@
 								</div> -->
 								<script type="text/javascript">
 								    $(document).ready(function() {
+								        var availableTags = '{{$availableTags}}'.split(',');
 								        $("#myTags").tagit({
-								        	autocomplete: {
-								        		delay: 1, 
-								        		minLength: 2,
-								        		source: function(request, response) {
-								        			$.ajax({
-								        				url: '{{ route("admin.tag.search") }}',
-								        				type: 'get',
-								        				data: {
-								        					term: request.term
-								        				},
-								        				success: function(data) {
-								        					response(data);
-								        				}
-								        			})
-								        		},
-								        		select: function(event, ui) {
-									        		var taged = JSON.parse($('#tags').val());
-									        		taged.push(ui.item);
-									        		$('#tags').val(JSON.stringify(taged));
-									        		return true;
-									        	}
-								        	},
-								        	beforeTagAdded: function(event, ui) {
-								        		console.log(ui);
-								        	},
-								        	afterTagAdded: function(event, ui) {
-								        		// var taged = JSON.parse($('#tags').val());
-								        		// taged.push(ui.item);
-								        		// $('#tags').val(JSON.stringify(taged));
-								        		// return true;
-								        	}
+								            availableTags: availableTags,
+								            autocomplete: {
+								                source: function(req, res) {
+								                    $.ajax({
+								                        url: '{{route("admin.tag.search")}}',
+								                        type: 'GET',
+								                        data: {
+								                            term: req.term
+								                        },
+								                        success: function(data) {
+								                            res(data);
+								                        }
+								                    });
+								                },
+								                delay: 500,
+								                select: function(event, ui) {
+								                    var arr = $('#tags').val() == '' ? [] : JSON.parse($('#tags').val());
+								                    var exist = false;
+								                    for (var i = 0; i < arr.length; i++) {
+								                        if (arr[i].id == ui.item.value) {
+								                            exist = true;
+								                            break;
+								                        }
+								                    }
+								                    if (!exist) {
+								                        arr.push({
+								                            name: ui.item.label,
+								                            id: ui.item.value
+								                        });
+								                        $('#tags').val((JSON.stringify(arr)));
+								                        $("#myTags").tagit("createTag", ui.item.label);
+								                    }
+								                    return false;
+								                }
+								            },
+								            allowSpaces: true,
+								            singleField: true,
+								            singleFieldNode: $("#single"),
+								            afterTagRemoved: function(event, ui) {
+								                var arr = JSON.parse($('#tags').val());
+								                arr = arr.filter(function(item) {
+								                    return item.name.trim() != ui.tagLabel.trim();
+								                })
+								                $('#tags').val((JSON.stringify(arr)));
+								            },
+								            beforeTagAdded: function(event, ui) {
+								                if ($.inArray(ui.tagLabel, availableTags) == -1) {
+								                    return false;
+								                }
+								            }
 								        });
 								    });
 								</script>
 
-								<ul id="myTags"></ul>
+								<!-- <ul id="myTags"></ul> -->
+								<input class="form-control" name="mytags" id="myTags" />
 								<input  id="tags" name="tag" value="[]">
-
-								<div class="col-md-6 col-xs-12">
-
-								
-								
+								<div class="col-md-6 col-xs-12">					
 								<!-- <div class="form-group">
 							      	<label for="ten">Mã SP</label>
 							      	<input type="text" name="txtCode"  value=""  class="form-control" />
 								</div> -->
-
 								<!-- <div class="form-group">
 									<label for="">Thuộc tính</label>
 									<div id="a">
 									</div>
 									<input id="btnAdd"  class="add-properties" type="button" value="Add" />
 								</div> -->
-
 								<div class="form-group">
 							      	<label for="desc">Mô tả</label>
 							      	<textarea name="txtDesc" rows="5" id="txtContent" class="form-control"></textarea>

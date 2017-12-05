@@ -126,6 +126,75 @@
 								</div>
 								<div class="col-md-6 col-xs-12">
 									
+									<script type="text/javascript">
+								    $(document).ready(function() {
+								        var availableTags = '{{$availableTags}}'.split(',');
+								        $("#myTags").tagit({
+								            availableTags: availableTags,
+								            autocomplete: {
+								                source: function(req, res) {
+								                    $.ajax({
+								                        url: '{{route("admin.tag.search")}}',
+								                        type: 'GET',
+								                        data: {
+								                            term: req.term
+								                        },
+								                        success: function(data) {
+								                            res(data);
+								                        }
+								                    });
+								                },
+								                delay: 500,
+								                select: function(event, ui) {
+								                    var arr = $('#tags').val() == '' ? [] : JSON.parse($('#tags').val());
+								                    var exist = false;
+								                    for (var i = 0; i < arr.length; i++) {
+								                        if (arr[i].id == ui.item.value) {
+								                            exist = true;
+								                            break;
+								                        }
+								                    }
+								                    if (!exist) {
+								                        arr.push({
+								                            name: ui.item.label,
+								                            id: ui.item.value
+								                        });
+								                        $('#tags').val((JSON.stringify(arr)));
+								                        $("#myTags").tagit("createTag", ui.item.label);
+								                    }
+								                    return false;
+								                }
+								            },
+								            allowSpaces: true,
+								            singleField: true,
+								            singleFieldNode: $("#single"),
+								            afterTagRemoved: function(event, ui) {
+								                var arr = JSON.parse($('#tags').val());
+								                arr = arr.filter(function(item) {
+								                    return item.name.trim() != ui.tagLabel.trim();
+								                })
+								                $('#tags').val((JSON.stringify(arr)));
+								            },
+								            beforeTagAdded: function(event, ui) {
+								                if ($.inArray(ui.tagLabel, availableTags) == -1) {
+								                    return false;
+								                }
+								            }
+								        });
+								    });
+								 //    var tags = '{{ $data->tags }}';
+									// if (tags) {
+									// 	tags = JSON.parse(tags.replace(/&quot;/g, '"'));
+									// 	for (var i = 0; i < tags.length; i++) {
+									// 		$('#myTags').tagit('createTag', tags[i].name);
+									// 	}
+									// }
+								</script>
+
+								<!-- <ul id="myTags"></ul> -->
+								<input class="form-control" name="mytags" id="myTags" value="{{ $tagsInput }}"/>
+								<input  id="tags" name="tag" value="{{ $data->tags }}">
+
 									<!-- <div class="form-group">
 								      	<label for="ten">Mã SP</label>
 								      	<input type="text" name="txtCode"  value="{{ $data->code }}"  class="form-control" />

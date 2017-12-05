@@ -11,11 +11,11 @@
       <form action="{{route('seachOrder')}}" method="get" accept-charset="utf-8">
         <select name="searchorder" class="search-order pull-left" style="width: 250px; height: 34px; font-size: 16px;">
              <option value="">-- Trạng thái --</option>
-             <option value="0">Mới đặt</option>
-             <option value="1">Xác nhận</option>
-             <option value="2">Đang giao hàng</option>
-             <option value="3">Hoàn thành</option>
-             <option value="4">Hủy</option>
+             <option @if($search == 0) {{"selected"}} @endif value="0">Mới đặt</option>
+             <option @if($search == 1) {{"selected"}} @endif value="1">Xác nhận</option>
+             <option @if($search == 2) {{"selected"}} @endif value="2">Đang giao hàng</option>
+             <option @if($search == 3) {{"selected"}} @endif value="3">Hoàn thành</option>
+             <option @if($search == 4) {{"selected"}} @endif value="4">Hủy</option>
          </select>
          <div class="btn-seach-order pull-left" style="margin-left: 10px;"><button type="submit" class="btn btn-primary">Tìm kiếm</button></div> 
       </form>
@@ -32,14 +32,8 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="box">
-        @if (session('status'))
-        <div class="box-header">
-            <h3 class="box-title alert_thongbao text-green">{{ session('status') }}</h3>
-        </div>
-        @endif
-        <!--<div class="box-header">
-          <h3 class="box-title">Data Table With Full Features</h3>
-        </div>-->
+       
+        
         <div class="box-body">
           <table id="example2" class="table table-bordered table-hover">
             <thead>

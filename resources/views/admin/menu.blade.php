@@ -207,7 +207,7 @@
             <small class="label pull-right bg-yellow">12</small>
           </a>
         </li> -->
-        <!-- <li><a href="backend/bankaccount"><i class="fa fa-envelope"></i><span>Quản lý tài khoản ngân hàng</span></a></li> -->
+        
         <!-- <li><a href="{{ asset('backend/menu?type=menu-top') }}"><i class="fa fa-circle-o"></i> <span>Quản lý menu</span></a></li> -->
         
         
@@ -219,6 +219,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ asset('backend/setting') }}"><i class="fa fa-gear" aria-hidden="true"></i> <span>Thiết lập</span></a></li>
+            <li><a href="backend/bankaccount"><i class="fa fa-envelope"></i><span>Quản lý tài khoản ngân hàng</span></a></li>
             <li><a href="backend/province"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý tỉnh/ thành phố</span></a></li>
             <li><a href="backend/district"><i class="fa fa-gear" aria-hidden="true"></i> <span>Quản lý quận/ huyện</span></a></li>
           </ul>

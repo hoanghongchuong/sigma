@@ -62,7 +62,7 @@ Route::get('xoa-all','IndexController@deleteAllCart')->name('deleteCart');
 Route::get('dich-vu',['as'=>'getDichvu', 'uses'=>'IndexController@getDichvu']);
 Route::post('card/check',['as'=>'checkCard', 'uses'=>'IndexController@checkCard']);
 
-
+Route::get('admin/search/order', 'Admin\BillController@seachOrder')->name('seachOrder');
 
 Route::get('dich-vu/{id}',['as'=>'getDichVuList', 'uses'=>'IndexController@getDichVuList']);
 Route::get('chi-tiet-dich-vu/{id}.html',['as'=>'getDichVuDetail', 'uses'=>'IndexController@getDichVuDetail']);
