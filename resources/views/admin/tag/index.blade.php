@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('content')
-@section('controller','Tác giả')
+@section('controller','Tag')
 @section('action','List')
 <!-- Content Header (Page header) -->
 

@@ -190,10 +190,10 @@
 									// 	}
 									// }
 								</script>
-
+								<label for="desc">Tag</label>
 								<!-- <ul id="myTags"></ul> -->
 								<input class="form-control" name="mytags" id="myTags" value="{{ $tagsInput }}"/>
-								<input  id="tags" name="tag" value="{{ $data->tags }}">
+								<input  id="tags" hidden="" name="tag" value="{{ $data->tags }}">
 
 									<!-- <div class="form-group">
 								      	<label for="ten">Mã SP</label>

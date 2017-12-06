@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Bill;
 class BillController extends Controller
 {
+    public function __construct(Bill $bill){
+        $this->Bill = $bill;
+    }
     public function getList(){
     	$data = Bill::orderBy('id', 'desc')->get();
     	return view('admin.bill.list', compact('data'));
@@ -29,12 +32,12 @@ class BillController extends Controller
     public function getDelete($id){
     	$order = Bill::find($id);
     	$order->delete();
-    	return redirect()->back();
+    	return redirect()->back()->with('status','Xóa thành công');
     }
     public function seachOrder(Request $request){
         $search = (int)($request->searchorder);
-
-        $data = Bill::where('status', $search)->get();
+        // $data = Bill::where('status', $search)->get();
+        $data = $this->Bill->search($search);
         return view('admin.search_order', compact('data','search'));
     }
 }

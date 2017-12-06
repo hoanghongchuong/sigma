@@ -97,18 +97,16 @@
                         <span>{{$numbRates}} lượt đánh giá - {{$rateGood}}/{{$numbRates}} lượt đánh giá tốt</span>
                     </div>
                 </div>
-
+                @if(!empty($tags))
                 <h2 class="prate-point-tit">
                     <span class="mr-4">Tag: </span>
                     <ul class="p-tags">
-                        <li><a href="#" title="">Toán tài năng</a></li>
-                        <li><a href="#" title="">Toán tuổi thơ</a></li>
-                        <li><a href="#" title="">Em yêu toán học</a></li>
-                        <li><a href="#" title="">Toán tài năng</a></li>
-                        <li><a href="#" title="">Toán tuổi thơ</a></li>
-                        <li><a href="#" title="">Em yêu toán học</a></li>
+                        @foreach($tags as $tag)
+                        <li><a href="#" title="">{{$tag->name}}</a></li>
+                        @endforeach
                     </ul>
                 </h2>
+                @endif
 
 
                 <div class="fb-comments" data-href="{{url('san-pham/'.$product_detail->alias.'.html')}}" data-width="100%" data-numposts="5"></div>

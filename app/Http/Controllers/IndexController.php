@@ -234,7 +234,9 @@ class IndexController extends Controller
             $avgRates = DB::table('rating')->join('products', 'rating.product_id', '=', 'products.id')->where('rating.product_id', $product_detail->id)->avg('rate');
             $avg = round($avgRates);
             $rateGood = DB::table('rating')->join('products', 'rating.product_id', '=', 'products.id')->where('rating.product_id', $product_detail->id)->where('rating.rate', '>=', 3)->count('rate');
-            return view('templates.product_detail_tpl', compact('product_detail', 'banner_danhmuc', 'keyword', 'description', 'title', 'img_share', 'product_khac', 'album_hinh', 'cateProduct', 'productSameCate', 'tintucs', 'cate_pro', 'numbRates', 'avg', 'rateGood'));
+            $tags = json_decode($product_detail->tags);
+
+            return view('templates.product_detail_tpl', compact('product_detail', 'banner_danhmuc', 'keyword', 'description', 'title', 'img_share', 'product_khac', 'album_hinh', 'cateProduct', 'productSameCate', 'tintucs', 'cate_pro', 'numbRates', 'avg', 'rateGood','tags'));
         } else {
             return redirect()->route('getErrorNotFount');
         }

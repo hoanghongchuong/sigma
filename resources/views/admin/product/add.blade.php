@@ -189,8 +189,9 @@
 								</script>
 
 								<!-- <ul id="myTags"></ul> -->
+								<label for="desc">Tag</label>
 								<input class="form-control" name="mytags" id="myTags" />
-								<input  id="tags" name="tag" value="[]">
+								<input  id="tags" hidden="" name="tag" value="[]">
 								<div class="col-md-6 col-xs-12">					
 								<!-- <div class="form-group">
 							      	<label for="ten">Mã SP</label>
