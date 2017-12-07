@@ -65,6 +65,48 @@
                         <div class="rate_row"></div><p>(Đánh giá sản phẩm)</p>
                         <div class="mess-rate" style="margin-top: 5px; color: #1ba056"></div>
                         <input type="hidden" name="productId" class="productId" value="{{ $product_detail->id }}"> 
+                        <?php 
+                            $star = 0;
+                            if($avg > 3){
+                                $star = $avg;
+                            }else{
+                                $star = 3;
+                            }
+                        ?>
+                        <script type="text/javascript">
+                            $( document ).ready(function() {
+                                $('.rate_row').starwarsjs({
+                                    stars : 5,
+                                    count : 1,
+                                    range : [1,6],
+                                    <?php if($avg > 3) ?>
+                                    default_stars : {{$star}},
+                                    on_select : function(rate){
+                                      var productID = $('.productId').val();
+                                      $.ajax({
+                                        url : window.getRate,
+                                        type: 'POST',
+                                        data: {
+                                          productID : productID,
+                                          rate : rate,
+                                          _token : window.token
+                                        },
+                                        success: function(res){
+                                          if(res == 1){
+                                            $('.mess-rate').html("Cảm ơn bạn đã đánh giá");
+                                          }
+                                        }
+                                      }); 
+                                      
+                                    }
+                                });
+
+                                
+
+                             
+                            });
+                        </script>
+
                         <h3 class="p-price">Giá: <span>{{number_format($product_detail->price)}}</span> VNĐ</h3>
                         <h3 class="p-o-price"><del>Giá bìa: <span>{{number_format($product_detail->price_old)}}</span> đ</del></h3>
                         <p>{!! $product_detail->mota !!}</p>

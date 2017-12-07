@@ -43,28 +43,28 @@ $("#range").ionRangeSlider({
 });
 
 $( document ).ready(function() {
-    $('.rate_row').starwarsjs({
-        stars : 5,
-        count : 1,
-        on_select : function(rate){
-          var productID = $('.productId').val();
-          $.ajax({
-            url : window.getRate,
-            type: 'POST',
-            data: {
-              productID : productID,
-              rate : rate,
-              _token : window.token
-            },
-            success: function(res){
-              if(res == 1){
-                $('.mess-rate').html("Cảm ơn bạn đã đánh giá");
-              }
-            }
-          }); 
+    // $('.rate_row').starwarsjs({
+    //     stars : 5,
+    //     count : 1,
+    //     on_select : function(rate){
+    //       var productID = $('.productId').val();
+    //       $.ajax({
+    //         url : window.getRate,
+    //         type: 'POST',
+    //         data: {
+    //           productID : productID,
+    //           rate : rate,
+    //           _token : window.token
+    //         },
+    //         success: function(res){
+    //           if(res == 1){
+    //             $('.mess-rate').html("Cảm ơn bạn đã đánh giá");
+    //           }
+    //         }
+    //       }); 
           
-        }
-    });
+    //     }
+    // });
 
     
 

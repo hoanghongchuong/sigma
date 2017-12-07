@@ -239,6 +239,7 @@ class IndexController extends Controller
             $numbRates = count($numbRate);
             $avgRates = DB::table('rating')->join('products', 'rating.product_id', '=', 'products.id')->where('rating.product_id', $product_detail->id)->avg('rate');
             $avg = round($avgRates);
+            // dd($avg);
             $rateGood = DB::table('rating')->join('products', 'rating.product_id', '=', 'products.id')->where('rating.product_id', $product_detail->id)->where('rating.rate', '>=', 3)->count('rate');
             $tags = json_decode($product_detail->tags);
 
@@ -894,7 +895,6 @@ class IndexController extends Controller
         $data->product_id = $request->productID;
         $data->rate = $request->rate;
         $data->ip_address = $ip;
-        // dd($data);
         $data->save();
         return 1;
     }
