@@ -14,8 +14,6 @@ class GuiDonHangController extends Controller {
 	}
     public function postGuidonhang(Request $request)
 	{
-
-		
 		$data = [
 			'hoten' 	=> Request::input('hoten'), 
 			'diachi' 	=> Request::input('diachi'),
@@ -24,7 +22,6 @@ class GuiDonHangController extends Controller {
 			'noidung' 	=> Request::input('noidung'),
 			'tensanpham' 	=> Request::input('tensanpham')
 		];
-
 		Mail::send('templates.guidonhang_tpl', $data, function($msg){
 			$setting = Cache::get('setting');
 			$msg->from(Request::input('email'), Request::input('hoten'));

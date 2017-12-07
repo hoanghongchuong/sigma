@@ -33,7 +33,7 @@ class Authenticate {
 	 */
 	public function handle($request, Closure $next)
 	{
-		if ($this->auth->guest())
+		if (!\Auth::guard('admin')->check())
 		{
 			if ($request->ajax())
 			{
@@ -44,6 +44,9 @@ class Authenticate {
 				return redirect()->guest('backend/login');
 			}
 		}
+
+		view()->share('adminLogged', \Auth::guard('admin')->user());
+
 		return $next($request);
 	}
 

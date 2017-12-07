@@ -81,9 +81,15 @@ class IndexController extends Controller
         Cache::forever('dichvu', $dichvu);
         Cache::forever('cateProducts', $cateProducts);
         Cache::forever('about', $about);
-        if (Auth::check()) {
-            View::share('nguoidung', Auth::user());
-        }
+
+        $this->middleware(function($request, $next) {
+            // dd(Auth::user());
+            if (Auth::check()) {
+                view()->share('nguoidung', Auth::user());
+            }
+            return $next($request); //:D ueen
+        });
+        
         // Cache::forever('chinhanh', $chinhanh);
     }
 
@@ -534,25 +540,6 @@ class IndexController extends Controller
         }
     }
 
-    public function postGuidonhang(Request $request)
-    {
-        $setting = Cache::get('setting');
-        $data = [
-            'hoten' => $request->get('hoten'),
-            'diachi' => $request->get('diachi'),
-            'dienthoai' => $request->get('dienthoai'),
-            'email' => $request->get('email'),
-            'noidung' => $request->get('noidung')
-        ];
-        Mail::send('templates.guidonhang_tpl', $data, function ($msg) {
-            $msg->from($request->get('email'), $request->get('hoten'));
-            $msg->to('emailserver.send@gmail.com', 'Author sendmail')->subject('Liên hệ từ website');
-        });
-
-        echo "<script type='text/javascript'>
-			alert('Thanks for contacting us !');
-			window.location = '" . url('/') . "' </script>";
-    }
 
     public function postNewsLetter(Request $request)
     {
@@ -720,6 +707,7 @@ class IndexController extends Controller
 
     public function postOrder(Request $req)
     {
+        
         $cart = Cart::content();
         $bill = new Bill;
         $bill->full_name = $req->full_name;
@@ -762,7 +750,30 @@ class IndexController extends Controller
 				window.location = '" . url('/') . "' 
 			</script>";
         }
+
         Cart::destroy();
+        try {
+            $data = [
+                'hoten' => $req->full_name,
+                'diachi' => $req->address,
+                'dienthoai' => $req->phone,
+                'email' => $req->email,
+                // 'noidung' => $request->get('noidung')
+            ];
+            
+            Mail::send('templates.guidonhang_tpl', $data, function ($msg) {
+                $setting = Cache::get('setting');
+                $msg->from(Request::input('email'), 'Sigma Book');
+                $msg->to($setting->email, 'HoangChuong')->subject('Đơn hàng');
+            });
+        } catch (Exception $e) {
+            echo " khong gui dc email";
+        }
+        
+        // Mail::send('templates.guidonhang_tpl', $data, function ($msg) {
+        //     $msg->from($request->get('email'), $request->get('hoten'));
+        //     $msg->to('emailserver.send@gmail.com', 'Author sendmail')->subject('Liên hệ từ website');
+        // });
         echo "<script type='text/javascript'>
 				alert('Cảm ơn bạn đã đặt hàng, chúng tôi sẽ liên hệ với bạn sớm nhất!');
 				window.location = '" . url('/') . "' 

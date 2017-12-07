@@ -1,7 +1,4 @@
-<?php
-  $id_user=Auth::user()->id;
-  $data_user = DB::table('users')->select()->where('id', $id_user)->get()->first();
-?>
+
 <header class="main-header">
   <!-- Logo -->
   <a href="backend" class="logo">
@@ -203,16 +200,16 @@
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="{{ asset('upload/users/'.$data_user->photo) }}" onerror="this.src='{{asset('public/admin_assets/dist/img/favicon.png')}}'"  class="user-image" alt="User Image">
+            <img src="{{ asset('upload/users/'.$adminLogged->photo) }}" onerror="this.src='{{asset('public/admin_assets/dist/img/favicon.png')}}'"  class="user-image" alt="User Image">
             <span class="hidden-xs">Quản trị viên</span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="{{ asset('upload/users/'.$data_user->photo) }}" class="img-circle" alt="User Image">
+              <img src="{{ asset('upload/users/'.$adminLogged->photo) }}" class="img-circle" alt="User Image">
               <p>
-                {{ $data_user->name }}
-                <small>{{ $data_user->email }}</small>
+                {{ $adminLogged->name }}s
+                <small>{{ $adminLogged->email }}</small>
               </p>
             </li>
             <!-- Menu Body -->

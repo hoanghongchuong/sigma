@@ -71,7 +71,7 @@ class AuthController extends Controller {
         );   
         $remember = $request->remember ? true : false;
 
-        if (Auth::attempt($auth, $remember)) {
+        if (Auth::guard('admin')->attempt($auth, $remember)) {
             return redirect('backend')->with('flash_notice', 'Đăng nhập thành công.');;
         }else{
             return redirect('backend/login')->with('flash_error', 'Tên đăng nhập hoặc mật khẩu không đúng.')

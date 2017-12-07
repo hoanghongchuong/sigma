@@ -8,13 +8,12 @@
 </head>
 <body>
 	<div class="" style="width: 100%; max-width: 650px; margin: 0 auto; border: 1px solid #348dcc; ">
-		<div class="header" style="text-align: center; background: #348dcc; padding: 1px; color: #fff;"><h3 style="text-transform: uppercase; margin-top: 5px; margin-bottom: 2px">Thông báo đơn hàng</h3></div>	
+		<div class="header" style="text-align: center; background: #348dcc; padding: 1px; color: #fff;"><h3 style="text-transform: uppercase; margin-top: 5px; margin-bottom: 2px">Thông báo từ Sigma Book</h3></div>	
 		<div class="content" style="padding: 10px;">
-			<p>Chào admin,</p>
-			<p>Bạn vừa nhận được một đơn hàng từ <a href="" title="">{{$email}}</a></p>
+			<p>Chào {{$hoten}},</p>
+			<p>Bạn vừa đặt hàng thành công từ Sigma!</p>
 			<!-- <div class="detail-order">
 				<h3>Thông tin đơn hàng</h3>
-
 			</div> -->
 			<table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-left:1px solid #dcdcdc;border-right:1px solid #dcdcdc">
 				<tbody>

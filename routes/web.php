@@ -57,7 +57,8 @@ Route::post('cartajax/add', ['as' => 'addProductToCartAjax', 'uses' => 'IndexCon
 
 Route::post('cart/update',['as' => 'updateCart', 'uses' => 'IndexController@updateCart']);
 Route::get('xoa-gio-hang/{id}','IndexController@deleteCart');
-Route::post('gui-don-hang', ['as' =>'postOrder', 'uses'=> 'IndexController@postOrder']);
+Route::post('gui-don-hang', ['as' =>'postOrder', 'uses'=> 'PostOrderController@postOrder']);
+
 Route::get('xoa-all','IndexController@deleteAllCart')->name('deleteCart');
 Route::get('dich-vu',['as'=>'getDichvu', 'uses'=>'IndexController@getDichvu']);
 Route::post('card/check',['as'=>'checkCard', 'uses'=>'IndexController@checkCard']);
