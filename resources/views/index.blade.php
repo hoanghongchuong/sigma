@@ -56,7 +56,7 @@
    <script src="{{asset('public/js/jquery/jquery-2.1.3.min.js')}}"></script>
 </head>
 <body class="">
-    <div class="popup">
+    <div class="popup" style="display: none">
         <div class="container">
             <div class="popup-warp">
                 <i class="fa fa-times popup-close"></i>

@@ -62,7 +62,7 @@
                         </p>
                         <!-- <h2 class="p-status">Tình trạng: <span>Còn hàng</span></h2> -->
                         
-                        <div class="rate_row"></div><p>(Đánh giá sản phẩm)</p>
+                        <div class="rate_row"></div><p>(Đánh giá sản phẩm) <span>{{$numbRates}} lượt đánh giá - {{$rateGood}}/{{$numbRates}} lượt đánh giá tốt</span></p>
                         <div class="mess-rate" style="margin-top: 5px; color: #1ba056"></div>
                         <input type="hidden" name="productId" class="productId" value="{{ $product_detail->id }}"> 
                         <?php 
@@ -79,7 +79,6 @@
                                     stars : 5,
                                     count : 1,
                                     range : [1,6],
-                                    <?php if($avg > 3) ?>
                                     default_stars : {{$star}},
                                     on_select : function(rate){
                                       var productID = $('.productId').val();
@@ -100,10 +99,6 @@
                                       
                                     }
                                 });
-
-                                
-
-                             
                             });
                         </script>
 
@@ -128,7 +123,7 @@
                     <p>{!! $product_detail->content !!}</p>
                 </div>
 
-                <div class="p-rate-point">
+                <!-- <div class="p-rate-point">
                     <h2 class="prate-point-tit">Đánh giá từ khách hàng</h2>
                     <div class="rate-wrap">
                         <ul class="pro-rate">
@@ -138,7 +133,7 @@
                         </ul>
                         <span>{{$numbRates}} lượt đánh giá - {{$rateGood}}/{{$numbRates}} lượt đánh giá tốt</span>
                     </div>
-                </div>
+                </div> -->
                 @if(!empty($tags))
                 <h2 class="prate-point-tit">
                     <span class="mr-4">Tag: </span>

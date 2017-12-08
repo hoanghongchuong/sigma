@@ -1,4 +1,5 @@
-<?php namespace App;
+<?php 
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +17,7 @@ class Users extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['username','name', 'email','dienthoai','diachi', 'password', 'level'];
+	protected $fillable = ['username','name', 'email','phone','diachi', 'password', 'level','photo'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -25,4 +26,12 @@ class Users extends Model {
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+	 public function getFieldList()
+    {
+    	return $this->fillable;
+    }
+
+	public function deleteById($id){
+		return $this->where('id',$id)->delete();
+	}
 }

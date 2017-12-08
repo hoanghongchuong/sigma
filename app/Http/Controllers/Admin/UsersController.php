@@ -13,17 +13,37 @@ use DB,Hash;
 
 class UsersController extends Controller
 {
+    public function __construct(Users $users){
+        $this->Users = $users;
+    }
+    /**
+     * index action
+     * @return view
+     */
     public function index()
     {
-        $data = DB::table('user')->select()->first();
-        
-        return view('admin.users.edit', compact('data'));
+        $data = $this->Users::where('level',2)->where('status',1)->get();
+        return view('admin.users.index', compact('data'));
     }
+    public function create(Request $request, $id = null){
+        if($id){
+            $data = $this->Users->findOrFail($id);
+        }
+        if($request->isMethod('GET')){
+            return view('admin.users.create', compact('data','id'));
+        }
+    }
+    public function delete($id){
+        $this->Users->deleteById($id);
+        return redirect()->back()->with('status','Xóa thành công');
+
+    }
+
     public function getAdmin()
     {
-        $id_user=Auth::user()->id;
+        $id_user=Auth::guard('admin')->user()->id;
         $data = DB::table('users')->select()->where('id', $id_user)->get()->first();
-        
+        // dd($data);
         return view('admin.users.admin', compact('data'));
     }
     /**
@@ -37,19 +57,19 @@ class UsersController extends Controller
         $this->validate($request,
             [
                 "txtName" => "required",
-                "txtPassword" => "required",
+                // "txtPassword" => "required",
                 //'txtPasswordNew' => 'min:8|confirmed'
             ],
             [
                 "txtName.required" => "Bạn chưa nhập tên",
                 //"txtPasswordNew.length" => "Mật khẩu ít nhất 8 ký tự",
-                "txtPassword.required" => "Bạn chưa nhập lại mật khẩu"
+                // "txtPassword.required" => "Bạn chưa nhập lại mật khẩu"
             ]
         );
-        $id_user = Auth::user()->id;
+        $id_user = Auth::guard('admin')->user()->id;
         //$user = DB::table('users')->select('id',$id_user)->first();
-
         $data = Users::find($id_user);
+        // dd($data);
         if(!empty($data)){
             $img = $request->file('fImages');
 
@@ -67,11 +87,13 @@ class UsersController extends Controller
             $data->address = $request->txtAddress;
             $data->phone = $request->txtPhone;
             $data->email = $request->txtEmail;
+
             // if($request->status=='on'){
             //     $product->status = 1;
             // }else{
             //     $product->status = 0;
             // }
+             // dd($data);
             $data->save();
 
             return redirect('backend/users/info')->with('status','Cập nhật thành công');

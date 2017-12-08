@@ -95,6 +95,10 @@ Route::group(['middleware' =>'authen', 'prefix' => 'backend'], function(){
 	Route::post('recruitment/access',['as'=>'admin.recruitment.access','uses'=>'Admin\RecruitmentController@accessRe']);
 
 	Route::group(['prefix' => 'users'], function(){
+		Route::get('',['as' => 'admin.users.index', 'uses' => 'Admin\UsersController@index']);
+		Route::any('add',['as'=>'admin.users.create','uses'=>'Admin\UsersController@create']);
+		Route::any('edit/{id}',['as'=>'admin.users.edit', 'uses'=>'Admin\UsersController@create']);
+		Route::get('delete/{id}',['as'=>'admin.users.delete', 'uses' => 'Admin\UsersController@delete']);
 		Route::get('info',['as'=>'admin.users.getAdmin','uses'=>'Admin\UsersController@getAdmin']);
 		Route::post('updateinfo',['as'=>'admin.users.updateinfo','uses'=>'Admin\UsersController@updateinfo']);
 	});
