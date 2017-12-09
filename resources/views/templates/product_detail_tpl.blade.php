@@ -62,7 +62,7 @@
                         </p>
                         <!-- <h2 class="p-status">Tình trạng: <span>Còn hàng</span></h2> -->
                         
-                        <div class="rate_row"></div><p>(Đánh giá sản phẩm) <span>{{$numbRates}} lượt đánh giá - {{$rateGood}}/{{$numbRates}} lượt đánh giá tốt</span></p>
+                        <div class="rate_row"></div><p>(Đánh giá sản phẩm) <span>{{$rateGood}}/{{$numbRates}} lượt đánh giá tốt</span></p>
                         <div class="mess-rate" style="margin-top: 5px; color: #1ba056"></div>
                         <input type="hidden" name="productId" class="productId" value="{{ $product_detail->id }}"> 
                         <?php 

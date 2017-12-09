@@ -34,11 +34,11 @@
 		                  		<div class="col-md-6 col-xs-12">
 		                  			<div class="form-group @if ($errors->first('fImages')!='') has-error @endif">
 										<div class="form-group">
-											<img src="{{ asset('upload/users/'.$data->photo) }}" onerror="this.src='{{asset('public/admin_assets/images/no-image.jpg')}}'" width="200"  alt="NO PHOTO" />
+											<img src="{{ asset('upload/users/'.$users->photo) }}" onerror="this.src='{{asset('public/admin_assets/images/no-image.jpg')}}'" width="200"  alt="NO PHOTO" />
 												
-											<input type="hidden" name="img_current" value="{!! @$data->photo !!}">
+											<input type="hidden" name="img_current" value="{!! @$users->photo !!}">
 											@if(!empty($data->photo))
-												<a href="{!! asset('backend/users/edit?id='.$id.'&delete_bg='.@$data->photo) !!}" class="img_bg"><img src="{!! asset('public/admin_assets/images/del.png') !!}" alt="Xóa hình"></a>
+												<a href="{!! asset('backend/users/edit?id='.$id.'&delete_bg='.@$users->photo) !!}" class="img_bg"><img src="{!! asset('public/admin_assets/images/del.png') !!}" alt="Xóa hình"></a>
 											@endif
 										</div>
 										<label for="file">Chọn File ảnh</label>
@@ -49,27 +49,35 @@
 								      	@endif
 									</div>
 									<div class="clearfix"></div>
+									<div class="form-group">
+										<label>Username</label>
+										<input type="text" name="username" class="form-control" value="{{ isset($users) ? $users->username : '' }}">
+									</div>
+									<div class="form-group">
+										<label>Password</label>
+										<input type="text" name="password" class="form-control" value="{{ isset($users) ? $users->password : '' }}">
+									</div>
 							    	<div class="form-group @if ($errors->first('name')!='') has-error @endif">
 								      	<label for="ten">Họ tên</label>
-								      	<input type="text" name="name" id="txtName" value="{{ isset($data) ? $data->name : '' }}" required="required" class="form-control" />
+								      	<input type="text" name="name" id="txtName" value="{{ isset($users) ? $users->name : '' }}" required="required" class="form-control" />
 								      	@if ($errors->first('name')!='')
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtName'); !!}</label>
 								      	@endif
 									</div>
 									<div class="form-group @if ($errors->first('phone')!='') has-error @endif">
 								      	<label for="alias">phone</label>
-								      	<input type="text" name="phone" id="txtPhone" value="{{ isset($data) ? $data->phone : '' }}"  class="form-control" />
+								      	<input type="text" name="phone" id="txtPhone" value="{{ isset($users) ? $users->phone : '' }}"  class="form-control" />
 								      	@if ($errors->first('phone')!='')
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtPhone'); !!}</label>
 								      	@endif
 									</div>
 									<div class="form-group">
 										<label for="">Email</label>
-										<input type="email" name="email" class="form-control" value="{{ isset($data) ? $data->email : '' }}">
+										<input type="email" name="email" class="form-control" value="{{ isset($users) ? $users->email : '' }}">
 									</div>
 									<div class="form-group">
 										<label for="">Địa chỉ</label>
-										<input type="text" name="address" class="form-control" value="{{ isset($data) ? $data->address : '' }}">
+										<input type="text" name="address" class="form-control" value="{{ isset($users) ? $users->address : '' }}">
 									</div>
 								</div>
 							</div>
@@ -86,7 +94,7 @@
 			    	<div class="row">
 						<div class="col-md-6">
 					    	<button type="submit" class="btn btn-primary">Lưu</button>
-					    	<button type="button" onclick="javascript:window.location='backend/tag'" class="btn btn-danger">Thoát</button>
+					    	<button type="button" onclick="javascript:window.location='backend/users'" class="btn btn-danger">Thoát</button>
 				    	</div>
 			    	</div>
 			  	</div>

@@ -27,16 +27,27 @@ class UsersController extends Controller
     }
     public function create(Request $request, $id = null){
         if($id){
-            $data = $this->Users->findOrFail($id);
+            $users = $this->Users->findOrFail($id);
         }
         if($request->isMethod('GET')){
-            return view('admin.users.create', compact('data','id'));
+            return view('admin.users.create', compact('users','id'));
         }
+        $data = $request->only($this->Users->getFieldList());
+        $img = $request->file('fImages');
+        if(!empty($img)){
+            $path_img='upload/users';
+            $img_name=$img->getClientOriginalName();
+            $img->move($path_img,$img_name);
+            $data['photo'] = $img_name;
+        }
+        
+        $this->Users->insertOrUpdate($data, $id);
+        return redirect()->back()->with('status', 'success');
     }
+
     public function delete($id){
         $this->Users->deleteById($id);
         return redirect()->back()->with('status','Xóa thành công');
-
     }
 
     public function getAdmin()
@@ -69,7 +80,6 @@ class UsersController extends Controller
         $id_user = Auth::guard('admin')->user()->id;
         //$user = DB::table('users')->select('id',$id_user)->first();
         $data = Users::find($id_user);
-        // dd($data);
         if(!empty($data)){
             $img = $request->file('fImages');
 

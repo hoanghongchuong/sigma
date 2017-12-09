@@ -78,13 +78,13 @@ class PostOrderController extends Controller
             ];
             Mail::send('templates.guidonhang_tpl', $data, function ($msg) {
                 $setting = Cache::get('setting');
-                $msg->from(Request::input('email'), 'Sigma Book');
+                $msg->from(Request::input('email'),  $setting->name);
                 $msg->to($setting->email, 'HoangChuong')->subject('Đơn đặt hàng');
-                $msg->to(Request::input('email'), Request::input('full_name'))->subject('Đơn đặt hàng');
+                // $msg->to(Request::input('email'), Request::input('full_name'))->subject('Đơn đặt hàng');
             });
             Mail::send('templates.sendCustom_tpl', $data, function ($msg) {
                 $setting = Cache::get('setting');
-                $msg->from(Request::input('email'), 'Sigma Book');
+                $msg->from($setting->email, $setting->name);
                 $msg->to(Request::input('email'), Request::input('full_name'))->subject('Đơn đặt hàng');
             });
         } catch (Exception $e) {
