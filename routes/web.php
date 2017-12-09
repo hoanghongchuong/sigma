@@ -102,7 +102,7 @@ Route::group(['middleware' =>'authen', 'prefix' => 'backend'], function(){
 		Route::get('info',['as'=>'admin.users.getAdmin','uses'=>'Admin\UsersController@getAdmin']);
 		Route::post('updateinfo',['as'=>'admin.users.updateinfo','uses'=>'Admin\UsersController@updateinfo']);
 	});
-
+	Route::get('search/order', 'Admin\BillController@seachOrder')->name('seachOrder');
 	// Chương trình khuyến mại, giảm giá
 	Route::group(['prefix' => 'campaign'], function(){
 		Route::get('/', ['as' => 'campaignIndex', 'uses' => 'Admin\CampaignController@index']);
