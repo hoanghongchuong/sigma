@@ -135,7 +135,7 @@ class AboutController extends Controller
             // }else{
             //     $news->status = 0;
             // }
-            $data->user_id   = Auth::user()->id;
+            // $data->user_id   = Auth::user()->id;
 
             $data->save();
             return redirect('backend/about/edit?type='.$com)->with('status','Cập nhật thành công');

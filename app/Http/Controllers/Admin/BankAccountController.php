@@ -27,7 +27,7 @@ class BankAccountController extends Controller
         $data->info = $request->txtDesc;
         $data->img = $img_name;
         $data->save();
-    	return redirect(route('admin.bank.index'));
+    	return redirect(route('admin.bank.index'))->with('status','Thêm thành công');
     }
     public function getEdit($id){
     	$data = BankAccount::find($id);
@@ -49,7 +49,7 @@ class BankAccountController extends Controller
             }
     	$data->info = $request->txtDesc;
     	$data->save();
-    	return redirect(route('admin.bank.index'));
+    	return redirect(route('admin.bank.index'))->with('status','cập nhật thành công');
     }
     public function delete($id){
     	$data = BankAccount::where('id',$id)->first();

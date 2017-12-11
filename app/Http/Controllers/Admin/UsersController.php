@@ -42,7 +42,7 @@ class UsersController extends Controller
         }
         
         $this->Users->insertOrUpdate($data, $id);
-        return redirect()->back()->with('status', 'success');
+        return redirect()->route('admin.users.index')->with('status', 'success');
     }
 
     public function delete($id){

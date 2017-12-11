@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Products;
@@ -83,11 +84,10 @@ class IndexController extends Controller
         Cache::forever('about', $about);
 
         $this->middleware(function($request, $next) {
-            // dd(Auth::user());
             if (Auth::check()) {
-                view()->share('nguoidung', Auth::user());
+                View::share('nguoidung', Auth::user());
             }
-            return $next($request); //:D ueen
+            return $next($request);
         });
         
         // Cache::forever('chinhanh', $chinhanh);

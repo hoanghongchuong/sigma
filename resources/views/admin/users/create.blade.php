@@ -34,7 +34,7 @@
 		                  		<div class="col-md-6 col-xs-12">
 		                  			<div class="form-group @if ($errors->first('fImages')!='') has-error @endif">
 										<div class="form-group">
-											<img src="{{ asset('upload/users/'.$users->photo) }}" onerror="this.src='{{asset('public/admin_assets/images/no-image.jpg')}}'" width="200"  alt="NO PHOTO" />
+											<img src="{{ asset('upload/users/'.@$users->photo) }}" onerror="this.src='{{asset('public/admin_assets/images/no-image.jpg')}}'" width="200"  alt="NO PHOTO" />
 												
 											<input type="hidden" name="img_current" value="{!! @$users->photo !!}">
 											@if(!empty($data->photo))
@@ -55,7 +55,7 @@
 									</div>
 									<div class="form-group">
 										<label>Password</label>
-										<input type="text" name="password" class="form-control" value="{{ isset($users) ? $users->password : '' }}">
+										<input type="password" name="password" class="form-control" value="{{ isset($users) ? $users->password : '' }}">
 									</div>
 							    	<div class="form-group @if ($errors->first('name')!='') has-error @endif">
 								      	<label for="ten">Họ tên</label>

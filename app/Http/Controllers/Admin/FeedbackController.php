@@ -30,7 +30,7 @@ class FeedbackController extends Controller
         $data->position = $request->position;
         $data->content = $request->content;
         $data->save();
-        return redirect()->route('admin.feedback.index')->with('mess','Thêm thành công');
+        return redirect()->route('admin.feedback.index')->with('status','Thêm thành công');
     }
     public  function getEdit($id){
         $data = Feedback::where('id', $id)->first();
@@ -53,7 +53,7 @@ class FeedbackController extends Controller
         $data->position = $request->position;
         $data->content = $request->content;
         $data->save();
-        return redirect()->route('admin.feedback.index');
+        return redirect()->route('admin.feedback.index')->with('status','cập nhật thành công');
 
     }
     public function delete($id){

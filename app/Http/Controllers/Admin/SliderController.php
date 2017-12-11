@@ -81,7 +81,7 @@ class SliderController extends Controller
         }else{
             $news->status = 0;
         }
-        $news->user_id       = Auth::user()->id;
+        // $news->user_id       = Auth::user()->id;
         $news->save();
         return redirect('backend/slider?type='.$com)->with('status','Thêm mới thành công !');
     }
@@ -192,7 +192,7 @@ class SliderController extends Controller
             }else{
                 $news->status = 0;
             }
-            $news->user_id       = Auth::user()->id;
+            // $news->user_id       = Auth::user()->id;
 
             $news->save();
             return redirect('backend/slider/edit?id='.$id.'&type='.$com)->with('status','Cập nhật thành công');

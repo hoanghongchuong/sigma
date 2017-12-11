@@ -134,7 +134,7 @@ class ProductController extends Controller
         }else{
             $product->xuthe = 0;
         }
-        $product->user_id = Auth::user()->id;
+        // $product->user_id = Auth::user()->id;
         if(!empty($request->properties)){
             $product->properties = implode('###',$request->properties);
         }
@@ -360,7 +360,7 @@ class ProductController extends Controller
             }else{
                 $product->tinhtrang = 0;
             }
-            $product->user_id  = Auth::user()->id;
+            // $product->user_id  = Auth::user()->id;
 
             try {
                 \DB::beginTransaction();
@@ -408,7 +408,7 @@ class ProductController extends Controller
         $product = Products::findOrFail($id);
         $product->delete();
         File::delete('upload/product/'.$product->photo);
-        return redirect('backend/product?type='.$com)->route('admin.product.index');
+        return redirect()->back()->with('status','Xóa thành công');
     }
     public function getDeleteList($id){
         $listid = explode(",",$id);

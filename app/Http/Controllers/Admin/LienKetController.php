@@ -75,7 +75,7 @@ class LienKetController extends Controller
         }else{
             $news->status = 0;
         }
-        $news->user_id = Auth::user()->id;
+        // $news->user_id = Auth::user()->id;
         $news->save();
         return redirect('backend/lienket?type='.$com)->with('status','Thêm mới thành công !');
     }

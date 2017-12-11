@@ -40,7 +40,7 @@
 												
 											<input type="hidden" name="img_current" value="{!! @$data->photo !!}">
 											@if(!empty($data->photo))
-												<a href="{!! asset('backend/product/edit?id='.$id.'&delete_bg='.@$data->photo) !!}" class="img_bg"><img src="{!! asset('public/admin_assets/images/del.png') !!}" alt="Xóa hình"></a>
+												<a href="{!! asset('backend/product/edit?id='.$id.'&type='.$_GET['type'].'&delete_bg='.@$data->photo) !!}" class="img_bg"><img src="{!! asset('public/admin_assets/images/del.png') !!}" alt="Xóa hình"></a>
 											@endif
 										</div>
 										<label for="file">Chọn File ảnh</label>
@@ -192,7 +192,7 @@
 								</script>
 								<label for="desc">Tag</label>
 								<!-- <ul id="myTags"></ul> -->
-								<input class="form-control" name="mytags" id="myTags" value="{{ $tagsInput }}"/>
+								<input class="form-control" name="mytags" id="myTags" value="{{ @$tagsInput }}"/>
 								<input  id="tags" hidden="" name="tag" value="{{ $data->tags }}">
 
 									<!-- <div class="form-group">

@@ -4,6 +4,7 @@
     $setting = Cache::get('setting');
     // $about = Cache::get('about');
     $about = DB::table('about')->select()->first();
+    // dd($nguoidung);
 ?>
 @include('templates.layout.slider')
 <div class="contact">

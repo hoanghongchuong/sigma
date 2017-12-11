@@ -10,7 +10,8 @@ use App\Partner;
 class PartnerController extends Controller
 {
     public function getList(){
-    	$data = Partner::get();
+    	$data = Partner::all();
+        
     	return view('admin.partner.list', compact('data'));
     }
     public function getAdd(){

@@ -23,7 +23,7 @@ class ChiNhanhController extends Controller
         $chinhanh->website = $request->website;
     	$chinhanh->address = $request->txtAddress;
     	$chinhanh->save();
-    	return redirect(route('admin.chinhanh.index'));
+    	return redirect(route('admin.chinhanh.index'))->with('status','Thêm thành công');
     }
     public function getEdit($id){
     	$chinhanh = ChiNhanh::where('id',$id)->first();
@@ -38,11 +38,11 @@ class ChiNhanhController extends Controller
         $chinhanh->website = $request->website;
     	$chinhanh->address = $request->txtAddress;
     	$chinhanh->save();
-    	return redirect(route('admin.chinhanh.index'));
+    	return redirect(route('admin.chinhanh.index'))->with('status','cập nhật thành công');
     }
     public function delete($id){
     	$data = ChiNhanh::find($id);
     	$data->delete();
-    	return redirect()->back();
+    	return redirect()->back()->with('status','Xóa thành công');
     }
 }

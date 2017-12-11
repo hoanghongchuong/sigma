@@ -3,6 +3,7 @@
 <?php
     $setting = Cache::get('setting');
     $about = Cache::get('about');
+    // dd($nguoidung);
 ?>
 <div class="breadcrumb-wrap">
     <div class="container">
