@@ -13,15 +13,15 @@ class LoginController extends Controller
     public function postLogin(Request $request){
     	$this->validate($request, 
     		[
-	    		'email' => 'required',
+	    		'username' => 'required',
 	    		'password' => 'required'
 	    	],
 	    	[
-	    		'email.required' => 'Bạn chưa nhập email',
+	    		'username.required' => 'Bạn chưa nhập username',
 	    		'password.required' => 'Bạn chưa nhập password'
 	    	]
 	    );
-	    if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password, 'level'=>2]))
+	    if(Auth::attempt(['username'=>$request->username, 'password'=>$request->password, 'level'=>2]))
 	    {
 	    	return 1;
 	    	// return redirect()->route('index');

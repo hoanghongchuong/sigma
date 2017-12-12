@@ -3,25 +3,39 @@
 namespace App\Http\Controllers;
 use App\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use App\Http\Requests\RegisterAdminRequest;
 use DB,Hash;
 class SignupController extends Controller
 {
+    public function __construct(){
+         $this->middleware(function($request, $next) {
+            if (Auth::check()) {
+                View::share('nguoidung', Auth::user());
+            }
+            return $next($request);
+        });
+    }
     public function signup(){
 
     	return view('templates.signup');
     }
-    public function postSignup(RegisterAdminRequest $request){
+    public function postSignup(Request $request){
     	
     	$thanhvien = new Users;
         $thanhvien->username = $request->username;
-        $thanhvien->name = $request->name;
+        // $thanhvien->name = $request->name;
         $thanhvien->email = $request->email;
         $thanhvien->level = 2;
         $thanhvien->password = Hash::make($request->password);
         $thanhvien->remember_token = $request->_token;
         $thanhvien->save();
-        return redirect()->route('getLogin')->with('mess','Đăng ký thành công');
+        echo "<script type='text/javascript'>
+                alert('Bạn đã đăng kí thành công !');
+                window.location = '" . url('/') . "' </script>";
+        // return redirect()->route('index');
 
     }
+    
 }

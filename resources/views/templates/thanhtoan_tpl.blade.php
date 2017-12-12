@@ -56,7 +56,7 @@
 						<span class="chk-quan">2</span><span class="chk-cap">Hình thức thanh toán</span>
 					</h3>
 					<div class="chk-ship">
-						<input type="text"   name="payment_method" value="1" id="payment_method">
+						<input type="text" hidden=""  name="payment_method" value="1" id="payment_method">
 						<ul class="nav nav-pills chk-ship-list" id="pills-tab" role="tablist">
 								
 							<li class="d-flex align-items-center nav-item">

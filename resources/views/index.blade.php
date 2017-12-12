@@ -54,6 +54,7 @@
         window.getRate = '{{ route("rating") }}';
    </script>
    <script src="{{asset('public/js/jquery/jquery-2.1.3.min.js')}}"></script>
+
 </head>
 <body class="">
     <div class="popup" style="display: none">
@@ -75,29 +76,58 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="tit text-center w-100 text-uppercase">Đăng nhập hệ thống</h2>
+                    <!-- <h2 class="tit text-center w-100 text-uppercase">Đăng nhập hệ thống</h2> -->
+                    <ul class="w-100 bold d-flex align-items-center justify-content-start nav nav-pills mb-3 text-center newfilm-tab-menu" id="pills-tab" role="tablist">
+                        <li class="nav-item w-50">
+                            <a class="nav-link active" id="login" data-toggle="pill" href="#login-frm1" role="tab" aria-controls="pills-info" aria-selected="false">Đăng nhập</a>
+                        </li>
+                        <li class="nav-item w-50">
+                            <a class="nav-link" id="regis" data-toggle="pill" href="#regis-frm2" role="tab" aria-controls="pills-info" aria-selected="false">Đăng ký tài khoản </a>
+                        </li>
+                    </ul>
+
                     <button type="button" class="d-block d-sm-none close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('postLogin')}}" method="post" id="tutorial" class="form-group login-frm">
-                        {{ csrf_field() }}
-                        <input type="email" placeholder="Tài khoản" id="email" name="email" required="required" class="w-100">
-                        
-                        <input type="password" placeholder="Mật khẩu" id="password" name="password" required="required" class="w-100">
-
-                        <!-- <p class="d-flex align-items-center mb-3 login-choice-wrap"><span class="login-choice"></span> Mua hàng không cần đăng nhập</p> -->
-                        <div class="success" style="display:none;"></div>
-                        <button type="button" id="btn-login" class="w-100 text-uppercase font-weight-bold btn login-btn">Đăng nhập</button>
-                        <p class="text-center mt-4 mb-1">
-                            <a href="index.html" title=""><img src="{{asset('upload/hinhanh/'.$setting->photo)}}" alt="" title=""></a>
-                        </p>
-                    </form>
+                    <div class="tab-content film-tab-content" id="login-frmwrap">
+                        <div id="login-frm1" class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
+                            <form action="{{route('postLogin')}}" method="post" id="tutorial" class="form-group login-frm">
+                                {{ csrf_field() }}
+                                <div class="frm-wrap">
+                                    <input type="text" placeholder="Tài khoản" id="email" name="username" required="required" class="w-100">
+                                    <input type="password" placeholder="Mật khẩu" id="password" name="password" required="required" class="w-100">
+                                    <div class="success" style="display:none;"></div>
+                                    <p class="d-flex align-items-center mb-3 login-choice-wrap"><span class="login-choice"></span> Mua hàng không cần đăng nhập</p>
+                                    <p class="text-center mt-4 mb-1">
+                                        <a href="{{url('')}}" title=""><img src="{{asset('public/images/logo.png')}}" alt="" title=""></a>
+                                    </p>
+                                </div>
+                                <button type="button" id="btn-login" class="w-100 text-uppercase font-weight-bold btn login-btn">Đăng nhập</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="regis-frm2" role="tabpanel" aria-labelledby="pills-info-tab">
+                            <form action="{{ route('postSignup') }}" method="post" id="formDemo" class="form-group login-frm">
+                                {{ csrf_field() }}
+                                <div class="frm-wrap">
+                                    <input type="text" placeholder="Tên tài khoản" required name="username"  class="w-100">
+                                    <input type="email" placeholder="Email đăng ký" required name="email" class="w-100">
+                                    <input id="passwords" class="w-100" name="password" type="password"  placeholder="Vui lòng nhập Password" required>
+                                    <input name="confirm_password" id="confirm_password" class="w-100" type="password" placeholder="Vui lòng nhập lại Password" required>
+                                    <p class="text-center mt-4 mb-1">
+                                        <a href="#"><img src="{{asset('public/images/logo.png')}}" alt="logo" title=""></a>
+                                    </p>
+                                </div>
+                                <button type="submit" class="w-100 text-uppercase font-weight-bold btn login-btn">Đăng ký ngay</button>
+                            </form>
+                        </div>
+                    </div>
                 </div><!-- end modal body -->
             </div>
         </div>
     </div>
+
     <script type="text/javascript">
         $('#btn-login').click(function(){
           var password = $('#password').val();
@@ -107,7 +137,7 @@
               type: "POST",
               url: baseUrl()+"/login", 
               data: {
-                email : email,
+                username : email,
                 password : password,
                 _token : window.token
               },
@@ -131,16 +161,14 @@
     <script src="{{asset('public/js/popper.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/js/owl.carousel.js')}}"></script>
-
     <script src="{{asset('public/js/jquery.mmenu.js')}}" type="text/javascript"></script>
     <script type="text/javascript" src="{{asset('public/js/jquery.js')}}"></script>
     <script src="{{asset('public/js/ion.rangeSlider.js')}}"></script>
     <script src="{{asset('public/js/jquery.elevatezoom.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
     <script type="text/javascript" src="{{asset('public/js/custom.js')}}"></script>
-    <!-- <script type="text/javascript" src="{{asset('public/js/starwarsjs.js ')}}"></script> -->
     <script src="{{asset('public/js/starwarsjs.js')}}"></script>
-
+    <script src="{{asset('public/js/jquery.validate.min.js')}}"></script>
     <script>
         $('.carousel_top, .carousel_khach').owlCarousel({
             items:1,

@@ -49,25 +49,7 @@
                                     </ul>
                                 </li>
                                 @endforeach
-                                <!-- <li class="text-uppercase"><a href="list-pro.html" title="">Sách giáo khoa</a>
-                                    <ul class="text-capitalize sub-menu-list">
-                                        <li><a href="list-child.html" title="">Sách - Truyện thiếu nhi</a></li>
-                                        <li><a href="list-child.html" title="">Sách Toán Song Ngữ</a></li>
-                                        <li><a href="list-child.html" title="">Sách toán phổ thông</a></li>
-                                        <li><a href="list-child.html" title="">Sách toán tham khảo</a></li>
-                                        <li><a href="list-child.html" title="">Tạp chí toán học</a></li>
-                                        <li><a href="list-child.html" title="">Sách phổ thông</a></li>
-                                    </ul>
-                                </li>
-                                <li class="text-uppercase"><a href="list-pro.html" title="">Sách giáo khoa</a>
-                                    <ul class="text-capitalize sub-menu-list">
-                                        <li><a href="list-child.html" title="">Sách - Truyện thiếu nhi</a></li>
-                                        <li><a href="list-child.html" title="">Sách Toán Song Ngữ</a></li>
-                                        <li><a href="list-child.html" title="">Sách toán phổ thông</a></li>
-                                        <li><a href="list-child.html" title="">Sách toán tham khảo</a></li>
-                                        
-                                    </ul>
-                                </li>-->
+                                
                                 <li class="text-uppercase"><a href="#" title="">Hotline đặt sách</a>
                                     <ul class="text-capitalize sub-menu-list">
                                         <li class="top-tel"><a href="tel:0968582838" title="">0968 582 838</a></li>
@@ -81,6 +63,7 @@
                         <li><a href="{{url('gioi-thieu')}}" title="Giới thiệu">Giới thiệu</a></li>
                         <li><a href="{{url('tin-tuc')}}" title="TTin tức">Tin tức</a></li>
                         <li><a href="{{url('combo')}}" title="Combo">Combo</a></li>
+                        <li><a href="sach-truc-tuyen.html" title="">Sách điện tử</a></li>
                         <li><a href="{{url('lien-he')}}" title="Liên hệ">Liên hệ</a></li>
                     </ul>
                 </div>
@@ -88,11 +71,11 @@
             </div>
             <div class="d-flex align-items-center menu-wrap-r">
                 @if(isset($nguoidung))
-                    <a href="#" >{{$nguoidung->name}}</a>
+                    <a href="{{ url('tai-khoan/'.$nguoidung->id) }}" >{{$nguoidung->username}}</a>
                     <a href="{{route('logout')}}" title="Đăng xuất">Đăng xuất</a>
                 @else
-                <a href="#login" data-toggle="modal" data-target="#login" title="">Đăng nhập</a>
-                <a href="#" data-toggle="modal" data-target="#regis" title="">Đăng ký</a>
+                <a href="#login" data-toggle="modal" data-target="#login" title="Đăng nhập">Đăng nhập</a>
+                <a href="#" data-toggle="modal" data-target="#login" title="Đăng kí">Đăng ký</a>
                 @endif
             </div>
         </div>

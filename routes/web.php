@@ -44,8 +44,13 @@ Route::get('ajax/province/{id}',['as'=>'loadDistrictByProvince', 'uses'=>'IndexC
 Route::get('sap-xep','IndexController@SapXep')->name('sapxep');
 
 // dang ky, dang nhap
-Route::get('signup','SignupController@signup');
-Route::post('signup', 'SignupController@postSignup')->name('postSignup');
+// Route::get('signup','SignupController@signup');
+Route::post('signup', ['as' => 'postSignup', 'uses' => 'SignupController@postSignup']);
+Route::get('tai-khoan/{id}',['as' => 'detailUser', 'uses' => 'IndexController@getDetailUser']);
+Route::get('chi-tiet-don-hang/{id}', 'IndexController@detailBill');
+// Route::post('signup', function(){
+// 	echo 'post dang ky';
+// })->name('postSignup');
 // Route::get('login','LoginController@getLogin')->name('getLogin');
 Route::post('login','LoginController@postLogin')->name('postLogin');
 Route::get('logout','LoginController@logout')->name('logout');

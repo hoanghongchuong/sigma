@@ -3,7 +3,7 @@ jQuery(document).ready(function($){
     $("#load").delay(5000).fadeOut("slow");
 
     var w = $(window).width();
-    if(w <= 768) {
+    if(w <= 1025) {
         $("#my-menu").mmenu({
             extensions: ["widescreen"],
             navbar      : {

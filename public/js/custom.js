@@ -43,35 +43,56 @@ $("#range").ionRangeSlider({
 });
 
 $( document ).ready(function() {
-    // $('.rate_row').starwarsjs({
-    //     stars : 5,
-    //     count : 1,
-    //     on_select : function(rate){
-    //       var productID = $('.productId').val();
-    //       $.ajax({
-    //         url : window.getRate,
-    //         type: 'POST',
-    //         data: {
-    //           productID : productID,
-    //           rate : rate,
-    //           _token : window.token
-    //         },
-    //         success: function(res){
-    //           if(res == 1){
-    //             $('.mess-rate').html("Cảm ơn bạn đã đánh giá");
-    //           }
-    //         }
-    //       }); 
-          
-    //     }
-    // });
-
-    
-
   $(".nav-link").on('click',function(e){
     $("#payment_method").attr('value', $(this).data('id'));
     return -1;
   })
 
 });
+
+
+
+  $(document).ready(function() {
+    
+    //Khi bàn phím được nhấn và thả ra thì sẽ chạy phương thức này
+    $("#formDemo").validate({
+          rules: {
+            username: "required",
+            password: {
+              required: true,
+              minlength: 5
+            },
+            confirm_password: {
+              required: true,
+              minlength: 5,
+              equalTo: "#passwords"
+            },
+            email: {
+              required: true,
+              email: true
+            },
+            
+          },
+          messages: {
+            username: {
+              required: 'Vui lòng nhập tên đăng nhập'
+            },
+            password: {
+              required: 'Vui lòng nhập mật khẩu',
+              minlength: 'Vui lòng nhập ít nhất 5 kí tự'
+            },
+            confirm_password: {
+              required: 'Vui lòng nhập lại mật khẩu',
+              minlength: 'Vui lòng nhập ít nhất 5 kí tự',
+              equalTo: 'Mật khẩu không trùng'
+            },
+            // email: {
+            //   required: "Please provide a password",
+            //   minlength: "Your password must be at least 5 characters long",
+            //   equalTo: "Please enter the same password as above"
+            // },
+            email: "Vui lòng nhập Email",
+          }
+        });
+  });
 

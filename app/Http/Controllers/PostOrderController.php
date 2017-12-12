@@ -10,6 +10,13 @@ class PostOrderController extends Controller
     public function __construct(){
     	$setting = DB::table('setting')->select()->where('id',1)->get()->first();
     	 Cache::forever('setting', $setting);
+        //  $this->middleware(function($request, $next) {
+        //     if (Auth::check()) {
+        //         View::share('nguoidung', Auth::user());
+        //     }
+        //     return $next($request);
+        // });
+        // dd($nguoidung);
     }
      protected function getTotalPrice()
     {
@@ -37,6 +44,8 @@ class PostOrderController extends Controller
         $bill->district = Request::input('district');
         $total = $this->getTotalPrice();
         $bill->total = $total;
+        $bill->user_id = \Auth::user()->id;
+        // $bill->user_id  = 
         // $order['price'] = $this->getTotalPrice();
         // if ($req->card_code) {
         // 	$price = $this->checkCard($req);

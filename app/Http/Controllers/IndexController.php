@@ -18,7 +18,7 @@ use Cart;
 use App\Bill;
 use App\CampaignCard;
 use App\District;
-
+use App\Users;
 //use App\ChiNhanh;
 class IndexController extends Controller
 {
@@ -49,10 +49,7 @@ class IndexController extends Controller
             'text' => 'Mới nhất',
             'order' => ['created_at', 'DESC']
         ],
-        // 'best-selling' => [
-        // 	'text' => 'Bán chạy nhất',
-        // 	'order' => ['noibat', 'ASC']
-        // ]
+        
     ];
     /*
     |--------------------------------------------------------------------------
@@ -897,5 +894,17 @@ class IndexController extends Controller
         $data->ip_address = $ip;
         $data->save();
         return 1;
+    }
+    public function getDetailUser($id){
+        $data = Users::findOrFail($id);
+        $bills = DB::table('bills')->where('user_id', \Auth::user()->id)->orderBy('id', 'desc')->get();
+        
+        return view('templates.taikhoan', compact('data','bills'));
+    }
+    public function detailBill($id){
+        $bill = DB::table('bills')->where('id', $id)->first();
+        $detailBill = json_decode($bill->detail);
+        // dd($detailBill);
+        return view('templates.detailBill', compact('detailBill','bill'));
     }
 }

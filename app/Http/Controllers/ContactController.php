@@ -1,6 +1,8 @@
 <?php 
 namespace App\Http\Controllers;
 use App\Contact;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use DB,Cache,Mail;
 class ContactController extends Controller {
@@ -11,6 +13,12 @@ class ContactController extends Controller {
 		
     	$setting = DB::table('setting')->select()->where('id',1)->get()->first();
         Cache::forever('setting', $setting);
+        $this->middleware(function($request, $next) {
+            if (Auth::check()) {
+                View::share('nguoidung', Auth::user());
+            }
+            return $next($request);
+        });
 	}
 
 	public function getContact()
