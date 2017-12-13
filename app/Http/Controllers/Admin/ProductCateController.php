@@ -14,16 +14,33 @@ class ProductCateController extends Controller {
 
 	public function getDanhSach()
     {
-        $data = ProductCate::all();
+        if($_GET['type']=='san-pham') $trang='sản phẩm';
+        else if($_GET['type']=='sach-dien-tu') $trang='Sách điện tử';
+        
+        if(!empty($_GET['type'])){
+            $com=$_GET['type'];
+        }else{
+            $com='';
+        }
+        $data = ProductCate::where('com',$com)->orderBy('id','desc')->get();
     	return view('admin.productcate.list', compact('data'));
     }
     public function getAdd()
-    {
-        $parent = ProductCate::select('id','name','parent_id')->get()->toArray();
+    {   
+        if($_GET['type']=='san-pham') $trang='sản phẩm';
+        else if($_GET['type']=='sach-dien-tu') $trang='Sách điện tử';
+        
+        if(!empty($_GET['type'])){
+            $com=$_GET['type'];
+        }else{
+            $com='';
+        }
+        $parent = ProductCate::select('id','name','parent_id')->where('com',$com)->get()->toArray();
     	return view('admin.productcate.add', compact('parent'));
     }
     public function postAdd(ProductCateRequest $request)
     {
+        $com = $request->txtCom;
         $img = $request->file('fImages');
         $path_img='upload/product';
         $img_name='';
@@ -38,6 +55,7 @@ class ProductCateController extends Controller {
         $cate->name = $request->txtName;
         $cate->alias = changeTitle($request->txtName);
         $cate->photo = $img_name;
+        $cate->com  = $com;
         $cate->title = $request->txtTitle;
         $cate->keyword = $request->txtKeyword;
         $cate->description = $request->description;
@@ -52,8 +70,9 @@ class ProductCateController extends Controller {
         }else{
             $cate->status = 0;
         }
+        // dd($cate);
         $cate->save();
-        return redirect()->route('admin.productcate.index')->with('status','Thêm mới thành công !');
+        return redirect('backend/productcate?type='.$com)->with('status','Thêm mới thành công !');
     }
     public function getEdit(Request $request)
     {
@@ -140,6 +159,6 @@ class ProductCateController extends Controller {
             $product->delete();
             //File::delete('upload/product/'.$product->photo);
         }
-        return redirect()->route('admin.productcate.index');
+        return redirect()->back()->with('status','Xóa thành công');
     }
 }

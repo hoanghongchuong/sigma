@@ -62,6 +62,18 @@
 								      	</select>
 									</div>
 									@endif
+									@if($_GET['type'] == 'sach-dien-tu')
+										<div class="form-group">
+									      	<label for="ten">Danh mục cha</label>
+									      	<select name="txtProductCate" class="form-control">
+									      		<option value="0">Chọn danh mục</option>
+									      		<?php $cate = DB::table('product_categories')->where('com','sach-dien-tu')->get(); ?>
+									      		@foreach($cate as $cateS)
+									      		<option @if($data->cate_id == $cateS->id ) {{ "selected" }}  @endif value="{{$cateS->id}}">{{$cateS->name}}</option>
+												@endforeach
+									      	</select>
+										</div>
+									@endif
 							    	<div class="form-group @if ($errors->first('txtName')!='') has-error @endif">
 								      	<label for="ten">Tên</label>
 								      	<input type="text" name="txtName" id="txtName" value="{{ $data->name }}"  class="form-control" />
@@ -76,6 +88,7 @@
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtAlias'); !!}</label>
 								      	@endif
 									</div>
+									@if($_GET['type']=='san-pham' || $_GET['type'] =='combo')
 									<div class="form-group">
 								      	<label for="ten">Giá bán</label>
 								      	<input type="text" name="txtPrice" onkeyup="FormatNumber(this);"  onKeyPress="return isNumberKey(event)" value="{{ number_format($data->price,0,'',',') }}"  class="form-control" />
@@ -88,7 +101,8 @@
 								      	<label for="ten">Giá bìa</label>
 								      	<input type="text" name="txtPriceOld" onkeyup="FormatNumber(this);"  onKeyPress="return isNumberKey(event)" value="{{ number_format($data->price_old,0,'',',') }}"  class="form-control" />
 									</div>
-									@if($_GET['type']=='san-pham')			
+									@endif
+									@if($_GET['type']=='san-pham' || $_GET['type'] =='sach-dien-tu')			
 									<div class="form-group">
 								      	<label for="ten">Thể loại</label>
 								      	<select name="theloai" class="form-control">
@@ -312,6 +326,7 @@
 				        	<input type="checkbox" name="tinhtrang" {!! (!isset($data->tinhtrang) || $data->tinhtrang==1)?'checked="checked"':'' !!}> Còn hàng
 				    	</label>
 				    </div> -->
+				    @if($_GET['type']=='san-pham')
 			    	<div class="form-group">
 					    <label>
 				        	<input type="checkbox" name="noibat" {!! (!isset($data->noibat) || $data->noibat==1)?'checked="checked"':'' !!}> Sắp phát hành
@@ -322,14 +337,21 @@
 				        	<input type="checkbox" name="spbc" {!! (!isset($data->spbc) || $data->spbc==1)?'checked="checked"':'' !!}> Bán chạy
 				    	</label>
 				    </div>
-
+					@endif
+					@if($_GET['type']=='sach-dien-tu')
+						<div class="form-group">
+					    <label>
+				        	<input type="checkbox" name="noibat" {!! (!isset($data->noibat) || $data->noibat==1)?'checked="checked"':'' !!}> Sách đọc nhiều
+				    	</label>
+				    </div>
+					@endif
 			    </div>
 			    <div class="clearfix"></div>
 			    <div class="box-footer">
 			    	<div class="row">
 						<div class="col-md-6">
 					    	<button type="submit" class="btn btn-primary">Cập nhật</button>
-					    	<button type="button" class="btn btn-danger" onclick="javascript:window.location='backend/product'">Thoát</button>
+					    	<!-- <button type="button" class="btn btn-danger" onclick="javascript:window.location='backend/product'">Thoát</button> -->
 				    	</div>
 			    	</div>
 			  	</div>

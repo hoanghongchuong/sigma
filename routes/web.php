@@ -47,7 +47,12 @@ Route::get('sap-xep','IndexController@SapXep')->name('sapxep');
 // Route::get('signup','SignupController@signup');
 Route::post('signup', ['as' => 'postSignup', 'uses' => 'SignupController@postSignup']);
 Route::get('tai-khoan/{id}',['as' => 'detailUser', 'uses' => 'IndexController@getDetailUser']);
+Route::get('update/avata','IndexController@updateAvata')->name('updateAvata');
+Route::get('cap-nhat-tai-khoan/{id}',['as' => 'updateInfoUser', 'uses' => 'IndexController@updateInfoUser']);
+Route::post('cap-nhat-tai-khoan/{id}',['as' => 'postUpdateInfo', 'uses' => 'IndexController@postUpdateInfo']);
 Route::get('chi-tiet-don-hang/{id}', 'IndexController@detailBill');
+Route::get('lich-su-mua-hang/{id}','IndexController@historyOrder');
+Route::get('sach-dien-tu','IndexController@sachDienTu')->name('sachDienTu');
 // Route::post('signup', function(){
 // 	echo 'post dang ky';
 // })->name('postSignup');

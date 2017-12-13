@@ -31,6 +31,7 @@ class PostOrderController extends Controller
     {
         
         $cart = Cart::content();
+        
         $bill = new Bill;
         $bill->full_name = Request::input('full_name');
         $bill->email = Request::input('email');
@@ -63,10 +64,12 @@ class PostOrderController extends Controller
                 'product_numb' => $key->qty,
                 'product_price' => $key->price,
                 'product_img' => $key->options->photo,
-                'product_code' => $key->options->code
+                'product_code' => $key->options->code,
+                'slug' => $key->options->alias
             ];
         }
         $bill->detail = json_encode($detail);
+        // dd($bill);
         if ($total > 0) {
             $bill->save();
         } else {

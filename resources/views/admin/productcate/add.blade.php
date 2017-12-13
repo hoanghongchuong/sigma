@@ -42,6 +42,7 @@
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('fImages'); !!}</label>
 								      	@endif
 									</div> -->
+									@if($_GET['type']=='san-pham')
 			                    	<div class="form-group">
 								      	<label for="ten">Danh mục cha</label>
 								      	<select name="txtProductCate" class="form-control">
@@ -50,6 +51,7 @@
 								      		<?php cate_parent($parent); ?>
 								      	</select>
 									</div>
+									@endif
 									<div class="clearfix"></div>
 							    	<div class="form-group @if ($errors->first('txtName')!='') has-error @endif">
 								      	<label for="ten">Tên</label>
@@ -65,7 +67,7 @@
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtAlias'); !!}</label>
 								      	@endif
 									</div>
-									
+									<input type="hidden" name="txtCom" value="{{ @$_GET['type'] }}"/>
 								</div>
 							</div>
 							<div class="row">

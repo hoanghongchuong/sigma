@@ -63,6 +63,18 @@
 								      	</select>
 									</div>
 									@endif	
+									@if($_GET['type'] == 'sach-dien-tu')
+										<div class="form-group">
+									      	<label for="ten">Danh mục cha</label>
+									      	<select name="txtProductCate" class="form-control">
+									      		<option value="0">Chọn danh mục</option>
+									      		<?php $cate = DB::table('product_categories')->where('com','sach-dien-tu')->get(); ?>
+									      		@foreach($cate as $cateS)
+									      		<option value="{{$cateS->id}}">{{$cateS->name}}</option>
+												@endforeach
+									      	</select>
+										</div>
+									@endif
 							    	<div class="form-group @if ($errors->first('txtName')!='') has-error @endif">
 								      	<label for="ten">Tên</label>
 								      	<input type="text" id="txtName" name="txtName" value=""  class="form-control" />
@@ -77,7 +89,7 @@
 								      	<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> {!! $errors->first('txtAlias'); !!}</label>
 								      	@endif
 									</div>
-
+									@if($_GET['type']=='san-pham' || $_GET['type'] =='combo')
 									<div class="form-group">
 								      	<label for="ten">Giá bán</label>
 								      	<input type="text" name="txtPrice"  onkeyup="FormatNumber(this);"  onKeyPress="return isNumberKey(event)" value=""  class="form-control" />
@@ -86,7 +98,8 @@
 								      	<label for="ten">Giá bìa</label>
 								      	<input type="text" name="txtPriceOld"  onkeyup="FormatNumber(this);"  onKeyPress="return isNumberKey(event)" value=""  class="form-control" />
 									</div>
-									@if($_GET['type']=='san-pham')
+									@endif
+									@if($_GET['type']=='san-pham' || $_GET['type'] =='sach-dien-tu')
 									<div class="form-group">
 								      	<label for="ten">Thể loại</label>
 								      	<select name="theloai" class="form-control">
@@ -115,21 +128,9 @@
 								      	</select>
 									</div>
 									@endif	
-									<!-- <div class="form-group">
-										<label for="">Video</label>
-										<input type="text" name="video" class="form-control" value="" placeholder="">
-									</div> -->
-									<!-- <div class="form-group">
-								      	<label for="alias">Ghi chú</label>
-								      	<textarea name="txtHuongdan" rows="5" id="txtContent" class="form-control"></textarea>
-									</div> -->
+									
 								</div>
-								<!-- <div class="col-md-6">
-									<div class="form-group">
-								      	<label for="alias">Khuyến mại</label>
-								      	<textarea name="txtQuatang" rows="5" id="txtContent" class="form-control"></textarea>
-									</div>
-								</div> -->
+								
 								<script type="text/javascript">
 								    $(document).ready(function() {
 								        var availableTags = '{{$availableTags}}'.split(',');
@@ -207,36 +208,7 @@
 							      	<label for="desc">Mô tả</label>
 							      	<textarea name="txtDesc" rows="5" id="txtContent" class="form-control"></textarea>
 								</div>
-								<!-- <div class="form-group">
-							      	<label for="alias">Bảo hành</label>
-							      	<input type="text" name="txtBaohanh" id="txtBaohanh" value=""  class="form-control" />
-								</div> -->
-
-								<!-- <div class="form-group">
-							      	<label for="alias">Chất liệu</label>
-							      	<input type="text" name="txtThuonghieu" id="txtThuonghieu" value=""  class="form-control" />
-								</div>
 								
-								<div class="form-group">
-							      	<label for="alias">Size</label>
-							      	<input type="text" name="txtVanchuyen" id="txtVanchuyen" value=""  class="form-control" />
-								</div> -->
-								<!-- <div class="form-group">
-							      	<label for="alias">Ghi chú</label>
-							      	<input type="text" name="txtHuongdan" id="txtHuongdan" value=""  class="form-control" />
-								</div> -->
-								<!-- <div class="form-group">
-							      	<label for="alias">Năm sản xuất</label>
-							      	<input type="text" name="txtNamsanxuat" id="txtNamsanxuat" value=""  class="form-control" />
-								</div> -->
-								<!-- <div class="form-group">
-							      	<label for="alias">Phụ kiện</label>
-							      	<input type="text" name="txtQuatang" id="txtQuatang" value=""  class="form-control" />
-								</div> -->
-								<!-- <div class="form-group">
-							      	<label for="alias">Model</label>
-							      	<input type="text" name="txtModel" id="txtModel" value=""  class="form-control" />
-								</div> -->
 							</div>
 							</div>
 							
@@ -310,6 +282,7 @@
 				        	<input type="checkbox" checked="checked" name="tinhtrang"> Còn hàng
 				    	</label>
 				    </div> -->
+					@if($_GET['type']=='san-pham')
 			    	<div class="form-group">
 					    <label>
 				        	<input type="checkbox" name="noibat"> Sắp phát hành
@@ -320,7 +293,14 @@
 				        	<input type="checkbox" name="spbc"> Bán chạy
 				    	</label>
 				    </div>
-
+					@endif
+					@if($_GET['type']=='sach-dien-tu')
+						<div class="form-group">
+					    <label>
+				        	<input type="checkbox" name="noibat"> Sách đọc nhiều
+				    	</label>
+				    </div>
+					@endif
 			    </div>
 			    <div class="clearfix"></div>
 			    <div class="box-footer">

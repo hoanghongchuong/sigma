@@ -22,7 +22,7 @@ class ProductController extends Controller
         //$data = Products::select('id','name','photo','price','parent_id','alias')->orderBy('id','DESC')->get()->toArray();
         if($_GET['type']=='san-pham') $trang='sản phẩm';
         else if($_GET['type']=='combo') $trang='combo';
-        
+        else if($_GET['type']=='sach-dien-tu') $trang = 'sách điện tử';
         if(!empty($_GET['type'])){
             $com=$_GET['type'];
         }else{
@@ -37,6 +37,7 @@ class ProductController extends Controller
     {
         if($_GET['type']=='san-pham') $trang='sản phẩm';
         else if($_GET['type']=='combo') $trang='combo';
+        else if($_GET['type']=='sach-dien-tu') $trang = 'sách điện tử';
         if(!empty($_GET['type'])){
             $com=$_GET['type'];
         }else{
@@ -124,16 +125,6 @@ class ProductController extends Controller
         }else{
             $product->spbc = 0;
         }
-        if($request->phoido=='on'){
-            $product->phoido = 1;
-        }else{
-            $product->phoido = 0;
-        }
-        if($request->xuthe=='on'){
-            $product->xuthe = 1;
-        }else{
-            $product->xuthe = 0;
-        }
         // $product->user_id = Auth::user()->id;
         if(!empty($request->properties)){
             $product->properties = implode('###',$request->properties);
@@ -193,6 +184,7 @@ class ProductController extends Controller
     {
         if($_GET['type']=='san-pham') $trang='sản phẩm';
         else if($_GET['type']=='combo') $trang='combo';
+        else if($_GET['type']=='sach-dien-tu') $trang = 'sách điện tử';
         if(!empty($_GET['type'])){
             $com=$_GET['type'];
         }else{
@@ -421,7 +413,7 @@ class ProductController extends Controller
             $product->delete();
             File::delete('upload/product/'.$product->photo);
         }
-        return redirect('backend/product?type='.$com);
+        return redirect('backend/product?type='.$com)->with('status','Xóa thành công');
     }
     public function getDelImg(Request $request,$id){
         if ($request->ajax()) {      

@@ -94,5 +94,8 @@ $( document ).ready(function() {
             email: "Vui lòng nhập Email",
           }
         });
+
+    
+
   });
 

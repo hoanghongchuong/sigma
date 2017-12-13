@@ -24,24 +24,25 @@
                     <div class="row mb-3">
                         <div class="col-4">
                             <div class="ctd-img-wrap">
-                                <a href="pro-detail.html" title=""><img src="{{asset('upload/product/'.$item->product_img)}}" title="" alt=""></a>
+                                <a href="{{url('san-pham/'.$item->slug.'.html')}}" target="_blank" title=""><img src="{{asset('upload/product/'.$item->product_img)}}" title="" alt=""></a>
                             </div>
                         </div>
                         <div class="col-8">
-                            <h3 class="ctd-name"><a href="pro-detail.html" title="">{{$item->product_name}}</a></h3>
+                            <h3 class="ctd-name"><a href="{{url('san-pham/'.$item->slug.'.html')}}" target="_blank" title="">{{$item->product_name}}</a></h3>
                             <ul class="mt-2 rate">
-                                <li><i class="fa fa-star-o"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star-o"></i></li>
                             </ul>
+
+
                             <h4 class="ctd-price"><span>{{number_format($item->product_price)}}</span> VNĐ</h4>
                             <h5 class="ctd-quan">Số lượng: <span>{{$item->product_numb}}</span> cuốn</h5>
                         </div>
                     </div>
                     @endforeach
-                  
                     <p class="ctd-tprice">Tổng giá trị đơn hàng: <span>{{number_format($bill->total)}}</span> VNĐ</p>
                 </div>
             </div>

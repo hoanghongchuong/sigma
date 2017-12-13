@@ -12,7 +12,7 @@ use App\ProductCate;
 use App\NewsLetter;
 use App\Recruitment;
 use Cache, Mail;
-use DB;
+use DB, File;
 use Cart;
 //use App\Campaign;
 use App\Bill;
@@ -72,7 +72,7 @@ class IndexController extends Controller
         $setting = DB::table('setting')->select()->where('id', 1)->get()->first();
         $menu_top = DB::table('menu')->select()->where('com', 'menu-top')->where('status', 1)->orderBy('stt', 'asc')->get();
         $dichvu = DB::table('news')->select()->where('status', 1)->where('com', 'dich-vu')->orderBy('stt', 'asc')->get();
-        $cateProducts = DB::table('product_categories')->where('status', 1)->where('parent_id', 0)->get();
+        $cateProducts = DB::table('product_categories')->where('status', 1)->where('parent_id', 0)->where('com','san-pham')->get();
         $about = DB::table('about')->select()->first();
         Cache::forever('setting', $setting);
         Cache::forever('menu_top', $menu_top);
@@ -897,7 +897,7 @@ class IndexController extends Controller
     }
     public function getDetailUser($id){
         $data = Users::findOrFail($id);
-        $bills = DB::table('bills')->where('user_id', \Auth::user()->id)->orderBy('id', 'desc')->get();
+        $bills = DB::table('bills')->where('user_id', \Auth::user()->id)->orderBy('id', 'desc')->take(5)->get();
         
         return view('templates.taikhoan', compact('data','bills'));
     }
@@ -906,5 +906,41 @@ class IndexController extends Controller
         $detailBill = json_decode($bill->detail);
         // dd($detailBill);
         return view('templates.detailBill', compact('detailBill','bill'));
+    }
+    public function historyOrder($id){
+        $data = Users::findOrFail($id);
+        $bills = DB::table('bills')->where('user_id', \Auth::user()->id)->orderBy('id', 'desc')->get();
+        return view('templates.lichsumuahang', compact('data','bills'));
+    }
+
+    public function updateInfoUser($id){
+        $data = Users::findOrFail($id);
+        return view('templates.updatetaikhoan', compact('data'));
+    }
+    public function postUpdateInfo(Request $request, $id){
+        $data = Users::findOrFail($id);
+        $img = $request->file('fImages');
+        $img_current = 'upload/users/'.$request->img_current;
+        if(!empty($img)){
+            $path_img='upload/users';
+            $img_name=time().'_'.$img->getClientOriginalName();
+            $img->move($path_img,$img_name);
+            $data->photo = $img_name;
+            if (File::exists($img_current)) {
+                File::delete($img_current);
+            }
+        }
+        $data->username = $request->username;
+        $data->name = $request->name;
+        $data->phone = $request->phone;
+        $data->email = $request->email;
+        $data->address = $request->address;
+        // dd($data);
+        $data->save();
+        return redirect()->back()->with('status','Cập nhật thành công');
+    }
+    public function sachDienTu(){
+
+        return view('templates.sachdientu');
     }
 }

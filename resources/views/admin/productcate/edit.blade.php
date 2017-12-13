@@ -46,6 +46,7 @@
 									</div> -->
 									
 									<div class="clearfix"></div>
+									@if($_GET['type']=='san-pham')
 						        	<div class="form-group">
 								      	<label for="ten">Danh mục cha</label>
 								      	<select name="txtProductCate" class="form-control">
@@ -53,6 +54,7 @@
 								      		<?php cate_parent($parent,0,"--",$data["parent_id"]) ?>
 								      	</select>
 									</div>
+									@endif
 							    	<div class="form-group @if ($errors->first('txtName')!='') has-error @endif">
 								      	<label for="ten">Tên</label>
 								      	<input type="text" name="txtName" id="txtName" value="{!! old('txtName', isset($data) ? $data->name : null) !!}"  class="form-control" />
@@ -123,7 +125,7 @@
 			    <div class="box-footer col-md-12 row">
 					<div class="col-md-6">
 				    	<button type="submit" class="btn btn-primary">Cập nhật</button>
-				    	<button type="button" onclick="javascript:window.location='backend/productcate'" class="btn btn-danger">Thoát</button>
+				    	<button type="button" onclick="javascript:window.location='backend/productcate?type={{ @$_GET[type] }}'" class="btn btn-danger">Thoát</button>
 			    	</div>
 			  	</div>
 		    </form>
