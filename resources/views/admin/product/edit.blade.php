@@ -204,11 +204,12 @@
 									// 	}
 									// }
 								</script>
+								@if($_GET['type']=='san-pham' || $_GET['type'] =='combo')
 								<label for="desc">Tag</label>
 								<!-- <ul id="myTags"></ul> -->
 								<input class="form-control" name="mytags" id="myTags" value="{{ @$tagsInput }}"/>
 								<input  id="tags" hidden="" name="tag" value="{{ $data->tags }}">
-
+								@endif
 									<!-- <div class="form-group">
 								      	<label for="ten">Mã SP</label>
 								      	<input type="text" name="txtCode"  value="{{ $data->code }}"  class="form-control" />

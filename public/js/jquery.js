@@ -28,7 +28,7 @@ jQuery(document).ready(function($){
     $(window).resize(function(event) {
         /* Act on the event */
         var w = $(window).width();
-        if(w <= 768) {
+        if(w <= 1025) {
             $("#my-menu").mmenu({
                 extensions: ["widescreen"]
             });

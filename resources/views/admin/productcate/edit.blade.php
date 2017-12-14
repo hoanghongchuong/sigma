@@ -21,7 +21,7 @@
     <div class="box">
     	@include('admin.messages_error')
         <div class="box-body">
-        	<form method="post" action="backend/productcate/edit?id={{$id}}" enctype="multipart/form-data">
+        	<form method="post" action="backend/productcate/edit?id={{$id}}?type={{@$_GET[type]}}" enctype="multipart/form-data">
         		<input type="hidden" name="_token" value="{!! csrf_token() !!}" />
       			<div class="nav-tabs-custom">
 	                <ul class="nav nav-tabs">
@@ -76,7 +76,7 @@
 								<div class="col-md-12">
 									<div class="form-group">
 										<label for="">Mô tả</label>
-										<textarea name="description" rows="5" id="txtContent" class="form-control">{{$data->description}}</textarea>
+										<textarea name="mota" rows="5" id="txtContent" class="form-control">{{$data->mota}}</textarea>
 									</div>
 								</div>
 							</div>

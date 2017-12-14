@@ -103,11 +103,11 @@ class IndexController extends Controller
         $com = 'index';
         $hot_news = DB::table('news')->where('status', 1)->where('noibat', 1)->where('com', 'tin-tuc')->orderBy('id', 'desc')->take(3)->get();
         $cate_pro = DB::table('product_categories')->where('status', 1)->where('parent_id', 0)->orderby('id', 'asc')->get();
-        $news_product = DB::table('products')->select()->where('status', 1)->orderBy('id', 'desc')->take(8)->get();
-        $hot_product = DB::table('products')->where('status', 1)->where('noibat', 1)->orderBy('id', 'desc')->take(8)->get();
-        $productSale = DB::table('products')->where('status', 1)->where('spbc', 1)->orderBy('id', 'desc')->take(8)->get();
+        $news_product = DB::table('products')->select()->where('status', 1)->where('com','san-pham')->orderBy('id', 'desc')->take(8)->get();
+        $hot_product = DB::table('products')->where('status', 1)->where('noibat', 1)->where('com','san-pham')->orderBy('id', 'desc')->take(8)->get();
+        $productSale = DB::table('products')->where('status', 1)->where('spbc', 1)->where('com','san-pham')->orderBy('id', 'desc')->take(8)->get();
         $about = DB::table('about')->first();
-        $cateHots = DB::table('product_categories')->where('noibat', 1)->get();
+        $cateHots = DB::table('product_categories')->where('noibat', 1)->where('com','san-pham')->get();
         $video = DB::table('video')->first();
         // Cấu hình SEO
         $setting = Cache::get('setting');
@@ -940,7 +940,53 @@ class IndexController extends Controller
         return redirect()->back()->with('status','Cập nhật thành công');
     }
     public function sachDienTu(){
+        $hotEbook = DB::table('products')->where('status',1)->where('noibat',1)->where('com','sach-dien-tu')->take(9)->get();
+        $ebooks = DB::table('products')->where('status',1)->where('com','sach-dien-tu')->orderBy('id','desc')->take(8)->get();
+        $cateEBook = DB::table('product_categories')->where('com','sach-dien-tu')->where('status',1)->get();
+        // dd($hotEbook);
+        return view('templates.sachdientu', compact('cateEBook', 'hotEbook','ebooks'));
+    }
+    public function getListEbook($alias){
+        $cate = DB::table('product_categories')->where('alias', $alias)->first();
+        // dd($cate);
+        $cateEBook = DB::table('product_categories')->where('com','sach-dien-tu')->where('status',1)->get();
+       if (!empty($cate->title)) {
+                $title = $cate->title;
+            } else {
+                $title = $cate->name;
+            }
+            $keyword = $cate->keyword;
+            $description = $cate->description;
+        $products = DB::table('products')->where('status',1)->where('com','sach-dien-tu')->where('cate_id', $cate->id)->get();
 
-        return view('templates.sachdientu');
+        return view('templates.listEbook', compact('cate','products','title','keyword','description','cateEBook'));
+    }
+    public function detailEbook($alias){
+        $cateEBook = DB::table('product_categories')->where('com','sach-dien-tu')->where('status',1)->get();
+        $detailEbook = DB::table('products')->where('status',1)->where('com','sach-dien-tu')->where('alias', $alias)->first();
+        $ebookSameCate = DB::table('products')->where('status',1)->where('com','sach-dien-tu')->where('cate_id', $detailEbook->cate_id)->take(4)->get();
+        dd($ebookSameCate);
+        if (!empty($detailEbook->title)) {
+                $title = $detailEbook->title;
+            } else {
+                $title = $detailEbook->name;
+            }
+            $keyword = $detailEbook->keyword;
+            $description = $detailEbook->description;
+        return view('templates.detailEbook', compact('detailEbook','cateEBook','title','keyword','description'));
+    }
+    public  function searchEbook(Request $request){
+        $key = $request->search_ebook;
+        $cateEBook = $request->cateEbook;
+        $result = DB::table('products')->where('status',1)->where('com','sach-dien-tu');
+        if($key){
+            $result = $result->where('name','LIKE', '%' . $key . '%');
+        }
+        if($cateEBook){
+            $result = $result->where('cate_id', $cateEBook);
+        }
+        $result = $result->orderBy('id','desc')->get();
+        return view('templates.searchEbook', compact('result'));
+        
     }
 }

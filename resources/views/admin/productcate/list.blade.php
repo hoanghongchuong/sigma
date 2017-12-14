@@ -77,9 +77,9 @@
                 <td>{{$item->name}}</td>
                 <td class="text-center with_dieuhuong">
                   @if($item->status>0)
-                    <a href="backend/productcate/edit?id={{$item->id}}&hienthi={{ time() }}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Bật</a>
+                    <a href="backend/productcate/edit?id={{$item->id}}&hienthi={{ time() }}&type={{ @$_GET['type'] }}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Bật</a>
                   @else
-                    <a href="backend/productcate/edit?id={{$item->id}}&hienthi={{ time() }}" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> Tắt</a>
+                    <a href="backend/productcate/edit?id={{$item->id}}&hienthi={{ time() }}&type={{ @$_GET['type'] }}" class="btn btn-danger btn-xs"><i class="fa fa-eye"></i> Tắt</a>
                   @endif
                 </td>
                 <td class="text-center with_dieuhuong">

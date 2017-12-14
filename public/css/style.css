@@ -1971,9 +1971,17 @@ div#load {
     display: inline-block;
 }
 .rbook-cap {
-    padding-top: 15px;
+    /*padding-top: 15px;*/
     margin-top: 15px;
     border-top: 1px solid #ccc;
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3; /*số dòng muốn hiện */
+   font-size: 16px;          /*cỡ chữ, đơn vị px */
+   line-height: 1.5;        /* khoảng cách giữa các dòng, đơn vị em*/
+   max-height: 85px;
 }
 .thk {
     background: rgba(23, 115, 190, 0.7) url(../images/banner5.png) no-repeat center;

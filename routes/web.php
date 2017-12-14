@@ -53,6 +53,10 @@ Route::post('cap-nhat-tai-khoan/{id}',['as' => 'postUpdateInfo', 'uses' => 'Inde
 Route::get('chi-tiet-don-hang/{id}', 'IndexController@detailBill');
 Route::get('lich-su-mua-hang/{id}','IndexController@historyOrder');
 Route::get('sach-dien-tu','IndexController@sachDienTu')->name('sachDienTu');
+Route::get('sach-dien-tu/{alias}.html','IndexController@detailEbook')->name('detailEbook');
+Route::get('sach-dien-tu/{alias}','IndexController@getListEbook')->name('getListEbook');
+
+Route::post('search/ebook', 'IndexController@searchEbook')->name('searchEbook');
 // Route::post('signup', function(){
 // 	echo 'post dang ky';
 // })->name('postSignup');

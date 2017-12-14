@@ -190,9 +190,11 @@
 								</script>
 
 								<!-- <ul id="myTags"></ul> -->
+								@if($_GET['type']=='san-pham' || $_GET['type'] =='combo')
 								<label for="desc">Tag</label>
 								<input class="form-control" name="mytags" id="myTags" />
 								<input  id="tags" hidden="" name="tag" value="[]">
+								@endif	
 								<div class="col-md-6 col-xs-12">					
 								<!-- <div class="form-group">
 							      	<label for="ten">Mã SP</label>

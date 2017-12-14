@@ -87,7 +87,7 @@ class ProductCateController extends Controller {
                     $data->status = 1; 
                 }
                 $data->update();
-                return redirect()->route('admin.productcate.index')->with('status','Cập nhật thành công !');
+                return redirect()->back()->with('status','Cập nhật thành công !');
             }
             
             $parent = ProductCate::orderBy('stt', 'asc')->get()->toArray();
@@ -105,6 +105,11 @@ class ProductCateController extends Controller {
             ["txtName" => "required"],
             ["txtName.required" => "Bạn chưa nhập tên danh mục"]
         );
+        if(!empty($_GET['type'])){
+            $com=$_GET['type'];
+        }else{
+            $com='';
+        }
         $id=$request->get('id');
         $product_cate = ProductCate::find($id);
         if(!empty($product_cate)){
@@ -127,6 +132,7 @@ class ProductCateController extends Controller {
             $product_cate->title = $request->txtTitle;
             $product_cate->keyword = $request->txtKeyword;
             $product_cate->description = $request->description;
+            $product_cate->mota = $request->mota;
             $product_cate->stt = $request->stt;
             if($request->noibat=='on'){
                 $product_cate->noibat = 1;
@@ -141,7 +147,7 @@ class ProductCateController extends Controller {
 
             $product_cate->save();
 
-            return redirect('backend/productcate/edit?id='.$id)->with('status','Cập nhật thành công');
+            return redirect('backend/productcate/edit?id='.$id.'&type='.$com)->with('status','Cập nhật thành công');
         }else{
             return redirect('backend/productcate/')->with('status','Dữ liệu không có thực');
         }
