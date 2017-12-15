@@ -49,7 +49,7 @@
                 <div class="acc-content">
                     <h2 class="text-capitalize mb-3 acc-name">{{ isset($data->name)? $data->name : $data->username }}</h2>
                     <ul class="acc-contact">
-                        <li><i class="fa fa-envelope-o"></i> <a href="{{$data->email}}">{{$data->email}}</a></li>
+                        <li><i class="fa fa-envelope-o"></i> <a href="#">{{$data->email}}</a></li>
                         <li><i class="fa fa-phone"></i> <a href="tel:{{$data->phone}}">{{$data->phone}}</a></li>
                     </ul>
                     <h3 class="acc-add"><i class="fa fa-map-marker"></i> {{$data->address}}</h3>

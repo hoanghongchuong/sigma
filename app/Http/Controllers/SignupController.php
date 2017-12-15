@@ -23,7 +23,14 @@ class SignupController extends Controller
     }
     public function postSignup(Request $request){
     	
+        $checkUsername = DB::table('users')->where('username', $request->username)->first();
+        if($checkUsername){
+             echo "<script type='text/javascript'>
+                alert('Tài khoản đã tồn tại !');
+                window.location = '" . url('/') . "' </script>";
+        }
     	$thanhvien = new Users;
+
         $thanhvien->username = $request->username;
         // $thanhvien->name = $request->name;
         $thanhvien->email = $request->email;

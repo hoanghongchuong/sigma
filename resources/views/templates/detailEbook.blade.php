@@ -133,13 +133,9 @@
                     <div class="col-sm-8">
                         
                         <div class="owl-carousel owl-theme carousel_btype">
-                            <div class="item"><a href="#">Tất cả</a></div>
-                            <div class="item"><a href="#">Khởi nghiệp</a></div>
-                            <div class="item"><a href="#">Marketing - Bán hàng</a></div>
-                            <div class="item"><a href="#">Quản trị - Lãnh đạo</a></div>
-                            <div class="item"><a href="#">Đầu tư - Tài chính</a></div>
-                            <div class="item"><a href="#">Kiến thức - Kinh tế</a></div>
-                            <div class="item"><a href="#">Kinh doanh - Tổng hợp</a></div>
+                            @foreach($cateEBook as $cate)
+                            <div class="item"><a href="{{url('sach-dien-tu/'.$cate->alias)}}">{{$cate->name}}</a></div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -157,18 +153,21 @@
                         <li><i class="fa fa-star"></i></li>
                         <li><i class="fa fa-star-o"></i></li>
                     </ul>
-                    <h2 class="mt-3 bdetail-author">Tác giả: <span>Glen Amold</span></h2>
-                    <h3 class="bdetail-btype">Thể loại: <a href="#" title="">Kinh doanh</a>, <a href="#" title="">Kinh doanh tổng hợp</a></h3>
-                    <h3>Nhà xuất bản: <span>NXB Lao Động</span></h3>
+                    <?php $tg = DB::table('tacgia')->where('id', $detailEbook->tacgia_id)->first(); ?>
+                    <h2 class="mt-3 bdetail-author">Tác giả: <span>{{@$tg->name}}</span></h2>
+                    <?php $tl = DB::table('theloai')->where('id', $detailEbook->theloai_id)->first(); ?>
+                    <h3 class="bdetail-btype">Thể loại: <a href="#" title="">{{@$tl->name}}</a></h3>
+                    <?php $nxb = DB::table('nxb')->where('id', $detailEbook->nxb_id)->first(); ?>
+                    <h3>Nhà xuất bản: <span>{{@$nxb->name}}</span></h3>
                     <h3>Định dạng: <span>Epub</span></h3>
                     <h4>Ngày cập nhật: <span>{{date('d/m/Y', strtotime($detailEbook->created_at))}}</span></h4>
                     <h4>Lượt đọc: <span>12345</span></h4>
-                    <p class="mt-4 mb-3">Khi nhắc đến Warren Edward Buffett, chúng ta đều biết ông là một trong những nhà đầu tư thành công nhất trên thế giới, được tạp chí Forbes xếp vị trí người giàu thứ hai trên thế giới sau Bill Gates. Không chỉ dừng lại ở đó, ông còn rất nổi tiếng với sự kiên định trong triết lý đầu tư theo giá trị cũng như lối sống tiết kiệm dù sở hữu khối tài sản khổng lổ. Nhưng có một điều không phải ai cũng biết, trên con đường trở nên thành công và giàu có, Warren Buffett cũng mắc rất nhiều sai lầm.</p>
+                    <p class="mt-4 mb-3">{!! $detailEbook->mota !!}</p>
                     <p class="text-md-left text-center"><a href="read-online.html" title="" class="btn text-uppercase rounded-0 btn-nread">Đọc sách</a></p>
                 </div>
             </div>
             <div class="bdetail-fb">
-                <img src="images/fb.jpg" title="" alt="">
+                <div class="fb-comments" data-href="{{url('sach-dien-tu/'.$detailEbook->alias.'.html')}}" data-width="100%" data-numposts="5"></div>
             </div>
             
         </div>
@@ -178,81 +177,27 @@
         <div class="container">
             <h2 class="mb-4 rebook-tit">Có thể bạn quan tâm</h2>
             <div class="row">
+            @foreach($ebookSameCate as $ebookS)
                 <div class="col-lg-3 col-md-6">
                     <div class="nbook-wrap">
-                        <a href="chi-tiet.html" title=""><img src="images/b13.jpg" title="" alt=""></a>
+                        <a href="chi-tiet.html" title=""><img src="{{asset('public/images/b13.jpg')}}" title="" alt=""></a>
                     </div>
                     <div class="nbook-tit">
-                        <h3><a href="chi-tiet.html" title="">Trí khùng tự truyện</a></h3>
+                        <h3><a href="chi-tiet.html" title="">{{$ebookS->name}}</a></h3>
                     </div>
                     <div class="nbook-info">
                         <ul class="rate">
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <h4 class="rbook-author">Tác giả: <span>Tú Cẩm</span></h4>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="nbook-wrap">
-                        <a href="chi-tiet.html" title=""><img src="images/b14.jpg" title="" alt=""></a>
-                    </div>
-                    <div class="nbook-tit">
-                        <h3><a href="chi-tiet.html" title="">Trí khùng tự truyện</a></h3>
-                    </div>
-                    <div class="nbook-info">
-                        <ul class="rate">
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
+                            <li><i class="fa fa-star"></i></li>
                             <li><i class="fa fa-star-o"></i></li>
                         </ul>
-                        <h4 class="rbook-author">Tác giả: <span>Tú Cẩm</span></h4>
+                        <?php $tg = DB::table('tacgia')->where('id', $ebookS->tacgia_id)->first(); ?>
+                        <h4 class="rbook-author">Tác giả: <span>{{$tg->name}}</span></h4>
                     </div>
                 </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="nbook-wrap">
-                        <a href="chi-tiet.html" title=""><img src="images/b15.jpg" title="" alt=""></a>
-                    </div>
-                    <div class="nbook-tit">
-                        <h3><a href="chi-tiet.html" title="">Boss là nữ phụ - Tập 36: Thiếu tướng thích ngả ngớn</a></h3>
-                    </div>
-                    <div class="nbook-info">
-                        <ul class="rate">
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <h4 class="rbook-author">Tác giả: <span>Tú Cẩm</span></h4>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <div class="nbook-wrap">
-                        <a href="chi-tiet.html" title=""><img src="images/b16.jpg" title="" alt=""></a>
-                    </div>
-                    <div class="nbook-tit">
-                        <h3><a href="chi-tiet.html" title="">Trí khùng tự truyện</a></h3>
-                    </div>
-                    <div class="nbook-info">
-                        <ul class="rate">
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                        <h4 class="rbook-author">Tác giả: <span>Tú Cẩm</span></h4>
-                    </div>
-                </div>
+            @endforeach    
             </div>
         </div>
     </section>
@@ -261,13 +206,9 @@
             <h2 class="text-uppercase ft-tit">Từ khóa tìm kiếm</h2>
             <div class="ftmenu-wrap">
                 <ul class="ft-menu">
-                    <li><a href="list-child.html" title="">Truyện thiếu nhi</a></li>
-                    <li><a href="list-child.html" title="">Sác toán học</a></li>
-                    <li><a href="list-child.html" title="">Sách văn học</a></li>
-                    <li><a href="list-child.html" title="">Sách lý học</a></li>
-                    <li><a href="list-child.html" title="">Sách giải</a></li>
-                    <li><a href="list-child.html" title="">Đánh thức tài năng toán học</a></li>
-                    <li><a href="list-child.html" title="">Toán tài năng</a></li>
+                    @foreach($cateEBook as $cate)
+                    <li><a href="{{url('sach-dien-tu/'.$cate->alias)}}" title="{{$cate->name}}">{{$cate->name}}</a></li>
+                    @endforeach
                 </ul>
             </div>
             <!-- <div class="d-flex flex-md-row flex-column align-items-center justify-content-between ft-card"> -->
@@ -279,20 +220,19 @@
                         <div class="d-flex align-items-center justify-content-center justify-content-md-end ft-card-r">
                             <span class="mr-2">Chia sẻ với chúng tôi:</span> 
                             <ul class="ft-social">
-                                <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#" title=""><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="{{$setting->facebook}}" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="{{$setting->twitter}}" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="{{$setting->google}}" title="Google"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="{{$setting->instagram}}" title="Instagram"><i class="fa fa-instagram"></i></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="ft-last">
-                <h2>© 2016 Công ty Cổ phần Công nghệ và Truyền thông GCO</h2>
-
-                <p>Địa chỉ: <span>Tầng 8, Tòa nhà TOYOTA Thanh Xuân - Số 315 Trường Chinh, Thanh Xuân, Hà Nội</span></p>
-                <p>Điện thoại : <a href="tel:0987708400">0987708400</a> - Website: <a href="http://gco.vn">http://gco.vn</a></p>
+                <h2>© 2017 Công ty Cổ phần Công nghệ và Truyền thông GCO</h2>
+                <p>Địa chỉ: <span>{{$setting->address}}</span></p>
+                <p>Điện thoại : <a href="tel:{{$setting->phone}}">{{$setting->phone}}</a> - Website: <a href="{{$setting->website}}">{{$setting->website}}</a></p>
             </div>
         </div>
     </footer>
@@ -305,10 +245,10 @@
                     <!-- <h2 class="tit text-center w-100 text-uppercase">Đăng nhập hệ thống</h2> -->
                     <ul class="w-100 bold d-flex align-items-center justify-content-start nav nav-pills mb-3 text-center newfilm-tab-menu" id="pills-tab" role="tablist">
                         <li class="nav-item w-50">
-                            <a class="nav-link active" id="login" data-toggle="pill" href="#login-frm" role="tab" aria-controls="pills-info" aria-selected="false">Đăng nhập</a>
+                            <a class="nav-link active" id="login" data-toggle="pill" href="#login-frm1" role="tab" aria-controls="pills-info" aria-selected="false">Đăng nhập</a>
                         </li>
                         <li class="nav-item w-50">
-                            <a class="nav-link" id="regis" data-toggle="pill" href="#regis-frm" role="tab" aria-controls="pills-info" aria-selected="false">Đăng ký tài khoản </a>
+                            <a class="nav-link" id="regis" data-toggle="pill" href="#regis-frm2" role="tab" aria-controls="pills-info" aria-selected="false">Đăng ký tài khoản </a>
                         </li>
                     </ul>
 
@@ -318,32 +258,33 @@
                 </div>
                 <div class="modal-body">
                     <div class="tab-content film-tab-content" id="login-frmwrap">
-                        <div id="login-frm" class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
-                            <form action="" class="form-group login-frm">
+                        <div id="login-frm1" class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
+                            <form action="{{route('postLogin')}}" method="post" id="tutorial" class="form-group login-frm">
+                                {{ csrf_field() }}
                                 <div class="frm-wrap">
-                                    <input type="text" placeholder="Tài khoản" required="required" class="w-100">
-                                    <input type="password" placeholder="Mật khẩu" required="required" class="w-100">
+                                    <input type="text" placeholder="Tài khoản" id="email" name="username" required="required" class="w-100">
+                                    <input type="password" placeholder="Mật khẩu" id="password" name="password" required="required" class="w-100">
+                                    <div class="success" style="display:none;"></div>
                                     <p class="d-flex align-items-center mb-3 login-choice-wrap"><span class="login-choice"></span> Mua hàng không cần đăng nhập</p>
                                     <p class="text-center mt-4 mb-1">
-                                        <a href="index.html" title=""><img src="{{asset('public/images/logo.png')}}" alt="" title=""></a>
+                                        <a href="{{url('')}}" title=""><img src="{{asset('public/images/logo.png')}}" alt="" title=""></a>
                                     </p>
                                 </div>
-                                <button type="submit" class="w-100 text-uppercase font-weight-bold btn login-btn">Tiếp tục</button>
+                                <button type="button" id="btn-login" class="w-100 text-uppercase font-weight-bold btn login-btn">Đăng nhập</button>
                             </form>
                         </div>
-                        <div class="tab-pane fade" id="regis-frm" role="tabpanel" aria-labelledby="pills-info-tab">
-                            <form action="" class="form-group login-frm regis-frm">
+                        <div class="tab-pane fade" id="regis-frm2" role="tabpanel" aria-labelledby="pills-info-tab">
+                            <form action="{{ route('postSignup') }}" method="post" id="formDemo" class="form-group login-frm">
+                                {{ csrf_field() }}
                                 <div class="frm-wrap">
-                                    <input type="text" placeholder="Tên tài khoản" required="required" class="w-100">
-                                    <input type="email" placeholder="Email đăng ký" required="required" class="w-100">
-                                    <input type="password" class="w-100" required="required" placeholder="Mật khẩu">
-                                    <input type="password" class="w-100" required="required" placeholder="Nhập lại mật khẩu">
-                                    
+                                    <input type="text" placeholder="Tên tài khoản" required name="username"  class="w-100">
+                                    <input type="email" placeholder="Email đăng ký" required name="email" class="w-100">
+                                    <input id="passwords" class="w-100" name="password" type="password"  placeholder="Vui lòng nhập Password" required>
+                                    <input name="confirm_password" id="confirm_password" class="w-100" type="password" placeholder="Vui lòng nhập lại Password" required>
                                     <p class="text-center mt-4 mb-1">
-                                        <a href="index.html" title=""><img src="{{asset('public/images/logo.png')}}" alt="" title=""></a>
+                                        <a href="#"><img src="{{asset('public/images/logo.png')}}" alt="logo" title=""></a>
                                     </p>
                                 </div>
-                                
                                 <button type="submit" class="w-100 text-uppercase font-weight-bold btn login-btn">Đăng ký ngay</button>
                             </form>
                         </div>
@@ -358,12 +299,14 @@
     <script type="text/javascript" src="{{asset('public/js/owl.carousel.js')}}"></script>
     <script src="{{asset('public/js/jquery.mmenu.js')}}" type="text/javascript"></script>
     <script type="text/javascript" src="{{asset('public/js/jquery.js')}}"></script>
+    <script type="text/javascript" src="{{asset('public/js/custom.js')}}"></script>
     <script type="text/javascript">
         function baseUrl(){
             return '<?php echo url('/'); ?>';
         }
        
    </script>
+   
     <script type="text/javascript">
         $('.carousel_btype').owlCarousel({
             rewind:true,
@@ -423,4 +366,12 @@
             animateIn: 'fadeIn'
         });
     </script>
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.11&appId=190075641504179';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 </body>

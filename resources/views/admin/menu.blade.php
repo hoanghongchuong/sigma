@@ -25,7 +25,8 @@
 
       <ul class="sidebar-menu">
         <!-- <li class="header">MAIN NAVIGATION</li> -->
-         <li><a href="backend/users"><i class="fa fa-users"></i><span>Quản lý thành viên</span></a></li>
+         <!-- <li><a href="backend/users"><i class="fa fa-users"></i><span>Quản lý thành viên</span></a></li> -->
+         <li><a href="backend/members"><i class="fa fa-users"></i><span>Quản lý thành viên</span></a></li>
         <li class="treeview ">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Quản lý sản phẩm</span> <i class="fa fa-angle-left pull-right"></i>

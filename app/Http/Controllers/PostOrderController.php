@@ -27,6 +27,12 @@ class PostOrderController extends Controller
         }
         return $total;
     }
+    public function getTotalUser(){
+        $total_money = DB::table('users')->select('total_money')->where('id', \Auth::user()->id)->first();
+        if($total_money){
+            return  $tm = $total_money->total_money;
+        }
+    }
     public function postOrder(Request $req)
     {
         
@@ -44,8 +50,11 @@ class PostOrderController extends Controller
         $bill->province = Request::input('province');
         $bill->district = Request::input('district');
         $total = $this->getTotalPrice();
-        $bill->total = $total;
-        $bill->user_id = \Auth::user()->id;
+        // $bill->total = $total;
+        if(isset(\Auth::user()->id)){
+            $bill->user_id = \Auth::user()->id;
+        }
+       
         // $bill->user_id  = 
         // $order['price'] = $this->getTotalPrice();
         // if ($req->card_code) {
@@ -69,9 +78,37 @@ class PostOrderController extends Controller
             ];
         }
         $bill->detail = json_encode($detail);
-        // dd($bill);
+        
         if ($total > 0) {
-            $bill->save();
+            
+            $tt = $total;
+            try {
+                \DB::beginTransaction();
+            
+                // $bill->save();
+                if(isset(\Auth::user()->id)){
+
+                    $money = $this->getTotalUser();
+                    $torder = $money + $tt;
+                    // dd($torder);
+                    \DB::table('users')->where('id', \Auth::user()->id)->update(['total_money' =>$torder ]);
+                    if($torder > 500000){
+                        $bill->total = $tt - 100000;
+                    }
+
+                    else{
+                        $bill->total = $tt;
+                    }
+
+                }
+                // dd($bill);
+                $bill->save();
+
+                \DB::commit();
+            } catch (Exception $e) {
+                \DB::rollback();
+                
+            }
         } else {
             echo "<script type='text/javascript'>
 				alert('Giỏ hàng của bạn rỗng!');

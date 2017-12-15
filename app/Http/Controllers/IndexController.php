@@ -964,8 +964,14 @@ class IndexController extends Controller
     public function detailEbook($alias){
         $cateEBook = DB::table('product_categories')->where('com','sach-dien-tu')->where('status',1)->get();
         $detailEbook = DB::table('products')->where('status',1)->where('com','sach-dien-tu')->where('alias', $alias)->first();
-        $ebookSameCate = DB::table('products')->where('status',1)->where('com','sach-dien-tu')->where('cate_id', $detailEbook->cate_id)->take(4)->get();
-        dd($ebookSameCate);
+        $ebookSameCate = DB::table('products')
+        ->where([
+            'status' => 1,
+            'com' => 'sach-dien-tu',
+            'cate_id' => $detailEbook->cate_id,
+
+        ])->where('id','<>', $detailEbook->id)->take(4)->get();
+        
         if (!empty($detailEbook->title)) {
                 $title = $detailEbook->title;
             } else {
@@ -973,7 +979,7 @@ class IndexController extends Controller
             }
             $keyword = $detailEbook->keyword;
             $description = $detailEbook->description;
-        return view('templates.detailEbook', compact('detailEbook','cateEBook','title','keyword','description'));
+        return view('templates.detailEbook', compact('detailEbook','cateEBook','title','keyword','description','ebookSameCate'));
     }
     public  function searchEbook(Request $request){
         $key = $request->search_ebook;

@@ -116,6 +116,16 @@ Route::group(['middleware' =>'authen', 'prefix' => 'backend'], function(){
 		Route::get('info',['as'=>'admin.users.getAdmin','uses'=>'Admin\UsersController@getAdmin']);
 		Route::post('updateinfo',['as'=>'admin.users.updateinfo','uses'=>'Admin\UsersController@updateinfo']);
 	});
+
+	Route::group(['prefix' => 'members'], function(){
+		Route::get('/',['as' => 'admin.members.index', 'uses' => 'Admin\MembersController@index']);
+		Route::any('add',['as'=>'admin.members.create','uses'=>'Admin\MembersController@create']);
+		Route::any('edit/{id}',['as'=>'admin.members.edit', 'uses'=>'Admin\MembersController@create']);
+		Route::get('delete/{id}',['as'=>'admin.members.delete', 'uses' => 'Admin\MembersController@delete']);
+		// Route::get('info',['as'=>'admin.members.getAdmin','uses'=>'Admin\MembersController@getAdmin']);
+		// Route::post('updateinfo',['as'=>'admin.members.updateinfo','uses'=>'Admin\MembersController@updateinfo']);
+	});
+
 	Route::get('search/order', 'Admin\BillController@seachOrder')->name('seachOrder');
 	// Chương trình khuyến mại, giảm giá
 	Route::group(['prefix' => 'campaign'], function(){

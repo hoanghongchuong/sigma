@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use DB;
 class LoginController extends Controller
 {
     public function getLogin(){
@@ -21,6 +21,8 @@ class LoginController extends Controller
 	    		'password.required' => 'Bạn chưa nhập password'
 	    	]
 	    );
+	   
+	    
 	    if(Auth::attempt(['username'=>$request->username, 'password'=>$request->password, 'level'=>2]))
 	    {
 	    	return 1;

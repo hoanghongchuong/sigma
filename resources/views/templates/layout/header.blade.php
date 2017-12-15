@@ -76,7 +76,7 @@
                     <a href="{{ url('tai-khoan/'.$nguoidung->id) }}" title=""><img src="{{asset('upload/users/'.$nguoidung->photo)}}" style="width: 43px; height: 43px;" title="" alt=""></a>
                     <div class="ml-2 menu-acc">
                         <h1 class="text-capitalize menu-acc-tit"><a href="{{ url('tai-khoan/'.$nguoidung->id) }}" title="">{{$nguoidung->username}}</a></h1>
-                        <p class="menu-acc-xu">Hiện có <span>12345</span> xu</p>
+                        <!-- <p class="menu-acc-xu">Hiện có <span>12345</span> xu</p> -->
                     </div>
                     <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                     

@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="d-flex align-items-center justify-content-center justify-content-lg-start nheader-l">
-                            <img src="{{asset('upload/hinhanh/'.$setting->photo)}}" title="" alt="">
+                            <a href="{{url('')}}" title=""><img src="{{asset('upload/hinhanh/'.$setting->photo)}}" title="" alt=""></a>
                             
                             <div class="addthis_toolbox addthis_default_style" style="margin-top:10px;">
                                 <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
@@ -113,7 +113,7 @@
                         <div class="row no-gutters">
                             <div class="col-sm-5">
                                 <div class="rbook-img">
-                                    <a href="{{url('sach-dien-tu/'.$hotE->alias.'/'.$hotE->id.'.html')}}"><img src="{{asset('upload/product/'.$hotE->photo)}}" title="" alt=""></a>
+                                    <a href="{{url('sach-dien-tu/'.$hotE->alias.'.html')}}"><img src="{{asset('upload/product/'.$hotE->photo)}}" title="" alt=""></a>
                                 </div>
                             </div>
                             <div class="col-sm-7 pl-3">
@@ -264,10 +264,10 @@
                     <!-- <h2 class="tit text-center w-100 text-uppercase">Đăng nhập hệ thống</h2> -->
                     <ul class="w-100 bold d-flex align-items-center justify-content-start nav nav-pills mb-3 text-center newfilm-tab-menu" id="pills-tab" role="tablist">
                         <li class="nav-item w-50">
-                            <a class="nav-link active" id="login" data-toggle="pill" href="#login-frm" role="tab" aria-controls="pills-info" aria-selected="false">Đăng nhập</a>
+                            <a class="nav-link active" id="login" data-toggle="pill" href="#login-frm1" role="tab" aria-controls="pills-info" aria-selected="false">Đăng nhập</a>
                         </li>
                         <li class="nav-item w-50">
-                            <a class="nav-link" id="regis" data-toggle="pill" href="#regis-frm" role="tab" aria-controls="pills-info" aria-selected="false">Đăng ký tài khoản </a>
+                            <a class="nav-link" id="regis" data-toggle="pill" href="#regis-frm2" role="tab" aria-controls="pills-info" aria-selected="false">Đăng ký tài khoản </a>
                         </li>
                     </ul>
 
@@ -277,32 +277,33 @@
                 </div>
                 <div class="modal-body">
                     <div class="tab-content film-tab-content" id="login-frmwrap">
-                        <div id="login-frm" class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
-                            <form action="" class="form-group login-frm">
+                        <div id="login-frm1" class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
+                            <form action="{{route('postLogin')}}" method="post" id="tutorial" class="form-group login-frm">
+                                {{ csrf_field() }}
                                 <div class="frm-wrap">
-                                    <input type="text" placeholder="Tài khoản" required="required" class="w-100">
-                                    <input type="password" placeholder="Mật khẩu" required="required" class="w-100">
+                                    <input type="text" placeholder="Tài khoản" id="email" name="username" required="required" class="w-100">
+                                    <input type="password" placeholder="Mật khẩu" id="password" name="password" required="required" class="w-100">
+                                    <div class="success" style="display:none;"></div>
                                     <p class="d-flex align-items-center mb-3 login-choice-wrap"><span class="login-choice"></span> Mua hàng không cần đăng nhập</p>
                                     <p class="text-center mt-4 mb-1">
-                                        <a href="index.html" title=""><img src="{{asset('public/images/logo.png')}}" alt="" title=""></a>
+                                        <a href="{{url('')}}" title=""><img src="{{asset('public/images/logo.png')}}" alt="" title=""></a>
                                     </p>
                                 </div>
-                                <button type="submit" class="w-100 text-uppercase font-weight-bold btn login-btn">Tiếp tục</button>
+                                <button type="button" id="btn-login" class="w-100 text-uppercase font-weight-bold btn login-btn">Đăng nhập</button>
                             </form>
                         </div>
-                        <div class="tab-pane fade" id="regis-frm" role="tabpanel" aria-labelledby="pills-info-tab">
-                            <form action="" class="form-group login-frm regis-frm">
+                        <div class="tab-pane fade" id="regis-frm2" role="tabpanel" aria-labelledby="pills-info-tab">
+                            <form action="{{ route('postSignup') }}" method="post" id="formDemo" class="form-group login-frm formDemo">
+                                {{ csrf_field() }}
                                 <div class="frm-wrap">
-                                    <input type="text" placeholder="Tên tài khoản" required="required" class="w-100">
-                                    <input type="email" placeholder="Email đăng ký" required="required" class="w-100">
-                                    <input type="password" class="w-100" required="required" placeholder="Mật khẩu">
-                                    <input type="password" class="w-100" required="required" placeholder="Nhập lại mật khẩu">
-                                    
+                                    <input type="text" placeholder="Tên tài khoản" required name="username"  class="w-100">
+                                    <input type="email" placeholder="Email đăng ký" required name="email" class="w-100">
+                                    <input id="passwords" class="w-100" name="password" type="password"  placeholder="Vui lòng nhập Password" required>
+                                    <input name="confirm_password" id="confirm_password" class="w-100" type="password" placeholder="Vui lòng nhập lại Password" required>
                                     <p class="text-center mt-4 mb-1">
-                                        <a href="index.html" title=""><img src="images/logo.png" alt="" title=""></a>
+                                        <a href="#"><img src="{{asset('public/images/logo.png')}}" alt="logo" title=""></a>
                                     </p>
                                 </div>
-                                
                                 <button type="submit" class="w-100 text-uppercase font-weight-bold btn login-btn">Đăng ký ngay</button>
                             </form>
                         </div>
@@ -317,15 +318,46 @@
     <script type="text/javascript" src="{{asset('public/js/bootstrap.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/js/owl.carousel.js')}}"></script>
     <script src="{{asset('public/js/jquery.mmenu.js')}}" type="text/javascript"></script>
+
     <script type="text/javascript" src="{{asset('public/js/jquery.js')}}"></script>
+    <!-- <script type="text/javascript" src="{{asset('public/js/custom.js')}}"></script> -->
+    <script src="{{asset('public/js/jquery.validate.min.js')}}"></script>
     <script type="text/javascript">
         function baseUrl(){
             return '<?php echo url('/'); ?>';
         }
-        // window.token = '{{ csrf_token() }}';
+        window.token = '{{ csrf_token() }}';
         // window.urlAddCart = '{{ route("addProductToCartAjax") }}';
         // window.getRate = '{{ route("rating") }}';
    </script>
+   <script type="text/javascript">
+        $('#btn-login').click(function(){
+
+          var password = $('#password').val();
+          var email = $('#email').val();
+          // alert(email);
+          $.ajax({
+              type: "POST",
+              url: baseUrl()+"/login", 
+              data: {
+                username : email,
+                password : password,
+                _token : window.token
+              },
+              success: function(res){  
+                if(res == 0){
+                    
+                    $('div.success').fadeIn();
+                    $('div.success').html('<p class="mess-login">Username hoặc password không đúng !</p>');                  
+                }else{
+                    location.reload();  
+                }
+                   
+            }
+                
+          });
+       });
+    </script>
     <script type="text/javascript">
         $('.rbook-slider').owlCarousel({
             navText: [ '<img src="'+ baseUrl() +'/public/images/l.png">', '<img src="'+ baseUrl() +'/public/images/r.png">' ],

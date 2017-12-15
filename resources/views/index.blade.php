@@ -108,7 +108,7 @@
                             </form>
                         </div>
                         <div class="tab-pane fade" id="regis-frm2" role="tabpanel" aria-labelledby="pills-info-tab">
-                            <form action="{{ route('postSignup') }}" method="post" id="formDemo" class="form-group login-frm">
+                            <form action="{{ route('postSignup') }}" method="post" id="formDemo" class="form-group formDemo login-frm">
                                 {{ csrf_field() }}
                                 <div class="frm-wrap">
                                     <input type="text" placeholder="Tên tài khoản" required name="username"  class="w-100">
@@ -142,6 +142,7 @@
                 _token : window.token
               },
               success: function(res){  
+                console.log(res);
                 if(res == 0){
                     
                     $('div.success').fadeIn();

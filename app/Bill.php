@@ -16,7 +16,7 @@ class Bill extends Model
     // 	}
     // }
     public function search($search){
-    	$result = $this->where('status', $search)->get();
+    	$result = $this->where('status', $search)->orderBy('id','desc')->get();
     	return $result;
     }
 }

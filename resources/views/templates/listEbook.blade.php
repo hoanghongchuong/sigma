@@ -185,13 +185,9 @@
             <h2 class="text-uppercase ft-tit">Từ khóa tìm kiếm</h2>
             <div class="ftmenu-wrap">
                 <ul class="ft-menu">
-                    <li><a href="list-child.html" title="">Truyện thiếu nhi</a></li>
-                    <li><a href="list-child.html" title="">Sác toán học</a></li>
-                    <li><a href="list-child.html" title="">Sách văn học</a></li>
-                    <li><a href="list-child.html" title="">Sách lý học</a></li>
-                    <li><a href="list-child.html" title="">Sách giải</a></li>
-                    <li><a href="list-child.html" title="">Đánh thức tài năng toán học</a></li>
-                    <li><a href="list-child.html" title="">Toán tài năng</a></li>
+                    @foreach($cateEBook as $cate)
+                    <li><a href="{{url('sach-dien-tu/'.$cate->alias)}}" title="{{$cate->name}}">{{$cate->name}}</a></li>
+                    @endforeach
                 </ul>
             </div>
             <!-- <div class="d-flex flex-md-row flex-column align-items-center justify-content-between ft-card"> -->
@@ -203,20 +199,20 @@
                         <div class="d-flex align-items-center justify-content-center justify-content-md-end ft-card-r">
                             <span class="mr-2">Chia sẻ với chúng tôi:</span> 
                             <ul class="ft-social">
-                                <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#" title=""><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="{{$setting->facebook}}" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="{{$setting->twitter}}" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="{{$setting->google}}" title="Google"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="{{$setting->instagram}}" title="Instagram"><i class="fa fa-instagram"></i></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="ft-last">
-                <h2>© 2016 Công ty Cổ phần Công nghệ và Truyền thông GCO</h2>
+                <h2>© 2017 Công ty Cổ phần Công nghệ và Truyền thông GCO</h2>
 
-                <p>Địa chỉ: <span>Tầng 8, Tòa nhà TOYOTA Thanh Xuân - Số 315 Trường Chinh, Thanh Xuân, Hà Nội</span></p>
-                <p>Điện thoại : <a href="tel:0987708400">0987708400</a> - Website: <a href="http://gco.vn">http://gco.vn</a></p>
+                <p>Địa chỉ: <span>{{$setting->address}}</span></p>
+                <p>Điện thoại : <a href="tel:{{$setting->phone}}">{{$setting->phone}}</a> - Website: <a href="{{$setting->website}}">{{$setting->website}}</a></p>
             </div>
         </div>
     </footer>
