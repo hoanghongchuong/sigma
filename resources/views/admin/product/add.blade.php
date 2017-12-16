@@ -30,6 +30,7 @@
 	                  	
 	                  	<li><a href="#tab_2" data-toggle="tab" aria-expanded="true">Nội dung</a></li>
 	                  	<li><a href="#tab_5" data-toggle="tab" aria-expanded="true">Album hình</a></li>
+	                  	<li><a href="#tab_4" data-toggle="tab" aria-expanded="true">File đọc thử</a></li>
 	                  	<li><a href="#tab_3" data-toggle="tab" aria-expanded="true">SEO</a></li>
 	                </ul>
 	                <div class="tab-content">
@@ -248,6 +249,12 @@
 	                		<div class="form-group">
 	                  			<label class="control-label">Chọn ảnh</label>
                       			<input id="input-2" name="detailImg[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-allowed-file-extensions='["jpeg", "jpg", "png", "gif"]'>
+	                  		</div>
+	                  	</div>
+	                  	<div class="tab-pane" id="tab_4">
+	                		<div class="form-group">
+	                  			<label class="control-label">Chọn file</label>
+                      			<input id="input-3" name="fileRead[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-allowed-file-extensions='["pdf"]'>
 	                  		</div>
 	                  	</div>
 	                	<div class="tab-pane" id="tab_3">

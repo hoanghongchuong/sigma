@@ -593,7 +593,6 @@ class IndexController extends Controller
     public function getCart()
     {
         $product_cart = Cart::content();
-        // dd($product_cart);
         $bank = DB::table('bank_account')->get();
         $total = $this->getTotalPrice();
         $province = DB::table('province')->get();
@@ -623,6 +622,7 @@ class IndexController extends Controller
             'price' => $product->price,
             'options' => array('photo' => $product->photo, 'code' => $product->code, 'alias' => $product->alias)
         ));
+
         return redirect(route('getCart'));
     }
 

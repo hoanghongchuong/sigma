@@ -84,15 +84,10 @@ Route::get('chi-tiet-dich-vu/{id}.html',['as'=>'getDichVuDetail', 'uses'=>'Index
 
 Route::get('tuyen-dung','IndexController@getTuyenDung')->name('getTuyenDung');
 Route::post('tuyen-dung',['as'=>'postTuyenDung', 'uses'=>'IndexController@postTuyenDung']);
-// Route::get('thu-vien-anh',['as'=>'getThuvienanh', 'uses'=>'IndexController@getThuvienanh']);
-// Route::get('hoi-vien',['as'=>'getHoivien', 'uses'=>'IndexController@getHoivien']);
+
 Route::get('{id}.html',['as'=>'getProductDetail', 'uses'=>'IndexController@getProductDetail']);
 Route::get('bai-viet/{id}.html',['as'=>'getBaiVietDetail', 'uses'=>'IndexController@getBaiVietDetail']);
 Route::get('error/404.html',['as'=>'getErrorNotFount', 'uses'=>'IndexController@getErrorNotFount']);
-// Route::controllers([
-// 	'auth' => 'Auth\AuthController',
-// 	'password' => 'Auth\PasswordController',
-// ]);
 
 Route::get('backend/login',['as'=>'admin.auth.getLogin', 'uses'=>'AdminAuth\AuthController@getLogin']);
 Route::post('backend/postlogin',['as'=>'admin.auth.postLogin', 'uses'=>'AdminAuth\AuthController@postLogin']);
@@ -137,7 +132,12 @@ Route::group(['middleware' =>'authen', 'prefix' => 'backend'], function(){
 		Route::get('/', ['as' => 'campaignCardIndex', 'uses' => 'Admin\CampaignController@getCard']);
 		Route::get('delete_list/{id}',['as'=>'deleteListCode','uses'=>'Admin\CampaignController@getDeleteList']);
 	});
-
+	Route::group(['prefix' => 'saleof'], function(){
+		Route::get('', ['as' => 'admin.saleof.index', 'uses' => 'Admin\SaleOfController@index']);
+		Route::any('add',['as'=>'admin.saleof.create','uses'=>'Admin\SaleOfController@create']);
+		Route::any('edit/{id}',['as'=>'admin.saleof.edit', 'uses'=>'Admin\SaleOfController@create']);
+		Route::get('delete/{id}',['as'=>'admin.saleof.delete', 'uses' => 'Admin\SaleOfController@delete']);
+	});
 
 	Route::group(['prefix' => 'productcate'], function(){
 		Route::get('/',['as'=>'admin.productcate.index','uses'=>'Admin\ProductCateController@getDanhSach']);

@@ -66,7 +66,7 @@ $banner = DB::table('banner_content')->where('position',1)->get();
                                 <a href="{{url('san-pham/'.$newProduct->alias.'.html')}}" title="{{$newProduct->name}}"><img src="{{asset('upload/product/'.$newProduct->photo)}}" alt="{{$newProduct->name}}" title="{{$newProduct->name}}" class="img-responsive img "></a>
                                 <form id="add-item-form" action="{{ route('addProductToCart') }}" method="post" class="variants clearfix"> 
                                     {!! csrf_field() !!}
-                                    <input type="hidden" name="product_id" value="{{ $hotProduct->id }}"> 
+                                    <input type="hidden" name="product_id" value="{{ $newProduct->id }}"> 
                                     <input id="quantity" type="number" name="product_numb" min="1" value="1" class="tc item-quantity" style="display: none" />  
                                 <button type="submit" class="btn btn-buy">MUA NGAY</button>
                                 </form>

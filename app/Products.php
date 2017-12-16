@@ -13,5 +13,9 @@ class Products extends Model {
 	public function pimg(){
 		return $this->hasMany('App\Images','product_id');
 	}
+	public function pimgFile(){
+		return $this->hasMany('App\FileRead','product_id');
+	}
+	
 	
 }

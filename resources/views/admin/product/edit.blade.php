@@ -28,6 +28,7 @@
 	                  	<li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="false">Thông tin chung</a></li>
 	                  	<li><a href="#tab_2" data-toggle="tab" aria-expanded="true">Nội dung</a></li>
 	                  	<li><a href="#tab_3" data-toggle="tab" aria-expanded="true">Album hình</a></li>
+	                  	<li><a href="#tab_5" data-toggle="tab" aria-expanded="true">File đọc thử</a></li>
 	                  	<li><a href="#tab_4" data-toggle="tab" aria-expanded="true">SEO</a></li>
 	                </ul>
 	                <div class="tab-content">
@@ -289,6 +290,20 @@
 				            </div> -->
 	                    	<div class="clearfix"></div>
 	                	</div><!-- /.tab-pane -->
+	                	<div class="tab-pane" id="tab_5">
+	                  		<div class="form-group">
+	                  			@foreach($fileRead as $key => $item)
+			                        <div class="form-group" id="{!! $key !!}">
+			                            <!-- <img src="{!! asset('upload/hasp/'.$item['photo']) !!}" style="max-width: 150px; margin: 20px;" idImg="{!! $item['id'] !!}" id="{!! $key !!}"> -->
+										<!-- <p>{{asset('upload/files/'.$item->file)}}</p> -->
+										<p style="font-size: 17px;"><a href="{{asset('upload/files/'.$item->file)}}" title="">{{$item->file}}</a></p>
+			                            <a href="javascript:" type="button" id="del_files" class="btn btn-danger btn-circle icon_del"><i class="fa fa-times"></i></a>
+			                        </div>
+			                     @endforeach
+	                  		</div>
+	                    	</div>
+	                    	<div class="clearfix"></div>
+	                	</div>
 	                	<div class="tab-pane" id="tab_4">
 	                  		<div class="row">
 		                    	<div class="col-md-6 col-xs-12">

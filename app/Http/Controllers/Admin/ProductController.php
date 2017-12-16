@@ -14,7 +14,7 @@ use App\ProductCate;
 use Input, File;
 use Validator;
 use Auth;
-
+use App\FileRead;
 class ProductController extends Controller
 {
     public function getList()
@@ -151,17 +151,30 @@ class ProductController extends Controller
             \DB::rollBack();
         }
 
-        
-
         $product_id = $product->id;
         if ($request->hasFile('detailImg')) {
+
             foreach ($request->file('detailImg') as $file) {
                 $product_img = new Images();
                 if (isset($file)) {
                     $product_img->photo = time().'_'.$file->getClientOriginalName();
                     $product_img->product_id = $product_id;
                     $file->move('upload/hasp/',time().'_'.$file->getClientOriginalName());
+
                     $product_img->save();
+                }
+            }
+        }
+        if ($request->hasFile('fileRead')) {
+            foreach ($request->file('fileRead') as $files) {
+
+                $product_file = new FileRead();
+                if (isset($files)) {
+                    $product_file->file = time().'_'.$files->getClientOriginalName();
+                    $product_file->product_id = $product_id;
+                    $files->move('upload/files/',time().'_'.$files->getClientOriginalName());
+                    // dd($product_file);
+                    $product_file->save();
                 }
             }
         }
@@ -239,8 +252,9 @@ class ProductController extends Controller
             $parent = ProductCate::orderBy('stt', 'asc')->get()->toArray();
             $product = Products::select('stt')->orderBy('id','asc')->get()->toArray();
             $product_img = Products::find($id)->pimg;
+            $fileRead = Products::find($id)->pimgFile;
             // Gọi view edit.blade.php hiển thị bải viết
-            return view('admin.product.edit',compact('data','product','id','parent','product_img','tacgia','theloai','nxb','availableTags', 'tagsInput'));
+            return view('admin.product.edit',compact('data','product','id','parent','product_img','fileRead','tacgia','theloai','nxb','availableTags', 'tagsInput'));
         }else{
             $data = Products::all();
             $parent = ProductCate::orderBy('stt', 'asc')->get()->toArray();
@@ -285,6 +299,19 @@ class ProductController extends Controller
                         $product_img->product_id = $id;
                         $file->move('upload/hasp/',time().'_'.$file->getClientOriginalName());
                         $product_img->save();
+                    }
+                }
+            }
+            if ($request->hasFile('fileRead')) {
+                foreach ($request->file('fileRead') as $files) {
+
+                    $product_file = new FileRead();
+                    if (isset($files)) {
+                        $product_file->file = time().'_'.$files->getClientOriginalName();
+                        $product_file->product_id = $product_id;
+                        $files->move('upload/files/',time().'_'.$files->getClientOriginalName());
+                        // dd($product_file);
+                        $product_file->save();
                     }
                 }
             }

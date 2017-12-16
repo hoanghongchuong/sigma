@@ -95,11 +95,12 @@ class PostOrderController extends Controller
                     if($torder > 500000){
                         $bill->total = $tt - 100000;
                     }
-
                     else{
                         $bill->total = $tt;
                     }
 
+                }else{
+                    $bill->total = $tt;
                 }
                 // dd($bill);
                 $bill->save();
