@@ -242,6 +242,7 @@ class ProductController extends Controller
                 $data->update();
                 return redirect('backend/product?type='.$com)->with('status','Cập nhật thành công !');
             }
+            $product_id = $data->id;
             if($request->get('delete_bg')>0){
                 $background='upload/product/'.$request->get('delete_bg');
                 File::delete($background);
@@ -302,6 +303,7 @@ class ProductController extends Controller
                     }
                 }
             }
+            $product_id = $product->id;
             if ($request->hasFile('fileRead')) {
                 foreach ($request->file('fileRead') as $files) {
 

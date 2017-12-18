@@ -34,7 +34,17 @@
                     <ul class="mb-2 acc-info-list">
                         <li>Tên tài khoản: <a href="tai-khoan.html" title="">{{$data->username}}</a></li>
                         <li>Mật khẩu: <span>*********</span></li>
-                        <li><img src="{{asset('public/images/i5.png')}}" title="" alt=""> Mức độ: <span class="acc-level">New-members</span></li>
+                       <li><img src="{{asset('public/images/i5.png')}}" title="" alt="">
+                            Mức độ: 
+                            @if($data->total_money >= $saleOf[0]->total_value)    
+                            <span class="acc-level">{{$saleOf[0]->name}}</span>
+                            @elseif($data->total_money >= $saleOf[1]->total_value && $data->total_money < $saleOf[0]->total_value)
+                            <span class="acc-level">{{$saleOf[1]->name}}</span>
+                            @elseif($data->total_money >= $saleOf[2]->total_value && $data->total_money < $saleOf[1]->total_value)
+                            <span class="acc-level">{{$saleOf[2]->name}}</span>
+                            @else <span class="acc-level">New member</span>
+                            @endif
+                        </li>
                         <!-- <li>Trạng thái: <span class="acc-status-none">Chưa kích hoạt</span></li> -->
                     </ul>
                     

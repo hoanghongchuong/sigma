@@ -127,7 +127,7 @@
             </div>
         </div>
     </div>
-
+    
     <script type="text/javascript">
         $('#btn-login').click(function(){
           var password = $('#password').val();

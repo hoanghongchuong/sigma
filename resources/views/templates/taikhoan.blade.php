@@ -47,7 +47,6 @@
                             <span class="acc-level">{{$saleOf[2]->name}}</span>
                             @else <span class="acc-level">New member</span>
                             @endif
-
                         </li>
                         <!-- <li>Trạng thái: <span class="acc-status">Đã kích hoạt</span></li> -->
                     </ul>

@@ -215,7 +215,7 @@
         
         <!-- <li><a href="{{ asset('backend/menu?type=menu-top') }}"><i class="fa fa-circle-o"></i> <span>Quản lý menu</span></a></li> -->
         
-        <li><a href="backend/saleof"><i class="fa fa-gear" aria-hidden="true"></i> <span>Cài đặt giảm giá</span></a></li>
+        <!-- <li><a href="backend/saleof"><i class="fa fa-gear" aria-hidden="true"></i> <span>Cài đặt giảm giá</span></a></li> -->
         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>

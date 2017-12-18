@@ -239,8 +239,9 @@ class IndexController extends Controller
             // dd($avg);
             $rateGood = DB::table('rating')->join('products', 'rating.product_id', '=', 'products.id')->where('rating.product_id', $product_detail->id)->where('rating.rate', '>=', 3)->count('rate');
             $tags = json_decode($product_detail->tags);
-
-            return view('templates.product_detail_tpl', compact('product_detail', 'banner_danhmuc', 'keyword', 'description', 'title', 'img_share', 'product_khac', 'album_hinh', 'cateProduct', 'productSameCate', 'tintucs', 'cate_pro', 'numbRates', 'avg', 'rateGood','tags'));
+            $fileRead = DB::table('docthu')->where('product_id',$product_detail->id)->first();
+            // dd($fileRead);
+            return view('templates.product_detail_tpl', compact('product_detail', 'banner_danhmuc', 'keyword', 'description', 'title', 'img_share', 'product_khac', 'album_hinh', 'cateProduct', 'productSameCate', 'tintucs', 'cate_pro', 'numbRates', 'avg', 'rateGood','tags','fileRead'));
         } else {
             return redirect()->route('getErrorNotFount');
         }
@@ -937,7 +938,8 @@ class IndexController extends Controller
 
     public function updateInfoUser($id){
         $data = Users::findOrFail($id);
-        return view('templates.updatetaikhoan', compact('data'));
+        $saleOf = DB::table('saleof')->get();
+        return view('templates.updatetaikhoan', compact('data','saleOf'));
     }
     public function postUpdateInfo(Request $request, $id){
         $data = Users::findOrFail($id);

@@ -294,12 +294,13 @@
 	                  		<div class="form-group">
 	                  			@foreach($fileRead as $key => $item)
 			                        <div class="form-group" id="{!! $key !!}">
-			                            <!-- <img src="{!! asset('upload/hasp/'.$item['photo']) !!}" style="max-width: 150px; margin: 20px;" idImg="{!! $item['id'] !!}" id="{!! $key !!}"> -->
-										<!-- <p>{{asset('upload/files/'.$item->file)}}</p> -->
 										<p style="font-size: 17px;"><a href="{{asset('upload/files/'.$item->file)}}" title="">{{$item->file}}</a></p>
-			                            <a href="javascript:" type="button" id="del_files" class="btn btn-danger btn-circle icon_del"><i class="fa fa-times"></i></a>
 			                        </div>
 			                     @endforeach
+			                    <div class="form-group">
+		                  			<label class="control-label">Chọn file</label>
+	                      			<input id="input-3" name="fileRead[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" data-allowed-file-extensions='["pdf"]'>
+		                  		</div>
 	                  		</div>
 	                    	</div>
 	                    	<div class="clearfix"></div>

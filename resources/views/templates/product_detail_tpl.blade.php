@@ -111,13 +111,15 @@
                                 <input type="hidden" name="product_id" value="{{ $product_detail->id }}"> 
                                 <input type="number" name="product_numb" min="1" required="required" value="1">
                                 <button type="submit" class="btn text-uppercase btn-pbuy">Mua ngay</button>
-                                <a href="reader.html" title="" class="btn btn-read">Đọc thử</a>
+                                <button type="button" style="border:none" data-toggle="collapse" data-target="#demo"><a href="#" title=""  class="btn btn-read">Đọc thử</a></button>
                             </div>
                         </form>
                         
                     </div>
                 </div><!-- end row -->
-                
+                <div id="demo" class="collapse">
+                    <iframe src="{{asset('upload/files/'.@$fileRead->file)}}" width="100%"; height="600px;"></iframe>
+                </div>
                 <div class="pdetail-it">
                     <h2 class="text-uppercase pdetail-intro-tit">Giới thiệu sách</h2>
                     <p>{!! $product_detail->content !!}</p>
@@ -215,5 +217,7 @@
         <p{!! $about->mota !!}</p>
     </div>
 </div>
+
+
 
 @endsection
