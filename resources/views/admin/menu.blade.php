@@ -26,16 +26,16 @@
       <ul class="sidebar-menu">
         <!-- <li class="header">MAIN NAVIGATION</li> -->
          <!-- <li><a href="backend/users"><i class="fa fa-users"></i><span>Quản lý thành viên</span></a></li> -->
-         <li><a href="backend/members"><i class="fa fa-users"></i><span>Quản lý thành viên</span></a></li>
+         <li><a href="backend/users"><i class="fa fa-users"></i><span>Quản lý thành viên</span></a></li>
         <li class="treeview ">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Quản lý sản phẩm</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-dashboard"></i> <span>Quản lý sách</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
             <li><a href="backend/productcate?type=san-pham"><i class="fa fa-circle-o"></i> <span>Danh mục sách</span></a></li>
-            <li><a href="backend/productcate?type=sach-dien-tu"><i class="fa fa-circle-o"></i> <span>Danh mục sách điện tử</span></a></li>
+            <!-- <li><a href="backend/productcate?type=sach-dien-tu"><i class="fa fa-circle-o"></i> <span>Danh mục sách điện tử</span></a></li> -->
             <li><a href="backend/product?type=san-pham"><i class="fa fa-circle-o"></i> <span>List sách</span></a></li>
-            <li><a href="backend/product?type=sach-dien-tu"><i class="fa fa-circle-o"></i> <span>Sách điện tử</span></a></li>
+            <!-- <li><a href="backend/product?type=sach-dien-tu"><i class="fa fa-circle-o"></i> <span>Sách điện tử</span></a></li> -->
             <li><a href="backend/product?type=combo"><i class="fa fa-circle-o"></i> <span>Combo</span></a></li>
 
             <!-- <li><a href="backend/about/edit?type=san-pham"><i class="fa fa-th"></i> <span>Giới thiệu sản phẩm</span></a></li> -->

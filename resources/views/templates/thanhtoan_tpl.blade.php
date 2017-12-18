@@ -72,46 +72,20 @@
 						<div class="tab-content" id="pills-tabContent">
 					  		<div class="tab-pane fade show active bank-content-tab" id="bank" role="tabpanel" aria-labelledby="pills-profile-tab">
 								<p class="chk-info-text">Lưu ý: Bạn cần phải đăng ký dịch vụ Internet Banking hoặc dịch vụ thanh toán trực tuyến tại ngân hàng trước khi tiếp tục.</p>
-								<p class="chk-info-text">Chúng tôi giúp bạn thanh toán qua chuyển khoản ngân hàng với các ngân hàng dưới đây. Chọn ngân hàng để hoàn tất thanh toán</p>
+								<p class="chk-info-text">Chúng tôi giúp bạn thanh toán qua chuyển khoản ngân hàng với các ngân hàng dưới đây.</p>
 								<div class="chk-info-choice">
 									<div class="row">
-										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="{{asset('public/images/partner7.jpg')}}" alt="" title=""></a>
+										@foreach($bank as $b)
+										<div class="col-md-6 col-lg-6 text-center">
+											<div class="col-md-push-4 col-xs-4">
+												<img src="{{asset('upload/hinhanh/'.$b->img)}}" alt="" title="">
+											</div>
+											<div class="col-md-8 taikhoan-info">
+												{!! $b->info !!}
+											</div>
 										</div>
-										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="{{asset('public/images/partner8.jpg')}}" alt="" title=""></a>
-										</div>
-										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="{{asset('public/images/partner9.jpg')}}" alt="" title=""></a>
-										</div>
-										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="{{asset('public/images/partner10.jpg')}}" alt="" title=""></a>
-										</div>
-										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="{{asset('public/images/partner11.jpg')}}" alt="" title=""></a>
-										</div>
-										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="{{asset('public/images/partner12.jpg')}}" alt="" title=""></a>
-										</div>
-
-										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="{{asset('public/images/partner13.jpg')}}" alt="" title=""></a>
-										</div>
-										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="{{asset('public/images/partner14.jpg')}}" alt="" title=""></a>
-										</div>
-										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="{{asset('public/images/partner15.jpg')}}" alt="" title=""></a>
-										</div>
-										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="{{asset('public/images/partner16.jpg')}}" alt="" title=""></a>
-										</div>
-										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="{{asset('public/images/partner17.jpg')}}" alt="" title=""></a>
-										</div>
-										<div class="col-md-3 col-lg-2 text-center">
-											<a href="#" title=""><img src="{{asset('public/images/partner18.jpg')}}" alt="" title=""></a>
-										</div>
+										@endforeach
+										
 									</div>
 								</div>
 					  		</div><!-- end chuyển khoản -->
@@ -150,7 +124,9 @@
 						
 
 						<div class="chk-total">
-							<p class="chk-total-p">Tổng thanh toán: <span>{{number_format($total)}}</span> VNĐ</p>
+							<p class="chk-total-p">Giảm giá: <span>{{number_format(@$money_sale)}}</span> VNĐ</p>
+							<p class="chk-total-p">Tổng thanh toán: <span>{{number_format(@$money_pay)}}</span> VNĐ</p>
+
 							<p class="text-right">
 								<a href="{{url('gio-hang')}}" title="" class="btn btn-chk-see">Xem giỏ hàng</a>
 							</p>

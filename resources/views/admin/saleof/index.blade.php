@@ -1,6 +1,6 @@
 @extends('admin.master')
 @section('content')
-@section('controller','Thành viên')
+@section('controller','Giảm giá')
 @section('action','List')
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -33,14 +33,12 @@
               <tr>
                 <!-- <th style="width: 20px;"><input type="checkbox" name="chonhet" class="minimal" id="chonhet" /></th> -->
                 <th class="text-center with_dieuhuong">Stt</th>
-                <th>Tên tài khoản</th>
-                <th>Họ tên</th>
-                <th>Số điện thoại</th>
-                <th>Email</th>
-                <th>Địa chỉ</th>
+                <th class="text-center">Cấp</th>
+                <th class="text-center">Giá trị</th>
+                <th class="text-center">Giảm (%)</th>
                 <!-- <th class="text-center with_dieuhuong">Hiển thị</th> -->
                 <th class="text-center with_dieuhuong">Sửa</th>
-                <th class="text-center with_dieuhuong">Xóa</th>
+                <!-- <th class="text-center with_dieuhuong">Xóa</th> -->
               </tr>
             </thead>
             <tbody>
@@ -48,17 +46,16 @@
               <tr>
                 <!-- <td><input type="checkbox" name="chon" id="chon" value="{{$item->id}}" class="chon" /></td> -->
                 <td class="text-center with_dieuhuong">{{$k+1}}</td>
-                <td class="text-center with_dieuhuong">{{$item->username}}</td>
                 <td class="text-center with_dieuhuong">{{$item->name}}</td>
-                <td class="text-center with_dieuhuong">{{$item->phone}}</td>  
-                <td class="text-center with_dieuhuong">{{$item->email}}</td>  
-                <td class="text-center with_dieuhuong">{{$item->address}}</td>  
+                <td class="text-center with_dieuhuong">{{number_format($item->total_value)}}</td>
+                <td class="text-center with_dieuhuong">{{ number_format($item->value_sale) }}</td>  
+                
                 <td class="text-center with_dieuhuong">
-                  <i class="fa fa-pencil fa-fw"></i><a href="backend/users/edit/{{$item->id}}">Edit</a>
+                  <i class="fa fa-pencil fa-fw"></i><a href="backend/saleof/edit/{{$item->id}}">Edit</a>
                 </td>
-                <td class="text-center">
-                  <i class="fa fa-trash-o fa-fw"></i><a onClick="if(!confirm('Xác nhận xóa')) return false;" href="backend/users/delete/{{$item->id}}">Delete</a>
-                </td>
+                <!-- <td class="text-center">
+                  <i class="fa fa-trash-o fa-fw"></i><a onClick="if(!confirm('Xác nhận xóa')) return false;" href="backend/saleof/delete/{{$item->id}}">Delete</a>
+                </td> -->
               </tr>
               @endforeach
             </tbody>
@@ -66,7 +63,7 @@
         </div><!-- /.box-body -->
         <div class="box-footer col-md-12">
           <div class="col-md-6">
-            <input type="button" onclick="javascript:window.location='backend/users/add'" value="Thêm" class="btn btn-primary" />
+            <input type="button" onclick="javascript:window.location='backend/saleof/add'" value="Thêm" class="btn btn-primary" />
             <!-- <button type="button" id="xoahet" class="btn btn-success">Xóa</button> -->
             <input type="button" value="Thoát" onclick="javascript:window.location='backend'" class="btn btn-danger" />
           </div>

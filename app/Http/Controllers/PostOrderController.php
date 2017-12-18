@@ -18,7 +18,7 @@ class PostOrderController extends Controller
         // });
         // dd($nguoidung);
     }
-     protected function getTotalPrice()
+    protected function getTotalPrice()
     {
         $cart = Cart::content();
         $total = 0;
@@ -26,6 +26,23 @@ class PostOrderController extends Controller
             $total += $key->price * $key->qty;
         }
         return $total;
+    }
+    protected function getMoneyPay(){
+        $total = $this->getTotalPrice();
+        $saleOf = DB::table('saleof')->get();
+        $money_pay = $total;
+        if(\Auth::check()){
+            if($total >= $saleOf[0]->total_value){
+            $money_pay = $total*((100-$saleOf[0]->value_sale)/100);
+            }
+            if($total >= $saleOf[1]->total_value && $total < $saleOf[0]->total_value){
+                $money_pay = $total*((100-$saleOf[1]->value_sale)/100);
+            }
+            if($total >= $saleOf[2]->total_value && $total < $saleOf[1]->total_value){
+                $money_pay = $total*((100-$saleOf[2]->value_sale)/100);
+            }
+        }
+        return $money_pay;
     }
     public function getTotalUser(){
         $total_money = DB::table('users')->select('total_money')->where('id', \Auth::user()->id)->first();
@@ -45,12 +62,11 @@ class PostOrderController extends Controller
         $bill->note = Request::input('note');
         $bill->address = Request::input('address');
         $bill->code = str_random(8);
-        // $bill->payment = (int)($req->payment_method);
         $bill->payment = (int)(Request::input('payment_method'));
         $bill->province = Request::input('province');
         $bill->district = Request::input('district');
         $total = $this->getTotalPrice();
-        // $bill->total = $total;
+        $bill->total = $total;
         if(isset(\Auth::user()->id)){
             $bill->user_id = \Auth::user()->id;
         }
@@ -82,27 +98,38 @@ class PostOrderController extends Controller
         if ($total > 0) {
             
             $tt = $total;
+            $money_pay = $total;
             try {
                 \DB::beginTransaction();
             
-                // $bill->save();
                 if(isset(\Auth::user()->id)){
 
                     $money = $this->getTotalUser();
-                    $torder = $money + $tt;
+                    $torder = $money;
                     // dd($torder);
-                    \DB::table('users')->where('id', \Auth::user()->id)->update(['total_money' =>$torder ]);
-                    if($torder > 500000){
-                        $bill->total = $tt - 100000;
+                    $saleOf = DB::table('saleof')->get(); 
+                    if($torder >= $saleOf[0]->total_value){
+                    $money_pay = $total*((100-$saleOf[0]->value_sale)/100);
+                    }
+                    elseif($torder >= $saleOf[1]->total_value && $total < $saleOf[0]->total_value){
+                        $money_pay = $total*((100-$saleOf[1]->value_sale)/100);
+
+                    }
+                    elseif($torder >= $saleOf[2]->total_value && $total < $saleOf[1]->total_value){
+                        $money_pay = $total*((100-$saleOf[2]->value_sale)/100);
                     }
                     else{
-                        $bill->total = $tt;
+                        $bill->money_pay = $money_pay;
                     }
-
-                }else{
-                    $bill->total = $tt;
+                    // dd($money_pay);
+                   
+                    $torder = $money + $tt;
+                    \DB::table('users')->where('id', \Auth::user()->id)->update(['total_money' =>$torder ]);
                 }
-                // dd($bill);
+                
+                $bill->money_pay = $money_pay;
+                // dd($money_pay);
+
                 $bill->save();
 
                 \DB::commit();

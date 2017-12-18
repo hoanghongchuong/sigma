@@ -783,14 +783,35 @@ class IndexController extends Controller
         Cart::destroy();
         return redirect()->back()->with('mess', 'Đã xóa giỏ hàng');
     }
-
+    public function getTotalUser(){
+        $total_money = DB::table('users')->select('total_money')->where('id', \Auth::user()->id)->first();
+        if($total_money){
+            return  $tm = $total_money->total_money;
+        }
+    }
     public function thanhtoan()
     {
         $bank = DB::table('bank_account')->get();
         $province = DB::table('province')->get();
         $product_cart = Cart::content();
         $total = $this->getTotalPrice();
-        return view('templates.thanhtoan_tpl', compact('bank', 'product_cart', 'total', 'province'));
+        $saleOf = DB::table('saleof')->get();
+        $money_pay = $total;
+        if(\Auth::check()){
+            $money = $this->getTotalUser();
+            if($money >= $saleOf[0]->total_value){
+            $money_pay = $total*((100-$saleOf[0]->value_sale)/100);
+            }
+            if($money >= $saleOf[1]->total_value && $money < $saleOf[0]->total_value){
+                $money_pay = $total*((100-$saleOf[1]->value_sale)/100);
+            }
+            if($money >= $saleOf[2]->total_value && $money < $saleOf[1]->total_value){
+                $money_pay = $total*((100-$saleOf[2]->value_sale)/100);
+            }
+        }
+        $money_sale = $total - $money_pay;
+        // dd($money_pay);
+        return view('templates.thanhtoan_tpl', compact('bank', 'product_cart', 'total', 'province','money_sale','money_pay'));
     }
 
     public function loadDistrictByProvince($id)
@@ -898,8 +919,9 @@ class IndexController extends Controller
     public function getDetailUser($id){
         $data = Users::findOrFail($id);
         $bills = DB::table('bills')->where('user_id', \Auth::user()->id)->orderBy('id', 'desc')->take(5)->get();
-        
-        return view('templates.taikhoan', compact('data','bills'));
+        $saleOf = DB::table('saleof')->get();
+        // dd($saleOf[0]->total_value);
+        return view('templates.taikhoan', compact('data','bills','saleOf'));
     }
     public function detailBill($id){
         $bill = DB::table('bills')->where('id', $id)->first();

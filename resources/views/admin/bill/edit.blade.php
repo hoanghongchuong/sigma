@@ -118,8 +118,9 @@
 					          </table>
 					        </div><!-- /.box-body -->
 					        <div class="form-group">
-					        
-					        	<h4>Tổng thành tiền: <b style="color: red; font-size: 22px"> {{ number_format($data->total) }} VNĐ</b></h4>
+					        	<h4>Tổng đơn hàng: <b style="color: red; font-size: 22px"> {{ number_format($data->total) }} VNĐ</b></h4>
+					        	<h4>Trừ: <b style="color: red; font-size: 22px"> {{ number_format(($data->total) - ($data->money_pay)) }} VNĐ</b></h4>
+					        	<h4>Tổng tiền thanh toán: <b style="color: red; font-size: 22px"> {{ number_format($data->money_pay) }} VNĐ</b></h4>
 					        </div>
 	                    	<div class="clearfix"></div>
 	                	</div><!-- /.tab-pane -->

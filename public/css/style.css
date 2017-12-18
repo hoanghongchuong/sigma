@@ -1211,7 +1211,7 @@ input[type=number].qty::-webkit-outer-spin-button
 }
 .chk-info-choice {
     background: #fff;
-    padding: 25px 70px;
+    padding: 25px 0px;
     margin-top: 30px;
 }
 .chk-info-choice > .row > div {
@@ -2677,4 +2677,7 @@ button.close {
 }
 .login-frm .error{
     color: red;
+}
+.taikhoan-info{
+    font-size: 15px;
 }

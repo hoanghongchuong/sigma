@@ -16,6 +16,7 @@ class BillController extends Controller
     }    
     public function getEdit($id){
         $data = Bill::where('id',$id)->first();
+        // dd($data);
         $detail = json_decode($data->detail);
         // dd($detail);
         // $sale = Bill::leftJoin('campaign_cards', 'bills.card_code', '=', 'campaign_cards.card_code')
