@@ -45,6 +45,10 @@ Route::get('sap-xep','IndexController@SapXep')->name('sapxep');
 
 // dang ky, dang nhap
 // Route::get('signup','SignupController@signup');
+// dang nhap facebook
+Route::get('facebook/redirect', 'Auth\SocialiteController@redirectToProvider');
+Route::get('facebook/callback', 'Auth\SocialiteController@handleProviderCallback');
+
 Route::post('signup', ['as' => 'postSignup', 'uses' => 'SignupController@postSignup']);
 Route::get('tai-khoan/{id}',['as' => 'detailUser', 'uses' => 'IndexController@getDetailUser']);
 Route::get('update/avata','IndexController@updateAvata')->name('updateAvata');

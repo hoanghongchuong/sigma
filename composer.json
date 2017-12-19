@@ -9,6 +9,7 @@
         "gloudemans/shoppingcart": "^2.4",
         "illuminate/html": "~5.0",
         "laravel/framework": "5.4.*",
+        "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.2",
         "radic/blade-extensions": "~7.0"

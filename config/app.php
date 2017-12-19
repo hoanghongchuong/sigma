@@ -180,7 +180,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -235,7 +235,7 @@ return [
         'Html'      => Illuminate\Html\HtmlFacade::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
     
-
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];
