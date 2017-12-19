@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Socialite;
+use App\Users;
 class SocialiteController extends Controller
 {
     /**
@@ -24,8 +25,12 @@ class SocialiteController extends Controller
      */
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('facebook')->user();
-        dd($user);
+        $userSocial = Socialite::driver('facebook')->user();
+        
+        dd($userSocial);
+        $user = new Users;
+        $user->name = $userSocial->name;
+        $user->email = $userSocial->email;
         // $user->token;
     }
 }

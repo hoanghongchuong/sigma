@@ -100,12 +100,17 @@
                                     <input type="password" placeholder="Mật khẩu" id="password" name="password" required="required" class="w-100">
                                     <div class="success" style="display:none;"></div>
                                     <p class="d-flex align-items-center mb-3 login-choice-wrap"><span class="login-choice"></span> Mua hàng không cần đăng nhập</p>
-                                    <a class="btn btn-link" href="{{ url('facebook/redirect') }}" title="">Facebook Login</a>
+
                                     <p class="text-center mt-4 mb-1">
                                         <a href="{{url('')}}" title=""><img src="{{asset('public/images/logo.png')}}" alt="" title=""></a>
                                     </p>
                                 </div>
-                               
+                                <a href="{{ url('facebook/redirect') }}" title="">
+                                <button type="button" class="loginBtn loginBtn--facebook">
+                                  Đăng nhập bằng facebook
+                                </button>
+                                </a>
+                                <button type="button" id="btn-login" class="w-100 text-uppercase font-weight-bold btn login-btn">Đăng nhập</button>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="regis-frm2" role="tabpanel" aria-labelledby="pills-info-tab">
@@ -121,7 +126,6 @@
                                     </p>
                                 </div>
                                 <button type="submit" class="w-100 text-uppercase font-weight-bold btn login-btn">Đăng ký ngay</button>
-
                             </form>
 
                         </div>
